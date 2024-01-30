@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import 'swiper/css';
+import 'swiper/css/effect-flip';
+import 'swiper/css/navigation';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,8 +18,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="fa" dir="rtl">
+      <body className={inter.className + " h-screen"}>{children}</body>
     </html>
   );
 }
