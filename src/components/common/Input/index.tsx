@@ -1,0 +1,33 @@
+import { UseFormRegisterReturn } from "react-hook-form";
+import { IconType } from "react-icons";
+interface InputProps {
+  Icon?: React.FC<React.SVGProps<SVGSVGElement>> | IconType;
+  placeHolder?: string;
+  label?: string;
+  hookFormProps?: UseFormRegisterReturn<string>;
+}
+
+const Input: React.FC<InputProps> = ({
+  Icon,
+  placeHolder,
+  label,
+  hookFormProps,
+}) => {
+  return (
+    <div className=" flex w-full items-center justify-between rounded-2xl bg-common-light px-4">
+      <input
+        type="text"
+        className="h-12 w-full rounded-xl border-none bg-transparent text-sm font-medium text-black placeholder:text-sm placeholder:font-medium placeholder:text-common-dark focus:border-none focus:outline-none focus:ring-0 "
+        placeholder={placeHolder}
+        {...hookFormProps}
+      />
+      {Icon && (
+        <div className="pr-3">
+          <Icon />
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default Input;

@@ -9,7 +9,7 @@ const Header = () => {
   return (
     <div className="flex justify-between px-8 py-7 relative">
       <div className="flex items-center gap-12 text-sm font-semibold text-white">
-        <Button className="rounded-xl bg-brand px-5 py-2.5">
+        <Button href={'/auth/login'} className="rounded-xl bg-brand px-5 py-2.5">
           {"ورود / ثبت نام"}
         </Button>
         {siteHeader.map((item) => (
