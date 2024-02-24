@@ -13,6 +13,12 @@ import Instagram from "public/icons/site/footer/instagram.svg";
 import Google from "public/icons/site/footer/google.svg";
 import Dots from "public/icons/site/footer/dots.svg";
 
+import Dashboard from "public/icons/dashboard/sidebar/dashboard.svg";
+import Requests from "public/icons/dashboard/sidebar/requests.svg";
+import List from "public/icons/dashboard/sidebar/list.svg";
+import Advertisment from "public/icons/dashboard/sidebar/advertisment.svg";
+import Companies from "public/icons/dashboard/sidebar/comapnies.svg";
+
 export const siteHeader = [
   {
     name: "لیستینگ مناقصات",
@@ -133,23 +139,51 @@ export const cards = [
 
 export const social = [
   {
-    icon: <Facebook/>,
+    icon: <Facebook />,
     url: "",
   },
   {
-    icon: <Twitter/>,
+    icon: <Twitter />,
     url: "",
   },
   {
-    icon: <Instagram/>,
+    icon: <Instagram />,
     url: "",
   },
   {
-    icon: <Google/>,
+    icon: <Google />,
     url: "",
   },
   {
-    icon: <Dots/>,
+    icon: <Dots />,
     url: "",
+  },
+];
+
+export const dashboardSideBar = [
+  {
+    name: "داشبورد",
+    icon: <Dashboard />,
+    url: "/dashboard",
+  },
+  {
+    name: "درخواست‌ها",
+    icon: <Requests />,
+    url: "/dashboard/requests",
+  },
+  {
+    name: "لیست مناقصات",
+    icon: <List />,
+    url: "/dashboard/tenders",
+  },
+  {
+    name: "آگهی‌ها",
+    icon: <Advertisment />,
+    url: "/dashboard/advertisments",
+  },
+  {
+    name: "شرکت‌ها",
+    icon: <Companies />,
+    url: "/dashboard/companies",
   },
 ];
