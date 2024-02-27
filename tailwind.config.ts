@@ -10,6 +10,7 @@ const config: Config = {
     extend: {
       boxShadow: {
         "services-card": "0px 4px 10px 0px rgba(0, 0, 0, 0.25)",
+        "company-card": "0px 30px 40px 0px #0000001A",
       },
       dropShadow: {
         card: "0px 4px 4px rgba(0, 0, 0, 0.25)",
@@ -18,6 +19,8 @@ const config: Config = {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         banner: `url('/images/homepage/banner.png')`,
         auth: "url('/images/auth/background.svg')",
+        "company-header": "url('/images/company/header.png')",
+        "company-background": "url('/images/company/background.png')",
         events: `url('/images/homepage/events.svg')`,
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
@@ -28,8 +31,12 @@ const config: Config = {
         brand: "#FF5117",
         common: "#1C274C",
         weeny: "#448CF6",
+        milky: "#F5F5F5",
+        "light-gray": "#EFEFEF",
+        "dark-gray": "#6C6C6C",
+        "light-brand": "#FFE6DD",
         "secondary-dark": "#131319",
-        "secondary-light": "#414042",
+        "secondary-light": "#CDCDCD",
       },
     },
   },

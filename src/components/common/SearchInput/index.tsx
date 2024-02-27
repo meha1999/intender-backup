@@ -17,14 +17,14 @@ const SearchInput: React.FC<SearchInputProps> = ({
   return (
     <div
       className={
-        `flex w-full items-center justify-between rounded-3xl bg-secondary-dark px-4 ` +
+        `flex w-full items-center justify-between rounded-3xl bg-white px-2.5 ` +
         className
       }
     >
       <input
         type="text"
         className={
-          `placeholder:text-text-base h-12 w-full rounded-3xl border-none bg-secondary-dark text-base font-medium text-white placeholder:font-medium placeholder:text-white focus:border-none focus:outline-none focus:ring-0 ` +
+          `placeholder:text-text-base h-12 w-full rounded-3xl border-none bg-white text-base font-medium text-primary placeholder:font-semibold placeholder:text-primary focus:border-none focus:outline-none focus:ring-0 ` +
           className
         }
         placeholder={placeHolder}
