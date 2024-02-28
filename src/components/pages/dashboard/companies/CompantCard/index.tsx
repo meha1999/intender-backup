@@ -25,7 +25,10 @@ const CompanyCard: React.FC<CompanyCardProps> = ({
         <p className="text-sm font-semibold text-black">{"محصولات اصلی"}</p>
         <p className="text-sm font-semibold text-weeny">{product}</p>
       </div>
-      <Button className="bg-light-brand border-light-brand hover:text-light-brand w-full rounded-3xl border py-2 font-semibold text-brand hover:bg-brand">
+      <Button
+        href={`/company/${id}`}
+        className="flex w-full justify-center rounded-3xl border border-light-brand bg-light-brand py-2 font-semibold text-brand hover:bg-brand hover:text-light-brand"
+      >
         {"مشاهده بیشتر"}
       </Button>
     </div>
