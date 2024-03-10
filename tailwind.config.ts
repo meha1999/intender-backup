@@ -37,6 +37,7 @@ const config: Config = {
         "light-brand": "#FFE6DD",
         "secondary-dark": "#131319",
         "secondary-light": "#CDCDCD",
+        platinum: "#424A5C",
       },
     },
   },
