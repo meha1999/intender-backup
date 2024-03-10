@@ -1,3 +1,4 @@
+import Info from "@/components/pages/profile/Info";
 import { TiEdit } from "react-icons/ti";
 
 const Profile = () => {
@@ -46,6 +47,7 @@ const Profile = () => {
             </p>
           </div>
         </div>
+        <Info />
       </div>
     </div>
   );
