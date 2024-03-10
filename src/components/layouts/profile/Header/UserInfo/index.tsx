@@ -1,6 +1,5 @@
 import Button from "@/components/common/Button";
 import { CiUser } from "react-icons/ci";
-import { IoIosArrowDown } from "react-icons/io";
 import { IoIosExit } from "react-icons/io";
 
 const UserInfo = () => {
@@ -18,7 +17,7 @@ const UserInfo = () => {
         </div>
       </div>
       <div className="flex items-center gap-3">
-        <IoIosArrowDown className="text-2xl cursor-pointer" />
+        {/* <IoIosArrowDown className="text-2xl cursor-pointer" /> */}
         <Button className="flex items-center gap-3 rounded-3xl bg-white px-16  py-3 text-weeny hover:bg-weeny hover:text-white">
           <IoIosExit className="text-2xl" />
           <p className="text-lg font-bold">{"خروج"}</p>
