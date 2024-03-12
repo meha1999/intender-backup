@@ -16,10 +16,10 @@ const PasswordInput: React.FC<PasswordInputProps> = ({
   const [passwordHide, setPasswordHide] = useState(true);
 
   return (
-    <div className="relative flex w-full items-center justify-between rounded-xl bg-common-light px-4">
+    <div className="relative flex w-full items-center justify-between rounded-xl bg-milky px-4">
       <input
         type={passwordHide ? "password" : "text"}
-        className="h-12 w-full rounded-xl border-none bg-transparent text-sm font-medium text-black placeholder:text-sm placeholder:font-medium placeholder:text-common-dark focus:border-none focus:outline-none focus:ring-0"
+        className="h-12 w-full rounded-xl border-none bg-transparent text-sm font-medium text-black placeholder:text-sm placeholder:font-medium placeholder:text-secondary-light focus:border-none focus:outline-none focus:ring-0"
         placeholder={placeHolder}
         {...hookFormProps}
         autoComplete="current-password"
