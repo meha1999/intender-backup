@@ -4,6 +4,7 @@ import PasswordInput from "@/components/common/PasswordInput";
 import Button from "@/components/common/Button";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { passwordPattern, phonePattern } from "@/configs/regex";
+import HookFormErrorHandler from "@/utils/HookFormErrorHandler";
 
 type Inputs = {
   phoneNumber: string;
@@ -21,7 +22,6 @@ const Login = () => {
 
   const handleLogin: SubmitHandler<Inputs> = (data) => console.log(data);
 
-  console.log(errors);
 
   return (
     <form onSubmit={handleSubmit(handleLogin)}>
@@ -36,20 +36,28 @@ const Login = () => {
           <Input
             placeHolder="09123456789"
             hookFormProps={register("phoneNumber", {
-              required: true,
-              pattern: phonePattern,
+              required: { value: true, message: "شماره تماس اجباری میباشد." },
+              pattern: {
+                value: phonePattern,
+                message: "فرمت شماره تلفن نامعتبر است.",
+              },
             })}
           />
+          <HookFormErrorHandler errors={errors} name="phoneNumber" />
         </div>
         <div className="flex flex-col gap-2.5">
           <p className="text-sm font-bold text-black">{"رمز عبور"}</p>
           <PasswordInput
             placeHolder=""
             hookFormProps={register("password", {
-              required: true,
-              pattern: passwordPattern,
+              required: { value: true, message: "رمز عبور اجباری میباشد" },
+              pattern: {
+                value: passwordPattern,
+                message: "فرمت رمز عبور نامعتبر است",
+              },
             })}
           />
+          <HookFormErrorHandler errors={errors} name="password" />
         </div>
         <div className="flex justify-between pt-8">
           <div className="flex items-center gap-2.5">
