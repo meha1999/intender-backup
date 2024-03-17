@@ -1,106 +1,159 @@
+"use client";
 import Input from "@/components/common/Input";
-import { IoCallOutline } from "react-icons/io5";
-import { IoBusiness } from "react-icons/io5";
 import PasswordInput from "@/components/common/PasswordInput";
 import Button from "@/components/common/Button";
-import { SiBrandfolder } from "react-icons/si";
-import { PiCertificateDuotone } from "react-icons/pi";
-import { FaCalendarDays } from "react-icons/fa6";
-import { MdOutlineAlternateEmail } from "react-icons/md";
-import { IoIosArrowDown } from "react-icons/io";
-import { GrAttachment } from "react-icons/gr";
-import TextArea from "@/components/common/TextArea";
-import { FaLocationDot } from "react-icons/fa6";
+import { SubmitHandler, useForm } from "react-hook-form";
+import {
+  passwordPattern,
+  phonePattern,
+  userNamePattern,
+} from "@/configs/regex";
+import HookFormErrorHandler from "@/utils/HookFormErrorHandler";
+
+type Inputs = {
+  name: string;
+  username: string;
+  phoneNumber: string;
+  password: string;
+  repeatPassword: string;
+  isMember: boolean;
+  company: string;
+};
 
 const Register = () => {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    getValues,
+    formState: { errors },
+  } = useForm<Inputs>();
+
+  const handleRegister: SubmitHandler<Inputs> = (data) => console.log(data);
+
   return (
-    <div className="flex flex-col">
-      <p className="text-2xl font-extrabold text-black">{"ثبت نام"}</p>
-      <div className="flex gap-10 pt-6">
-        <div className="flex flex-col gap-10">
-          <p className="flex h-12 items-center text-base font-bold text-white">
-            {"اشخاص:"}
-          </p>
-          <p className="flex h-12 items-center text-base font-bold text-white">
-            {"شرکت‌ها:"}
-          </p>
-        </div>
-        <div className="flex flex-col gap-4">
-          <div className="flex gap-10">
-            <Input placeHolder="شماره تماس" label="" Icon={IoCallOutline} />
-            <PasswordInput placeHolder="رمز عبور" />
-          </div>
-          <div className="flex flex-col gap-4">
-            <div className="flex gap-10">
-              <Input placeHolder="نام رسمی شرکت" label="" Icon={IoBusiness} />
-              <PasswordInput placeHolder="رمز عبور" />
-            </div>
-            <div className="flex gap-10">
-              <Input
-                placeHolder="نام برند شرکت"
-                label=""
-                Icon={SiBrandfolder}
-              />
-              <Input
-                placeHolder="شماره ثبت شرکت"
-                label=""
-                Icon={PiCertificateDuotone}
-              />
-            </div>
-            <div className="flex gap-10">
-              <Input
-                placeHolder="تاریخ شروع فعالیت"
-                label=""
-                Icon={FaCalendarDays}
-              />
-              <Input
-                placeHolder="شماره تلفن ثابت"
-                label=""
-                Icon={IoCallOutline}
-              />
-            </div>
+    <form onSubmit={handleSubmit(handleRegister)} className="h-full">
+      <div className="max-3xl:gap-4 flex h-full flex-col gap-5 py-0">
+        <p className="text-3xl font-bold text-black">{"صفحه ثبت نام"}</p>
+        <p className="max-3xl:hidden text-sm text-secondary-light">
+          {"مشخصات خود را در این قسمت وارد کنید."}
+        </p>
+
+        <div className="flex items-center gap-4">
+          <div className="flex flex-col gap-2.5">
+            <p className="text-sm font-bold text-black">{"نام/نام خانوادگی"}</p>
             <Input
-              placeHolder=" ایمیل شرکت"
-              label=""
-              Icon={MdOutlineAlternateEmail}
+              placeHolder="نام/نام خانوادگی"
+              hookFormProps={register("name", {
+                required: {
+                  value: true,
+                  message: "نام و نام خانوادگی اجباری میباشد.",
+                },
+              })}
             />
-            <div className="flex gap-10">
-              <Input placeHolder="انتخاب شهر" label="" Icon={IoIosArrowDown} />
-              <Input
-                placeHolder="آگهی تاسیس شرکت"
-                label=""
-                Icon={GrAttachment}
-              />
-            </div>
-            <TextArea
-              placeHolder="آدرس دفتر/ کارگاه/کارخانه "
-              Icon={FaLocationDot}
+            <HookFormErrorHandler errors={errors} name="name" />
+          </div>
+          <div className="flex flex-col gap-2.5">
+            <p className="text-sm font-bold text-black">{"نام کاربری"}</p>
+            <Input
+              placeHolder="نام کاربری"
+              hookFormProps={register("username", {
+                required: { value: true, message: "نام کاربری اجباری میباشد." },
+                pattern: {
+                  value: userNamePattern,
+                  message: "فرمت نام کاربری فقط شامل حروف و اعداد است.",
+                },
+              })}
             />
-          </div>
-          <div className="flex justify-between">
-            <Button className="flex items-center gap-1 rounded-2xl bg-black px-7 py-4 text-sm font-medium text-white hover:bg-white hover:text-black">
-              {"پروژه‌های انجام شده"}
-              <GrAttachment />
-            </Button>
-            <Button className="flex items-center gap-1 rounded-2xl bg-black px-7 py-4 text-sm font-medium text-white hover:bg-white hover:text-black">
-              {"رضایت‌نامه‌های مشتری"}
-              <GrAttachment />
-            </Button>
-          </div>
-          <div className="flex items-center gap-10">
-            <Button className="rounded-2xl bg-brand px-14 py-2.5 text-lg font-medium text-white hover:bg-white hover:text-brand">
-              {"ثبت نام"}
-            </Button>
-            <div className="flex items-center gap-3">
-              <input type="checkbox" className="h-5 w-5 rounded-full" />
-              <p className="font-semibold">
-                {"لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ"}
-              </p>
-            </div>
+            <HookFormErrorHandler errors={errors} name="username" />
           </div>
         </div>
+
+        <div className="flex flex-col gap-2.5">
+          <p className="text-sm font-bold text-black">{"شماره تماس"}</p>
+          <Input
+            placeHolder="09123456789"
+            hookFormProps={register("phoneNumber", {
+              required: { value: true, message: "شماره تماس اجباری میباشد." },
+              pattern: {
+                value: phonePattern,
+                message: "فرمت شماره تلفن نامعتبر است.",
+              },
+            })}
+          />
+          <HookFormErrorHandler errors={errors} name="phoneNumber" />
+        </div>
+
+        <div className="flex flex-col gap-2.5">
+          <p className="text-sm font-bold text-black">{"رمز عبور"}</p>
+          <PasswordInput
+            placeHolder=""
+            hookFormProps={register("password", {
+              required: { value: true, message: "رمز عبور اجباری میباشد" },
+              pattern: {
+                value: passwordPattern,
+                message: "فرمت رمز عبور نامعتبر است",
+              },
+            })}
+          />
+          <HookFormErrorHandler errors={errors} name="password" />
+        </div>
+
+        <div className="flex flex-col gap-2.5">
+          <p className="text-sm font-bold text-black">{"رمز عبور"}</p>
+          <PasswordInput
+            placeHolder=""
+            hookFormProps={register("repeatPassword", {
+              required: { value: true, message: "رمز عبور اجباری میباشد" },
+              pattern: {
+                value: passwordPattern,
+                message: "فرمت رمز عبور نامعتبر است",
+              },
+              validate: (value) => {
+                const { password } = getValues();
+                return (
+                  password === value || "تکرار رمز عبور با رمز عبور برابر نیست."
+                );
+              },
+            })}
+          />
+          <HookFormErrorHandler errors={errors} name="repeatPassword" />
+        </div>
+
+        <div className="flex justify-between">
+          <p className="text-xs text-black">
+            {"آیا عضو شرکت در اینتندر هستید؟"}
+          </p>
+          <input
+            type="checkbox"
+            className="accent-brand"
+            {...register("isMember")}
+          />
+        </div>
+
+        {watch("isMember") && (
+          <div className="flex flex-col gap-2.5">
+            <p className="text-sm font-bold text-black">{"نام شرکت"}</p>
+            <Input
+              placeHolder="نام شرکت را وارد کنید"
+              hookFormProps={register("company", {
+                required: {
+                  value: watch("isMember"),
+                  message: "نام شرکت اجباری میباشد.",
+                },
+              })}
+            />
+            <HookFormErrorHandler errors={errors} name="company" />
+          </div>
+        )}
+        <Button
+          type="submit"
+          className="mt-auto rounded-2xl border border-brand bg-brand px-20 py-2.5 text-sm font-bold text-white hover:bg-white hover:text-brand"
+        >
+          {"ثبت نام"}
+        </Button>
       </div>
-    </div>
+    </form>
   );
 };
 

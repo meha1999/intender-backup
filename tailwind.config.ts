@@ -8,6 +8,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      screens: {
+        "3xl": "1600px",
+      },
       boxShadow: {
         "services-card": "0px 4px 10px 0px rgba(0, 0, 0, 0.25)",
         "company-card": "0px 30px 40px 0px #0000001A",
