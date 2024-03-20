@@ -12,7 +12,7 @@ const Header = () => {
   const selectedRoute = dashboardSideBar.find((item) => item.url === pathname);
 
   return (
-    <div className="bg-light-gray px-2">
+    <div className="bg-light-gray px-8">
       <div className="container mx-auto flex justify-between py-10">
         <div className="flex items-center gap-2.5">
           <Title className="text-primary" />

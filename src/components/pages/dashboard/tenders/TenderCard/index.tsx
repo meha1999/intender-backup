@@ -49,12 +49,15 @@ const TenderCard: React.FC<TenderCardProps> = ({
           />
           <p>{tenderStatus[status]}</p>
         </div>
-        <p className="text-black font-bold">{origin}</p>
+        <p className="font-bold text-black">{origin}</p>
         <p className="font-bold text-dark-gray">#{id}</p>
       </div>
       <div className="border border-light-gray" />
       <div className="flex w-1/12 items-center">
-        <Button className="w-full rounded-xl border border-brand bg-brand py-2 text-xs font-bold text-white hover:bg-white hover:text-brand">
+        <Button
+          href={`/dashboard/tenders/${id}`}
+          className="w-full rounded-xl border border-brand bg-brand py-2 text-center text-xs font-bold text-white hover:bg-white hover:text-brand"
+        >
           {"مشاهده بیشتر"}
         </Button>
       </div>

@@ -15,6 +15,7 @@ const config: Config = {
         "services-card": "0px 4px 10px 0px rgba(0, 0, 0, 0.25)",
         "company-card": "0px 30px 40px 0px #0000001A",
         auth: "0px 23px 90px 0px #00000026",
+        faq: "0px 10px 30px 0px #0000001A",
       },
       dropShadow: {
         card: "0px 4px 4px rgba(0, 0, 0, 0.25)",
@@ -34,6 +35,7 @@ const config: Config = {
         common: "#1C274C",
         weeny: "#448CF6",
         milky: "#F5F5F5",
+        "light-weeny": "#E1EDFF",
         "light-gray": "#EFEFEF",
         "dark-gray": "#6C6C6C",
         "light-brand": "#FFE6DD",

@@ -7,6 +7,9 @@ import { BsSearch } from "react-icons/bs";
 import { motion } from "framer-motion";
 import { MdOutlineDateRange } from "react-icons/md";
 import TenderCard from "@/components/pages/dashboard/tenders/TenderCard";
+import DatePicker from "react-multi-date-picker";
+import persian from "react-date-object/calendars/persian";
+import persian_fa from "react-date-object/locales/persian_fa";
 
 const Companies = () => {
   const [filter, setFilter] = useState();
@@ -119,10 +122,23 @@ const Companies = () => {
           />
         </div>
         <div className="w-1/5">
-          <div className="flex items-center justify-center gap-4 rounded-3xl bg-white px-4 py-3.5 text-dark-gray">
-            <MdOutlineDateRange />
-            {"1402/02/25"}
-          </div>
+          <DatePicker
+            value={new Date()}
+            render={(value, openCalendar) => {
+              return (
+                <div
+                  onClick={openCalendar}
+                  className="flex w-full items-center justify-center gap-4 rounded-3xl bg-white px-4 py-3.5 text-dark-gray"
+                >
+                  <MdOutlineDateRange />
+                  {value}
+                </div>
+              );
+            }}
+            calendar={persian}
+            locale={persian_fa}
+            calendarPosition="bottom-left"
+          />
         </div>
       </div>
       <div className="w-full border border-gray-200" />

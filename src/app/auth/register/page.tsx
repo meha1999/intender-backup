@@ -33,14 +33,14 @@ const Register = () => {
 
   return (
     <form onSubmit={handleSubmit(handleRegister)} className="h-full">
-      <div className="max-3xl:gap-4 flex h-full flex-col gap-5 py-0">
+      <div className="flex h-full flex-col gap-5 py-0 max-3xl:gap-4">
         <p className="text-3xl font-bold text-black">{"صفحه ثبت نام"}</p>
-        <p className="max-3xl:hidden text-sm text-secondary-light">
+        <p className="text-sm text-secondary-light max-3xl:hidden">
           {"مشخصات خود را در این قسمت وارد کنید."}
         </p>
 
         <div className="flex items-center gap-4">
-          <div className="flex flex-col gap-2.5">
+          <div className="flex w-full flex-col gap-2.5">
             <p className="text-sm font-bold text-black">{"نام/نام خانوادگی"}</p>
             <Input
               placeHolder="نام/نام خانوادگی"
@@ -53,7 +53,7 @@ const Register = () => {
             />
             <HookFormErrorHandler errors={errors} name="name" />
           </div>
-          <div className="flex flex-col gap-2.5">
+          <div className="flex w-full flex-col gap-2.5">
             <p className="text-sm font-bold text-black">{"نام کاربری"}</p>
             <Input
               placeHolder="نام کاربری"
@@ -100,14 +100,14 @@ const Register = () => {
         </div>
 
         <div className="flex flex-col gap-2.5">
-          <p className="text-sm font-bold text-black">{"رمز عبور"}</p>
+          <p className="text-sm font-bold text-black">{"تکرار رمز عبور"}</p>
           <PasswordInput
             placeHolder=""
             hookFormProps={register("repeatPassword", {
-              required: { value: true, message: "رمز عبور اجباری میباشد" },
+              required: { value: true, message: "تکرار رمز عبور اجباری میباشد" },
               pattern: {
                 value: passwordPattern,
-                message: "فرمت رمز عبور نامعتبر است",
+                message: "فرمت تکرار رمز عبور نامعتبر است",
               },
               validate: (value) => {
                 const { password } = getValues();
