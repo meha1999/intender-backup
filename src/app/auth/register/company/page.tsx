@@ -174,9 +174,9 @@ const CompanyRegister = () => {
   const [actvieTab, setActiveTab] = useState(0);
 
   const steps = [
-    <BasicInformation setActiveTab={setActiveTab} />,
-    <Documents setActiveTab={setActiveTab} />,
-    <Certificates setActiveTab={setActiveTab} />,
+    <BasicInformation key='basicInfo' setActiveTab={setActiveTab} />,
+    <Documents key='documents' setActiveTab={setActiveTab} />,
+    <Certificates key='certificates' setActiveTab={setActiveTab} />,
   ];
 
   return (
