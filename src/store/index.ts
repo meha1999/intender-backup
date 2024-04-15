@@ -1,9 +1,27 @@
 import { create } from "zustand";
 
 export const useZustandStore = create<ZustandState>((set) => ({
-  count: 0,
   user: {
     access_token: "",
   },
-  setCount: () => set((state) => ({ count: state.count + 1 })),
+  companyRegister: {
+    name: "",
+    brandName: "",
+    registrationNumber: "",
+    phoneNumber: "",
+    createdAt: "",
+    email: "",
+    state: "",
+    city: "",
+    address: "",
+    companyEstablishmentAdvertise: undefined,
+    completedProjects: undefined,
+    customerConsent: undefined,
+    certificates: undefined,
+    tags: [],
+  },
+  setBasicInfo: (basicInfo) =>
+    set((state) => ({
+      companyRegister: { ...state.companyRegister, ...basicInfo },
+    })),
 }));

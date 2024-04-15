@@ -5,6 +5,7 @@ import Button from "@/components/common/Button";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { passwordPattern, phonePattern } from "@/configs/regex";
 import HookFormErrorHandler from "@/utils/HookFormErrorHandler";
+import { useRouter } from "next/navigation";
 
 type Inputs = {
   phoneNumber: string;
@@ -13,6 +14,7 @@ type Inputs = {
 };
 
 const Login = () => {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -20,8 +22,10 @@ const Login = () => {
     formState: { errors },
   } = useForm<Inputs>();
 
-  const handleLogin: SubmitHandler<Inputs> = (data) => console.log(data);
-
+  const handleLogin: SubmitHandler<Inputs> = (data) => {
+    console.log(data);
+    router.push("/dashboard");
+  };
 
   return (
     <form onSubmit={handleSubmit(handleLogin)}>

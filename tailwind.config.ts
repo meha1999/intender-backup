@@ -14,6 +14,7 @@ const config: Config = {
       boxShadow: {
         "services-card": "0px 4px 10px 0px rgba(0, 0, 0, 0.25)",
         "company-card": "0px 30px 40px 0px #0000001A",
+        "info-card" :'0px 5px 30px 0px #0000000D',
         auth: "0px 23px 90px 0px #00000026",
         faq: "0px 10px 30px 0px #0000001A",
       },
@@ -23,6 +24,7 @@ const config: Config = {
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         banner: `url('/images/homepage/banner.png')`,
+        auth: `url('/images/auth/background.svg')`,
         "company-background": "url('/images/company/background.png')",
         events: `url('/images/homepage/events.svg')`,
         "gradient-conic":

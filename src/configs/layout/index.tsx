@@ -179,7 +179,7 @@ export const dashboardSideBar = [
   {
     name: "آگهی‌ها",
     icon: <Advertisment />,
-    url: "/dashboard/advertisments",
+    url: "/dashboard/advertisements",
   },
   {
     name: "شرکت‌ها",

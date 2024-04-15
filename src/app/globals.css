@@ -70,3 +70,86 @@ input:-webkit-autofill:focus {
 .rmdp-container {
   width: 100%;
 }
+
+
+
+/* animations */
+
+@keyframes fade-out {
+  0% {
+    backdrop-filter: blur(3px);
+    background: rgba(0, 0, 0, 0.5);
+  }
+  100% {
+    backdrop-filter: blur(0px);
+    background: rgba(0, 0, 0, 0);
+  }
+}
+
+@keyframes swipe-out {
+  0% {
+    transform: translateY(0%);
+  }
+  50% {
+    transform: translateY(-4%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes pop-in-swipe {
+  0% {
+    transform: translateY(-5%) scale(0.9);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes pop-in-mobile-swipe {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide {
+  from {
+    height: 0;
+  }
+  to {
+    height: auto;
+  }
+}
+
+.pop-in-mobile-swipe {
+  animation: pop-in-mobile-swipe 0.8s both cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.swipe-out {
+  animation: swipe-out 0.5s both cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.fade-out {
+  animation: fade-out 0.4s both cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.fade-in {
+  animation: fadeIn 0.3s both cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.swipe {
+  animation: pop-in-swipe 0.1s both cubic-bezier(0.215, 0.61, 0.355, 1);
+}
