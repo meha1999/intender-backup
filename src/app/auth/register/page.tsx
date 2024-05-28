@@ -13,7 +13,7 @@ import HookFormErrorHandler from "@/utils/HookFormErrorHandler";
 type Inputs = {
   name: string;
   username: string;
-  phoneNumber: string;
+  mobile: string;
   password: string;
   repeatPassword: string;
   isMember: boolean;
@@ -73,7 +73,7 @@ const Register = () => {
           <p className="text-sm font-bold text-black">{"شماره تماس"}</p>
           <Input
             placeHolder="09123456789"
-            hookFormProps={register("phoneNumber", {
+            hookFormProps={register("mobile", {
               required: { value: true, message: "شماره تماس اجباری میباشد." },
               pattern: {
                 value: phonePattern,
@@ -81,7 +81,7 @@ const Register = () => {
               },
             })}
           />
-          <HookFormErrorHandler errors={errors} name="phoneNumber" />
+          <HookFormErrorHandler errors={errors} name="mobile" />
         </div>
 
         <div className="flex flex-col gap-2.5">

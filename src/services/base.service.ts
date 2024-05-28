@@ -56,7 +56,7 @@ export abstract class BaseService {
         // Any status codes that falls outside the range of 2xx cause this function to trigger
         // Do something with response error
         return Promise.reject(error);
-      }
+      },
     );
 
     return axiosInstanceWithoutToken;
@@ -74,7 +74,6 @@ export abstract class BaseService {
         null;
       if (token) BaseService.setToken(token);
     }
-
     if (token) {
       this.axiosRequestConfig = {
         headers: {
@@ -96,7 +95,7 @@ export abstract class BaseService {
         return response;
       },
       function (error) {
-        if (error.response.status === 401 || error.response.status === 403) {
+        if (error.response?.status === 401 || error.response?.status === 403) {
           localStorage.clear();
           sessionStorage.clear();
           window.location.href = "/auth/login";
@@ -104,7 +103,7 @@ export abstract class BaseService {
         // Any status codes that falls outside the range of 2xx cause this function to trigger
         // Do something with response error
         return Promise.reject(error);
-      }
+      },
     );
 
     return axiosInstanceWithToken;
@@ -144,13 +143,13 @@ export abstract class BaseService {
         // Any status codes that falls outside the range of 2xx cause this function to trigger
         // Do something with response error
         return Promise.reject(error);
-      }
+      },
     );
 
     return axiosInstanceWithLogToken;
   }
 
-  private static setToken(token: string) {
+  static setToken(token: string) {
     BaseService.token = token;
   }
 

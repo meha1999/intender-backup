@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 
 import SearchInput from "@/components/common/SearchInput";
 import SelectInput from "@/components/common/SelectInput";
@@ -7,10 +7,14 @@ import { listItemVariants, listVariants } from "@/utils/variants";
 import { useState } from "react";
 import { BsSearch } from "react-icons/bs";
 import { motion } from "framer-motion";
+import CompanyList from "@/components/pages/dashboard/companies/CompanyList";
+import { companyServiceHandler } from "@/services/company.service";
 
-const Companies = () => {
-  const [filter, setFilter] = useState();
-  const [order, setOrder] = useState<"desc" | "asc">("asc");
+const Companies = async () => {
+  // const [filter, setFilter] = useState();
+  // const [order, setOrder] = useState<"desc" | "asc">("asc");
+
+  const res = await companyServiceHandler.getCompanies();
 
   const data = [
     { id: "1", name: "لورم ایپسوم", desc: "توضیحات", product: "محصول الکی" },
@@ -21,6 +25,7 @@ const Companies = () => {
     { id: "6", name: "لورم ایپسوم", desc: "توضیحات", product: "محصول الکی" },
     { id: "17", name: "لورم ایپسوم", desc: "توضیحات", product: "محصول الکی" },
   ];
+
   return (
     <div className="flex flex-col gap-10">
       <div className="flex items-center justify-between">
@@ -35,7 +40,7 @@ const Companies = () => {
           />
         </div>
         <div className="w-1/4">
-          <SelectInput
+          {/* <SelectInput
             data={[
               { text: "مناقصات برتر", value: "superior" },
               { text: "سابقه", value: "history" },
@@ -45,22 +50,11 @@ const Companies = () => {
             setValue={setFilter}
             order={order}
             setOrder={setOrder}
-          />
+          /> */}
         </div>
       </div>
       <div className="w-full border border-gray-200" />
-      <motion.ul variants={listVariants} className="grid grid-cols-5 gap-5">
-        {data.map((item) => (
-          <motion.li
-            key={item?.id}
-            variants={listItemVariants}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <CompanyCard {...item} />
-          </motion.li>
-        ))}
-      </motion.ul>
+      <CompanyList data={res.data}/>
     </div>
   );
 };

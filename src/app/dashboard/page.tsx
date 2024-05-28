@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import InfoCard from "@/components/common/InfoCard";
 import Active from "public/icons/dashboard/requests/active.svg";
 import All from "public/icons/dashboard/requests/all.svg";
@@ -7,6 +7,7 @@ import Favorite from "public/icons/dashboard/requests/favorite.svg";
 import Deactive from "public/icons/dashboard/requests/deactive.svg";
 import Modal from "@/components/common/Modal";
 import TestModal from "@/components/Modals/TestModal";
+import { authServiceHandler } from "@/services/auth.service";
 
 const Dashboard = () => {
   const [isModalOpen, setIsModalOpen] = useState(true);
@@ -40,6 +41,14 @@ const Dashboard = () => {
       color: "#6C6C6C",
     },
   ];
+  const getUserProfile = async () => {
+    const res = authServiceHandler.getProfile();
+  };
+
+  useEffect(() => {
+    getUserProfile();
+  }, []);
+
   return (
     <div className="flex flex-col gap-10">
       <div className="flex items-center gap-4">

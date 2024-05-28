@@ -6,10 +6,15 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { passwordPattern, phonePattern } from "@/configs/regex";
 import HookFormErrorHandler from "@/utils/HookFormErrorHandler";
 import { useRouter } from "next/navigation";
+import { authServiceHandler } from "@/services/auth.service";
+import { useState } from "react";
+import { setCookie } from "cookies-next";
+import { BaseService } from "@/services/base.service";
 
 type Inputs = {
-  phoneNumber: string;
+  username: string;
   password: string;
+  company_national_id: string;
   rememberMe: boolean;
 };
 
@@ -21,10 +26,22 @@ const Login = () => {
     watch,
     formState: { errors },
   } = useForm<Inputs>();
+  const [loading, setLoading] = useState(false);
 
-  const handleLogin: SubmitHandler<Inputs> = (data) => {
-    console.log(data);
-    router.push("/dashboard");
+  const handleLogin: SubmitHandler<Inputs> = async (data) => {
+    setLoading(true);
+    try {
+      const res = await authServiceHandler.login(data);
+      setCookie("token", res.data.access);
+      setCookie("refresh", res.data.refresh);
+      BaseService.setToken(res.data.access);
+      // const profile = await authServiceHandler.getProfile();
+      // console.log(profile);
+      router.push("/dashboard");
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
   };
 
   return (
@@ -39,7 +56,7 @@ const Login = () => {
           <p className="text-sm font-bold text-black">{"شماره تماس"}</p>
           <Input
             placeHolder="09123456789"
-            hookFormProps={register("phoneNumber", {
+            hookFormProps={register("username", {
               required: { value: true, message: "شماره تماس اجباری میباشد." },
               pattern: {
                 value: phonePattern,
@@ -47,7 +64,20 @@ const Login = () => {
               },
             })}
           />
-          <HookFormErrorHandler errors={errors} name="phoneNumber" />
+          <HookFormErrorHandler errors={errors} name="username" />
+        </div>
+        <div className="flex flex-col gap-2.5">
+          <p className="text-sm font-bold text-black">{"شماره ثبت شرکت"}</p>
+          <Input
+            placeHolder=""
+            hookFormProps={register("company_national_id", {
+              required: {
+                value: true,
+                message: "شماره ثبت شرکت اجباری میباشد.",
+              },
+            })}
+          />
+          <HookFormErrorHandler errors={errors} name="company_national_id" />
         </div>
         <div className="flex flex-col gap-2.5">
           <p className="text-sm font-bold text-black">{"رمز عبور"}</p>
@@ -55,10 +85,10 @@ const Login = () => {
             placeHolder=""
             hookFormProps={register("password", {
               required: { value: true, message: "رمز عبور اجباری میباشد" },
-              pattern: {
-                value: passwordPattern,
-                message: "فرمت رمز عبور نامعتبر است",
-              },
+              // pattern: {
+              //   value: passwordPattern,
+              //   message: "فرمت رمز عبور نامعتبر است",
+              // },
             })}
           />
           <HookFormErrorHandler errors={errors} name="password" />
@@ -78,7 +108,7 @@ const Login = () => {
             type="submit"
             className="rounded-2xl border border-brand bg-brand px-20 py-2.5 text-sm font-bold text-white hover:bg-white hover:text-brand"
           >
-            {"ورود"}
+            {!loading ? "ورود" : "در حال ثبت"}
           </Button>
         </div>
       </div>
