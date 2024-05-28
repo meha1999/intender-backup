@@ -5,6 +5,7 @@ interface InputProps {
   placeHolder?: string;
   label?: string;
   hookFormProps?: UseFormRegisterReturn<string>;
+  className?: string;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -12,12 +13,18 @@ const Input: React.FC<InputProps> = ({
   placeHolder,
   label,
   hookFormProps,
+  className,
 }) => {
   return (
-    <div className=" max-3xl:rounded-xl flex w-full items-center justify-between rounded-2xl bg-milky px-4">
+    <div
+      className={
+        `flex w-full items-center justify-between rounded-2xl ${className ? className : "bg-milky"} px-4 max-3xl:rounded-xl` +
+        className
+      }
+    >
       <input
         type="text"
-        className="placeholder:text-common-dark max-3xl:h-10 h-12 w-full rounded-xl border-none bg-transparent text-sm font-medium text-black placeholder:text-sm placeholder:font-medium focus:border-none focus:outline-none focus:ring-0 "
+        className="placeholder:text-common-dark h-12 w-full rounded-xl border-none bg-transparent text-sm font-medium text-black placeholder:text-sm placeholder:font-medium focus:border-none focus:outline-none focus:ring-0 max-3xl:h-10 "
         placeholder={placeHolder}
         {...hookFormProps}
       />

@@ -31,7 +31,7 @@ const SelectInput: React.FC<SelectInputProps> = ({
   return (
     <div
       className={
-        `relative flex w-full cursor-pointer items-center justify-between bg-white px-4 py-3.5 text-primary ${open ? "rounded-t-3xl" : "rounded-3xl"} ` +
+        `relative flex w-full cursor-pointer items-center justify-between ${className ? className : "bg-white"} px-4 py-3.5 text-primary ${open ? "rounded-t-3xl" : "rounded-3xl"} ` +
         className
       }
       onClick={() => setOpen((prev) => !prev)}

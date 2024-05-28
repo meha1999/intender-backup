@@ -14,10 +14,10 @@ const TextArea: React.FC<TextAreaProps> = ({
   hookFormProps,
 }) => {
   return (
-    <div className=" flex w-full items-start  justify-between rounded-2xl bg-common-light px-4">
+    <div className=" bg-common-light flex w-full  items-start justify-between rounded-2xl bg-milky px-4">
       <textarea
         rows={5}
-        className=" w-full rounded-xl border-none bg-transparent text-sm font-medium text-black placeholder:text-sm placeholder:font-medium placeholder:text-common-dark focus:border-none focus:outline-none focus:ring-0 "
+        className=" placeholder:text-common-dark w-full rounded-xl border-none bg-transparent text-sm font-medium text-black placeholder:text-sm placeholder:font-medium focus:border-none focus:outline-none focus:ring-0 "
         placeholder={placeHolder}
         {...hookFormProps}
       />
