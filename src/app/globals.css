@@ -153,3 +153,15 @@ input:-webkit-autofill:focus {
 .swipe {
   animation: pop-in-swipe 0.1s both cubic-bezier(0.215, 0.61, 0.355, 1);
 }
+
+@layer base {
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+  }
+}
+
+input[type="number"] {
+  -moz-appearance: textfield; /* Firefox */
+}
