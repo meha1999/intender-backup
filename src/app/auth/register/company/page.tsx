@@ -20,9 +20,9 @@ const BasicInformation: React.FC<StepperComponentsProps> = ({
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<BasicInfoType>();
+  } = useForm<CompanySignUpType>();
 
-  const handleSubmitBasicInfo: SubmitHandler<BasicInfoType> = (data) => {
+  const handleSubmitBasicInfo: SubmitHandler<CompanySignUpType> = (data) => {
     setBasicInfo(data);
     setActiveTab(1);
   };
@@ -47,14 +47,39 @@ const BasicInformation: React.FC<StepperComponentsProps> = ({
           <HookFormErrorHandler errors={errors} name="name" />
         </div>
         <div className="flex w-full flex-col gap-2.5">
+          <p className="text-sm font-bold text-black">{"نام انگلیسی شرکت"}</p>
+          <Input
+            placeHolder="نام انگلیسی شرکت"
+            hookFormProps={register("name_en", {
+              required: {
+                value: true,
+                message: "نام انگلیسی شرکت اجباری میباشد.",
+              },
+            })}
+          />
+          <HookFormErrorHandler errors={errors} name="name_en" />
+        </div>
+      </div>
+      <div className="flex items-center gap-8">
+        <div className="flex w-full flex-col gap-2.5">
           <p className="text-sm font-bold text-black">{"نام برند"}</p>
           <Input
             placeHolder="نام برند"
-            hookFormProps={register("brandName", {
+            hookFormProps={register("brand_name", {
               required: { value: true, message: "نام برند اجباری میباشد." },
             })}
           />
-          <HookFormErrorHandler errors={errors} name="brandName" />
+          <HookFormErrorHandler errors={errors} name="brand_name" />
+        </div>
+        <div className="flex w-full flex-col gap-2.5">
+          <p className="text-sm font-bold text-black">{"نام انگلیسی برند"}</p>
+          <Input
+            placeHolder="نام انگلیسی برند"
+            hookFormProps={register("brand_name_en", {
+              required: { value: true, message: "نام انگلیسی برند اجباری میباشد." },
+            })}
+          />
+          <HookFormErrorHandler errors={errors} name="brand_name_en" />
         </div>
       </div>
       <div className="flex items-center gap-8">
@@ -62,27 +87,27 @@ const BasicInformation: React.FC<StepperComponentsProps> = ({
           <p className="text-sm font-bold text-black">{"نام شرکت"}</p>
           <Input
             placeHolder="شماره ثبت شرکت"
-            hookFormProps={register("registrationNumber", {
+            hookFormProps={register("registration_number", {
               required: {
                 value: true,
                 message: "شماره ثبت شرکت اجباری میباشد.",
               },
             })}
           />
-          <HookFormErrorHandler errors={errors} name="registrationNumber" />
+          <HookFormErrorHandler errors={errors} name="registration_number" />
         </div>
         <div className="flex w-full flex-col gap-2.5">
           <p className="text-sm font-bold text-black">{"تاریخ شروع فعالیت"}</p>
           <Input
             placeHolder="تاریخ شروع فعالیت"
-            hookFormProps={register("createdAt", {
+            hookFormProps={register("from_date", {
               required: {
                 value: true,
                 message: "تاریخ شروع فعالیت اجباری میباشد.",
               },
             })}
           />
-          <HookFormErrorHandler errors={errors} name="createdAt" />
+          <HookFormErrorHandler errors={errors} name="from_date" />
         </div>
       </div>
       <div className="flex items-center gap-8">
@@ -90,14 +115,14 @@ const BasicInformation: React.FC<StepperComponentsProps> = ({
           <p className="text-sm font-bold text-black">{"شماره تلفن ثابت"}</p>
           <Input
             placeHolder="شماره تلفن ثابت"
-            hookFormProps={register("phoneNumber", {
+            hookFormProps={register("phone", {
               required: {
                 value: true,
                 message: "شماره تلفن ثابت اجباری میباشد.",
               },
             })}
           />
-          <HookFormErrorHandler errors={errors} name="phoneNumber" />
+          <HookFormErrorHandler errors={errors} name="phone" />
         </div>
         <div className="flex w-full flex-col gap-2.5">
           <p className="text-sm font-bold text-black">{"پست الکترونیک"}</p>

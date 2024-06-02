@@ -1,13 +1,19 @@
-interface BasicInfoType {
+interface CompanySignUpType {
   name: string;
-  brandName: string;
-  registrationNumber: string;
-  phoneNumber: string;
-  createdAt: string;
+  name_en: string;
+  brand_name: string;
+  brand_name_en: string;
+  registration_number: string;
+  from_date: string;
+  phone: string;
+  company_type: string;
   email: string;
-  state: string;
-  city: string;
+  province: string;
   address: string;
+  description: string;
+  is_foreigner: true;
+  tags: Array<string>;
+  services: Array<number>;
 }
 
 interface ZustandState {
@@ -32,5 +38,5 @@ interface ZustandState {
     certificates: any;
     tags: Array<string>;
   };
-  setBasicInfo: (basicInfo: BasicInfoType) => void;
+  setBasicInfo: (basicInfo: CompanySignUpType) => void;
 }

@@ -21,9 +21,16 @@ class AuthService extends BaseService {
   signupVerification(payload: {
     verification_token: string;
     verification_code: number;
-  }): Promise<AxiosResponse<{ verification_token: string }>> {
+  }): Promise<AxiosResponse<loginType>> {
     return this.axiosInstanceWithoutToken.post(
       `/api/v1/users/signup/verification/`,
+      payload,
+    );
+  }
+
+  signupCompany(payload: CompanySignUpType): Promise<AxiosResponse<any>> {
+    return this.axiosInstanceWithToken.post(
+      `/api/v1/users/signup/company/`,
       payload,
     );
   }

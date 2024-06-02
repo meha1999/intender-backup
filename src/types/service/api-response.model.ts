@@ -16,6 +16,8 @@ interface loginType {
   refresh: string;
 }
 
+
+
 interface getProfileType {
   is_applicant: boolean;
   first_name: string;
