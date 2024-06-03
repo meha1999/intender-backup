@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import { setCookie } from "cookies-next";
 import { BaseService } from "@/services/base.service";
 import { useRouter } from "next/navigation";
+import { useZustandStore } from "@/store";
 
 type OtpInputs = {
   verification_code: number;
@@ -19,6 +20,7 @@ interface ConfirmOtpProps {
 
 const ConfirmOtp: React.FC<ConfirmOtpProps> = ({ verificationToken }) => {
   const router = useRouter();
+  const { setUserProfile } = useZustandStore();
   const {
     control,
     handleSubmit,
@@ -35,6 +37,8 @@ const ConfirmOtp: React.FC<ConfirmOtpProps> = ({ verificationToken }) => {
     setCookie("token", res.data.access);
     setCookie("refresh", res.data.refresh);
     BaseService.setToken(res.data.access);
+    const profile = await authServiceHandler.getProfile();
+    setUserProfile(profile.data);
     router.push("/auth/register/company");
   };
 

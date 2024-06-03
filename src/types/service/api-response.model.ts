@@ -16,8 +16,6 @@ interface loginType {
   refresh: string;
 }
 
-
-
 interface getProfileType {
   is_applicant: boolean;
   first_name: string;
@@ -55,7 +53,7 @@ interface getProfileType {
       document_type: string;
       file: string;
     }>;
-  };
+  } | null;
 }
 
 interface CompanyListType {

@@ -20,6 +20,7 @@ interface ZustandState {
   user: {
     access_token: string;
   };
+  userProfile: getProfileType;
   companyRegister: {
     name: string;
     brandName: string;
@@ -39,4 +40,5 @@ interface ZustandState {
     tags: Array<string>;
   };
   setBasicInfo: (basicInfo: CompanySignUpType) => void;
+  setUserProfile:(userProfile:getProfileType)=>void
 }

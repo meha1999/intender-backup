@@ -9,25 +9,35 @@ const Slider = () => {
       <Swiper
         dir="ltr"
         className="h-full w-full"
-        spaceBetween={100}
         slidesPerView={3}
         modules={[Navigation]}
+        centeredSlides={true}
       >
         {[1, 2, 3, 4, 5].map((item) => (
           <SwiperSlide key={item} className="!flex justify-center" dir="rtl">
-            <div className="flex w-80 flex-col items-center gap-5 rounded-2xl bg-white p-16">
-              <div className="h-28 w-28 rounded-full border-4 border-primary"></div>
-              <div className="flex items-center gap-1">
-                <p className="font-bold text-black">{"لورم ایپسوم"}</p>
-                <BiSolidBadgeCheck className="text-3xl text-green-700" />
+            {({ isActive }) => (
+              <div
+                className={`relative flex h-full flex-col items-center justify-center ${isActive ? "w-[100%]" : "top-10 w-[95%]"} rounded-[60px] bg-white`}
+              >
+                <div
+                  className={`relative mb-11 flex w-full flex-col items-start justify-end gap-11 rounded-full  ${isActive ? "bottom-10 h-[540px] px-11" : "h-[460px]  px-4"}`}
+                >
+                  <p className="text-lg font-bold text-black">
+                    {"همایش ها / اعلانات"}
+                  </p>
+
+                  <div className="w-full border border-dark-gray" />
+                  <p className="text-sm text-black">
+                    {
+                      "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپلورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت ."
+                    }
+                  </p>
+                  <p className="self-center text-lg text-black">
+                    {"مشاهده جزئیات"}
+                  </p>
+                </div>
               </div>
-              <div className="w-full border border-black" />
-              <p className="text-xs text-black">
-                {
-                  "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپلورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت ."
-                }
-              </p>
-            </div>
+            )}
           </SwiperSlide>
         ))}
       </Swiper>

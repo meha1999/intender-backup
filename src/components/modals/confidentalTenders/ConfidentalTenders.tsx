@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Draggable from "../../common/Draggable";
 import Documents from "../Documents";
-import ConfidentalInquiry from "./confidentalInquiry";
+import ConfidentalInquiry from "./ConfidentalInquiry";
 
 const ConfidentalTenders = () => {
   const data: Array<{

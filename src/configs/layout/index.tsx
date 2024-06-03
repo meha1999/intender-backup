@@ -7,6 +7,11 @@ import Inquiry from "public/icons/site/inquiry.svg";
 import Manage from "public/icons/site/manage.svg";
 import CardBg from "public/images/defaults/card-bg.png";
 
+import Home from "public/icons/site/header/home.svg";
+import TendersList from "public/icons/site/header/tender.svg";
+import Request from "public/icons/site/header/request.svg";
+import Company2 from "public/icons/site/header/company.svg";
+
 import Facebook from "public/icons/site/footer/facebook.svg";
 import Twitter from "public/icons/site/footer/twitter.svg";
 import Instagram from "public/icons/site/footer/instagram.svg";
@@ -21,16 +26,24 @@ import Companies from "public/icons/dashboard/sidebar/comapnies.svg";
 
 export const siteHeader = [
   {
-    name: "لیستینگ مناقصات",
+    name: "صفحه اصلی",
     route: "/",
+    icon: <Home />,
   },
   {
-    name: "شرکت‌ها",
+    name: "لیست مناقصات",
     route: "/",
+    icon: <TendersList />,
   },
   {
     name: "درخواست تشکیل مناقصه",
     route: "/",
+    icon: <Request />,
+  },
+  {
+    name: "شرکت‌ها",
+    route: "/",
+    icon: <Company2 />,
   },
 ];
 

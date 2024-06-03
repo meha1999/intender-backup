@@ -1,5 +1,3 @@
-import Button from "@/components/common/Button";
-import { tenderStatus } from "@/configs/tender";
 import React from "react";
 import Exclamation from "public/icons/dashboard/exclamation.svg";
 import { useForm } from "react-hook-form";

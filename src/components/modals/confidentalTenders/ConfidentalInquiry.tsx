@@ -11,7 +11,7 @@ const ConfidentalInquiry = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<BasicInfoType>();
+  } = useForm<any>();
   return (
     <div className="flex flex-col gap-7">
       <div>

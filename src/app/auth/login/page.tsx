@@ -104,6 +104,7 @@ const Login = () => {
               {"مرا به خاطر بسپار"}
             </p>
           </div>
+
           <Button
             type="submit"
             className="rounded-2xl border border-brand bg-brand px-20 py-2.5 text-sm font-bold text-white hover:bg-white hover:text-brand"
@@ -111,6 +112,9 @@ const Login = () => {
             {!loading ? "ورود" : "در حال ثبت"}
           </Button>
         </div>
+        <Button href={'/auth/register'} className="text-sm text-brand">
+          {"حساب ندارید؟ ثبت نام کنید"}
+        </Button>
       </div>
     </form>
   );
