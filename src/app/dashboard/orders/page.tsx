@@ -12,7 +12,7 @@ const Orders = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<BasicInfoType>();
+  } = useForm<CompanySignUpType>();
 
   const data: Array<{
     id: string;

@@ -11,7 +11,7 @@ const PublicInquiry = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<BasicInfoType>();
+  } = useForm<CompanySignUpType>();
   return (
     <div className="flex flex-col gap-7">
       <div className="flex justify-between">
@@ -31,7 +31,7 @@ const PublicInquiry = () => {
         <p className="text-sm font-bold">نام مناقصه</p>
         <Input
           placeHolder="...!نام مورد نظر را وارد کنید"
-          hookFormProps={register("brandName", {
+          hookFormProps={register("address", {
             required: {
               value: true,
               message: "نام سرویس اجباری میباشد.",

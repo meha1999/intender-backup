@@ -35,6 +35,10 @@ class AuthService extends BaseService {
     );
   }
 
+  reviewCompany(): Promise<AxiosResponse<any>> {
+    return this.axiosInstanceWithToken.post(`/api/v1/users/signup/review/`);
+  }
+
   login(payload: {
     username: string;
     company_national_id: string;
@@ -45,6 +49,18 @@ class AuthService extends BaseService {
 
   getProfile(): Promise<AxiosResponse<getProfileType>> {
     return this.axiosInstanceWithToken.get(`/api/v1/users/profile/`);
+  }
+
+  getConfigs(): Promise<AxiosResponse<any>> {
+    return this.axiosInstanceWithoutToken.get(`/api/v1/info/configs/`);
+  }
+
+  getTags(): Promise<AxiosResponse<any>> {
+    return this.axiosInstanceWithToken.get(`/api/v1/info/tags/`);
+  }
+
+  getServices(): Promise<AxiosResponse<any>> {
+    return this.axiosInstanceWithToken.get(`/api/v1/info/services/`);
   }
 }
 

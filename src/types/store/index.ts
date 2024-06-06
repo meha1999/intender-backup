@@ -12,26 +12,32 @@ interface CompanySignUpType {
   address: string;
   description: string;
   is_foreigner: true;
-  tags: Array<string>;
-  services: Array<number>;
+  tags: Array<string> | any;
+  services: Array<number> | any;
 }
 
 interface ZustandState {
   user: {
     access_token: string;
   };
+  configs: any;
+  tags: Array<{ name: string; id: number }>;
+  services: Array<{ name: string; id: number }>;
   userProfile: getProfileType;
   companyRegister: {
     name: string;
-    brandName: string;
-    registrationNumber: string;
-    phoneNumber: string;
-    createdAt: string;
+    name_en: string;
+    brand_name: string;
+    brand_name_en: string;
+    registration_number: string;
+    from_date: string;
+    phone: string;
+    company_type: { text: string; value: string };
     email: string;
-    state: string;
+    province: { text: string; value: string };
     city: string;
-    address: string;
     //step2
+    address: string;
     companyEstablishmentAdvertise: any;
     completedProjects: any;
     customerConsent: any;
@@ -39,6 +45,9 @@ interface ZustandState {
     certificates: any;
     tags: Array<string>;
   };
-  setBasicInfo: (basicInfo: CompanySignUpType) => void;
-  setUserProfile:(userProfile:getProfileType)=>void
+  setBasicInfo: (basicInfo: any) => void;
+  setUserProfile: (userProfile: getProfileType) => void;
+  setConfigs: (configs: any) => void;
+  setTags: (tags: any) => void;
+  setServices: (services: any) => void;
 }

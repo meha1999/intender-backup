@@ -9,7 +9,7 @@ const RequestTender = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<BasicInfoType>();
+  } = useForm<CompanySignUpType>();
   return (
     <div className="flex flex-col gap-6">
       <div className="flex flex-col gap-1">
@@ -40,7 +40,7 @@ const RequestTender = () => {
         <p className="text-sm font-bold">شرکت ایجاد کننده</p>
         <Input
           placeHolder="...!نام مورد نظر را وارد کنید"
-          hookFormProps={register("brandName", {
+          hookFormProps={register("address", {
             required: {
               value: true,
               message: "نام سرویس اجباری میباشد.",

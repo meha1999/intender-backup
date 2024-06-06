@@ -11,7 +11,7 @@ const Information = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<BasicInfoType>();
+  } = useForm<CompanySignUpType>();
   return (
     <div className="flex flex-col gap-7">
       <div>
@@ -30,7 +30,7 @@ const Information = () => {
         <p className="text-sm font-bold">نام شرکت</p>
         <Input
           placeHolder="...!نام مورد نظر را وارد کنید"
-          hookFormProps={register("brandName", {
+          hookFormProps={register("address", {
             required: {
               value: true,
               message: "نام سرویس اجباری میباشد.",

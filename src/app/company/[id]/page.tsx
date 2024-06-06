@@ -1,4 +1,3 @@
-"use client";
 import Image from "next/image";
 import Button from "@/components/common/Button";
 import Logo from "public/icons/dashboardLogo.svg";
@@ -6,11 +5,10 @@ import Reference from "public/icons/reference.svg";
 import Certificate from "public/icons/certificate.svg";
 import Message from "public/icons/message.svg";
 import Empty from "public/images/defaults/empty.png";
-import Accordion from "@/components/common/Accordion";
-import { useState } from "react";
+import { companyServiceHandler } from "@/services/company.service";
 
-const Comapny = () => {
-  const [expanded, setExpanded] = useState<number | false>(false);
+const Comapny = async ({ params: { id } }: { params: { id: string } }) => {
+  // const [expanded, setExpanded] = useState<number | false>(false);
 
   const references = [
     {
@@ -70,9 +68,14 @@ const Comapny = () => {
       desc: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ؟ لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ؟لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ؟",
     },
   ];
+
+  const res = await companyServiceHandler.getCompany(id);
+
+  console.log(res.data);
+
   return (
     <div className="flex h-screen flex-col overflow-y-auto bg-light-gray bg-company-background bg-cover bg-center bg-no-repeat">
-      <div className="min-h-60 bg-primary bg-company-header bg-no-repeat">
+      <div className="bg-company-header min-h-60 bg-primary bg-no-repeat">
         <div className="container mx-auto flex h-full items-center justify-end">
           <Logo />
         </div>
@@ -85,7 +88,7 @@ const Comapny = () => {
           <div className="flex grow flex-col justify-between">
             <div className="flex flex-col gap-8">
               <p className="text-2xl font-bold text-black max-lg:text-center">
-                {"لورم ایپسوم"}
+                {res.data.name}
               </p>
               <div className="flex justify-between max-xl:flex-col">
                 <div className="flex flex-col gap-5">
@@ -93,14 +96,10 @@ const Comapny = () => {
                     <p className="text-lg font-medium text-dark-gray">
                       {"دفتر مرکزی"}
                     </p>
-                    <p className="font-medium text-black">
-                      {"لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم"}
-                    </p>
+                    <p className="font-medium text-black">{res.data.address}</p>
                   </div>
                   <p className="font-normal text-dark-gray">
-                    {
-                      "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است."
-                    }
+                    {res.data.brand_name}
                   </p>
                 </div>
                 <div className="flex gap-12 max-xl:pt-3 max-lg:justify-center">
@@ -108,19 +107,23 @@ const Comapny = () => {
                     <p className="text-xl font-medium text-dark-gray">
                       {"صنعت"}
                     </p>
-                    <p className="text-sm text-black">{"اینترنت"}</p>
+                    <p className="text-sm text-black">
+                      {res.data.services[0].name}
+                    </p>
                   </div>
                   <div className="flex flex-col gap-3.5">
                     <p className="text-xl font-medium text-dark-gray">
                       {"نوع"}
                     </p>
-                    <p className="text-sm text-black">{"شرکت خصوصی"}</p>
+                    <p className="text-sm text-black">
+                      {res.data.company_type}
+                    </p>
                   </div>
                   <div className="flex flex-col gap-3.5">
                     <p className="text-xl font-medium text-dark-gray">
                       {"سال تاسیس"}
                     </p>
-                    <p className="text-sm text-black">{"۱۳۸۴"}</p>
+                    <p className="text-sm text-black">{res.data.from_date}</p>
                   </div>
                 </div>
               </div>
@@ -129,7 +132,7 @@ const Comapny = () => {
               <div className="flex gap-8 text-lg text-black">
                 <div className="flex gap-4 font-medium">
                   <p>{"تلفن:"}</p>
-                  <p dir="ltr">{"+۹۸ ۹۳۳ ۶۵ ۷۳"}</p>
+                  <p dir="ltr">{res.data.phone}</p>
                 </div>
                 <p className="text-lg">{"وب‌سایت: www.netsazan.ir"}</p>
               </div>
@@ -159,7 +162,7 @@ const Comapny = () => {
                 </div>
 
                 <div className="flex flex-col gap-1">
-                  {faq.map((item, index) => (
+                  {/* {faq.map((item, index) => (
                     <Accordion
                       i={index}
                       title={item.title}
@@ -171,7 +174,7 @@ const Comapny = () => {
                       containerStyle="text-black text-xs font-bold cursor-pointer"
                       childrenStyle="text-dark-gray text-xs pt-3"
                     />
-                  ))}
+                  ))} */}
                 </div>
               </div>
               <Button className="rounded-xl border border-brand bg-brand py-3 text-sm font-bold text-white hover:bg-white hover:text-brand">
@@ -184,13 +187,11 @@ const Comapny = () => {
               <div className="flex flex-col gap-5">
                 <p className="font-bold text-black">{"درباره ما"}</p>
                 <p className="text-sm font-medium text-dark-gray">
-                  {
-                    "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد."
-                  }
+                  {res.data.description}
                 </p>
               </div>
               <div className="flex flex-col gap-5">
-                <p className="font-bold text-black">{"تخصص ها"}</p>
+                <p className="font-bold text-black">{"برچسب ها"}</p>
                 <p className="text-sm font-medium text-dark-gray">
                   {
                     "حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد."

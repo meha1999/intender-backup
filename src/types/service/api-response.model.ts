@@ -62,3 +62,24 @@ interface CompanyListType {
   name_en: string;
   national_id: string;
 }
+
+interface CompanyType {
+  name: string;
+  name_en: string;
+  brand_name: string;
+  brand_name_en: string;
+  registration_number: string;
+  from_date: string;
+  phone: string;
+  company_type: string;
+  email: string;
+  province: string;
+  city: null;
+  address: string;
+  description: string;
+  is_foreigner: false;
+  tags: Array<{ id: number; name: string }>;
+  services: Array<{ id: number; name: string }>;
+  documents: Array<any>;
+  products: Array<any>;
+}

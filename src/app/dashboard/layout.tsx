@@ -25,7 +25,6 @@ const DashboardLayout = async ({
           <div className="container mx-auto h-full px-8 py-6">{children}</div>
         </div>
       </div>
-      <div id="portal" />
     </>
   );
 };

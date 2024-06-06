@@ -57,7 +57,7 @@ const SelectInput: React.FC<SelectInputProps> = ({
         variants={selectVariants}
         initial={false}
         className={
-          "absolute right-0 top-12 z-40 flex w-full flex-col gap-5 rounded-b-3xl bg-white px-4 py-5 text-sm font-bold text-primary " +
+          "!absolute right-0 top-12 z-40 flex w-full flex-col gap-5 !max-h-40 overflow-y-auto rounded-br-3xl bg-white px-4 py-5 text-sm font-bold text-primary" +
           className
         }
       >

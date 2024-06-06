@@ -16,16 +16,6 @@ const Companies = async () => {
 
   const res = await companyServiceHandler.getCompanies();
 
-  const data = [
-    { id: "1", name: "لورم ایپسوم", desc: "توضیحات", product: "محصول الکی" },
-    { id: "2", name: "لورم ایپسوم", desc: "توضیحات", product: "محصول الکی" },
-    { id: "3", name: "لورم ایپسوم", desc: "توضیحات", product: "محصول الکی" },
-    { id: "4", name: "لورم ایپسوم", desc: "توضیحات", product: "محصول الکی" },
-    { id: "5", name: "لورم ایپسوم", desc: "توضیحات", product: "محصول الکی" },
-    { id: "6", name: "لورم ایپسوم", desc: "توضیحات", product: "محصول الکی" },
-    { id: "17", name: "لورم ایپسوم", desc: "توضیحات", product: "محصول الکی" },
-  ];
-
   return (
     <div className="flex flex-col gap-10">
       <div className="flex items-center justify-between">

@@ -5,7 +5,7 @@ import "./globals.css";
 import "swiper/css";
 import "swiper/css/effect-flip";
 import "swiper/css/navigation";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -35,6 +35,7 @@ export default function RootLayout({
           pauseOnHover
           theme="colored"
         />
+        <div id="portal" />
       </body>
     </html>
   );

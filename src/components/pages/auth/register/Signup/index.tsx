@@ -19,7 +19,6 @@ type Inputs = {
   position: string;
 };
 
-
 interface SignupProps {
   setVerificationToken: Dispatch<SetStateAction<string>>;
 }
@@ -41,10 +40,6 @@ const Signup: React.FC<SignupProps> = ({ setVerificationToken }) => {
     <form onSubmit={handleSubmit(handleRegister)} className="h-full">
       <div className="flex h-full flex-col gap-5 py-0 max-3xl:gap-4">
         <p className="text-3xl font-bold text-black">{"صفحه ثبت نام"}</p>
-        <p className="text-sm text-secondary-light max-3xl:hidden">
-          {"مشخصات خود را در این قسمت وارد کنید."}
-        </p>
-
         <div className="flex items-center gap-4">
           <div className="flex w-full flex-col gap-2.5">
             <p className="text-sm font-bold text-black">{"نام"}</p>
@@ -103,43 +98,47 @@ const Signup: React.FC<SignupProps> = ({ setVerificationToken }) => {
           />
           <HookFormErrorHandler errors={errors} name="email" />
         </div>
-        <div className="flex flex-col gap-2.5">
-          <p className="text-sm font-bold text-black">{"رمز عبور"}</p>
-          <PasswordInput
-            placeHolder=""
-            hookFormProps={register("password", {
-              required: { value: true, message: "رمز عبور اجباری میباشد" },
-              pattern: {
-                value: passwordPattern,
-                message: "فرمت رمز عبور نامعتبر است",
-              },
-            })}
-          />
-          <HookFormErrorHandler errors={errors} name="password" />
-        </div>
 
-        <div className="flex flex-col gap-2.5">
-          <p className="text-sm font-bold text-black">{"تکرار رمز عبور"}</p>
-          <PasswordInput
-            placeHolder=""
-            hookFormProps={register("repeatPassword", {
-              required: {
-                value: true,
-                message: "تکرار رمز عبور اجباری میباشد",
-              },
-              pattern: {
-                value: passwordPattern,
-                message: "فرمت تکرار رمز عبور نامعتبر است",
-              },
-              validate: (value) => {
-                const { password } = getValues();
-                return (
-                  password === value || "تکرار رمز عبور با رمز عبور برابر نیست."
-                );
-              },
-            })}
-          />
-          <HookFormErrorHandler errors={errors} name="repeatPassword" />
+        <div className="flex items-center gap-4">
+          <div className="flex flex-col gap-2.5 w-full">
+            <p className="text-sm font-bold text-black">{"رمز عبور"}</p>
+            <PasswordInput
+              placeHolder=""
+              hookFormProps={register("password", {
+                required: { value: true, message: "رمز عبور اجباری میباشد" },
+                pattern: {
+                  value: passwordPattern,
+                  message: "فرمت رمز عبور نامعتبر است",
+                },
+              })}
+            />
+            <HookFormErrorHandler errors={errors} name="password" />
+          </div>
+
+          <div className="flex flex-col gap-2.5 w-full">
+            <p className="text-sm font-bold text-black">{"تکرار رمز عبور"}</p>
+            <PasswordInput
+              placeHolder=""
+              hookFormProps={register("repeatPassword", {
+                required: {
+                  value: true,
+                  message: "تکرار رمز عبور اجباری میباشد",
+                },
+                pattern: {
+                  value: passwordPattern,
+                  message: "فرمت تکرار رمز عبور نامعتبر است",
+                },
+                validate: (value) => {
+                  const { password } = getValues();
+                  return (
+                    password === value ||
+                    "تکرار رمز عبور با رمز عبور برابر نیست."
+                  );
+                },
+              })}
+            />
+            <HookFormErrorHandler errors={errors} name="repeatPassword" />
+          </div>
         </div>
 
         {/* <div className="flex justify-between">

@@ -9,7 +9,7 @@ import TclCard from "@/components/pages/dashboard/tcl/TclCard";
 import Tenders from "public/images/tenders.png";
 import Image from "next/image";
 import Modal from "@/components/common/Modal";
-import Documents from "@/components/mamad/Documents";
+import Documents from "@/components/modals/Documents";
 import Copy from "public/icons/dashboard/copy.svg";
 
 const Tcl = () => {
@@ -17,7 +17,7 @@ const Tcl = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<BasicInfoType>();
+  } = useForm<CompanySignUpType>();
   const [isModalOpen, setIsModalOpen] = useState(true);
   const data: Array<{
     id: string;

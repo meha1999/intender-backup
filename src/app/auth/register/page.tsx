@@ -3,8 +3,6 @@ import { useState } from "react";
 import ConfirmOtp from "@/components/pages/auth/register/ConfirmOtp";
 import Signup from "@/components/pages/auth/register/Signup";
 
-
-
 const Register = () => {
   const [verificationToken, setVerificationToken] = useState("");
 

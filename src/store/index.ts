@@ -1,8 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-
-
 export const useZustandStore = create<ZustandState>()(
   persist(
     (set) => ({
@@ -24,13 +22,21 @@ export const useZustandStore = create<ZustandState>()(
       },
       companyRegister: {
         name: "",
-        brandName: "",
-        registrationNumber: "",
-        phoneNumber: "",
-        createdAt: "",
+        name_en: "",
+        brand_name: "",
+        brand_name_en: "",
+        registration_number: "",
+        from_date: "",
+        phone: "",
+        company_type: {
+          text: "",
+          value: "",
+        },
         email: "",
-        state: "",
-        city: "",
+        province: {
+          text: "",
+          value: "",
+        },
         address: "",
         companyEstablishmentAdvertise: undefined,
         completedProjects: undefined,
@@ -38,16 +44,22 @@ export const useZustandStore = create<ZustandState>()(
         certificates: undefined,
         tags: [],
       },
+      configs: null,
+      tags: [],
+      services: [],
       setBasicInfo: (basicInfo) =>
         set((state) => ({
           companyRegister: { ...state.companyRegister, ...basicInfo },
         })),
       setUserProfile: (userProfile) => set(() => ({ userProfile })),
+      setConfigs: (configs) => set(() => ({ configs })),
+      setTags: (tags) => set(() => ({ tags })),
+      setServices: (services) => set(() => ({ services })),
     }),
     {
       name: "intender-storage",
       partialize(state) {
-        return { ...state, companyRegister: null };
+        return { ...state };
       },
     },
   ),

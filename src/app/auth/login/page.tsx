@@ -112,7 +112,7 @@ const Login = () => {
             {!loading ? "ورود" : "در حال ثبت"}
           </Button>
         </div>
-        <Button href={'/auth/register'} className="text-sm text-brand">
+        <Button href={'/auth/register'} className="text-sm bg-brand text-white px-4 py-2">
           {"حساب ندارید؟ ثبت نام کنید"}
         </Button>
       </div>

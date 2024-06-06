@@ -17,7 +17,7 @@ const RequestService = () => {
   );
 
   const tabs = {
-    infromation: <Information />,
+    information: <Information />,
     documents: <Documents />,
   };
 
