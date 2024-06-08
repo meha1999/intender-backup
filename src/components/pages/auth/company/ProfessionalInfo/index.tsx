@@ -8,12 +8,13 @@ import { useEffect, useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import CompleteRegistrationModal from "../CompleteRegistrationModal";
+import Tags from "./Tags";
 
 interface InputType {
   address: string;
   description: string;
   is_foreigner: true;
-  tags: { name: string; value: number };
+  tags: Array<string>;
   services: { name: string; value: number };
 }
 
@@ -25,6 +26,7 @@ const ProfessionalInfo: React.FC = ({}) => {
     register,
     handleSubmit,
     control,
+    watch,
     formState: { errors },
   } = useForm<InputType>();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -34,7 +36,7 @@ const ProfessionalInfo: React.FC = ({}) => {
       ...data,
       ...companyRegister,
       company_type: companyRegister.company_type.value,
-      tags: [data.tags.value],
+      // tags: [data.tags.value],
       services: [data.services.value],
       province: companyRegister.province.value,
     };
@@ -60,6 +62,8 @@ const ProfessionalInfo: React.FC = ({}) => {
     handleGetTags();
     handleGetServices();
   }, []);
+
+  console.log(watch("tags"));
 
   return (
     <>
@@ -104,14 +108,7 @@ const ProfessionalInfo: React.FC = ({}) => {
                 control={control}
                 name="tags"
                 render={({ field: { onChange, value, ref } }) => (
-                  <SelectInput
-                    data={tags.map((item) => {
-                      return { text: item.name, value: item.id };
-                    })}
-                    placeholder="برچسب ها"
-                    value={value}
-                    setValue={onChange}
-                  />
+                  <Tags list={tags} onChange={onChange} selectedList={value} />
                 )}
               />
             )}
@@ -138,6 +135,7 @@ const ProfessionalInfo: React.FC = ({}) => {
             <HookFormErrorHandler errors={errors} name="services" />
           </div>
         </div>
+
         <Button className="rounded-xl border border-brand bg-brand py-2 text-sm font-bold text-white hover:bg-white hover:text-brand">
           {"مرحله بعد"}
         </Button>

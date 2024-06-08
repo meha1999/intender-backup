@@ -9,6 +9,7 @@ interface ButtonProps {
   style?: CSSProperties;
   onClick?: MouseEventHandler<HTMLButtonElement>;
   type?: "button" | "submit" | "reset";
+  form?: string;
 }
 
 const Button: React.FC<ButtonProps> = (props) => {
@@ -18,6 +19,7 @@ const Button: React.FC<ButtonProps> = (props) => {
     </Link>
   ) : (
     <button
+      form={props.form}
       type={props.type}
       onClick={props.onClick}
       className={props.className}
