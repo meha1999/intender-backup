@@ -52,7 +52,7 @@ const Signup: React.FC<SignupProps> = ({ setVerificationToken }) => {
                 },
               })}
             />
-            <HookFormErrorHandler errors={errors} name="name" />
+            <HookFormErrorHandler errors={errors} name="first_name" />
           </div>
           <div className="flex w-full flex-col gap-2.5">
             <p className="text-sm font-bold text-black">{"نام خانوادگی"}</p>

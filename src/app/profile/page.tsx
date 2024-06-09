@@ -1,7 +1,15 @@
+"use client";
 import Info from "@/components/pages/profile/Info";
+import Members from "@/components/pages/profile/Members";
+import Resources from "@/components/pages/profile/Resources";
+import Tags from "@/components/pages/profile/Tags";
+import { useZustandStore } from "@/store";
 import { TiEdit } from "react-icons/ti";
 
 const Profile = () => {
+  const {
+    userProfile: { company },
+  } = useZustandStore();
   return (
     <div className="flex flex-col gap-7 px-12 py-16">
       <p className="text-lg font-bold text-brand">{"اطلاعات شرکت"}</p>
@@ -12,8 +20,7 @@ const Profile = () => {
             <div className="flex w-1/4 flex-col items-center gap-4">
               <p className="text-sm font-bold text-dark-gray">{"شماره تماس"}</p>
               <div className="flex items-center gap-11 text-sm font-bold text-black">
-                <p>{"021-7777**77"}</p>
-                <p>{"0912-52**111"}</p>
+                {company?.phone}
               </div>
             </div>
             <div className="h-16 border border-secondary-light" />
@@ -22,14 +29,14 @@ const Profile = () => {
                 {"پست الکترونیک"}
               </p>
               <p className="flex items-center gap-11 text-sm font-bold text-black">
-                {"ez@gmail.com"}
+                {company?.email}
               </p>
             </div>
             <div className="h-16 border border-secondary-light" />
             <div className="flex w-1/4 flex-col items-center gap-4">
               <p className="text-sm font-bold text-dark-gray">{"کد پستی"}</p>
               <p className="flex items-center gap-11 text-sm font-bold text-black">
-                {"***1216511"}
+                {/* {"***1216511"} */}
               </p>
             </div>
             <div className="h-16 border border-secondary-light" />
@@ -40,14 +47,17 @@ const Profile = () => {
           </div>
           <div className="flex flex-col gap-1">
             <p className="text-sm font-bold text-dark-gray">{"نشانی شرکت"}</p>
-            <p className="text-xs text-black">
-              {
-                "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. "
-              }
-            </p>
+            <p className="text-xs text-black">{company?.address}</p>
           </div>
         </div>
-        <Info />
+      </div>
+      <Info />
+      <div className="flex gap-9">
+        <Members />
+        <div className="flex w-1/2 flex-col gap-9">
+          <Resources />
+          <Tags />
+        </div>
       </div>
     </div>
   );

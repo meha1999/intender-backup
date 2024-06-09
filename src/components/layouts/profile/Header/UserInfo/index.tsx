@@ -1,8 +1,11 @@
+"use client";
 import Button from "@/components/common/Button";
+import { useZustandStore } from "@/store";
 import { CiUser } from "react-icons/ci";
 import { IoIosExit } from "react-icons/io";
 
 const UserInfo = () => {
+  const { userProfile } = useZustandStore();
   return (
     <div className="flex w-1/4 items-center justify-between rounded-3xl bg-platinum px-4 py-2">
       <div className="flex items-center gap-4">
@@ -12,13 +15,15 @@ const UserInfo = () => {
           </div>
         </div>
         <div className="flex flex-col gap-2">
-          <p className="text-sm font-bold text-white">{"نام کاربری"}</p>
-          <p className="text-xs text-white">{"لورم ایپسوم"}</p>
+          <p className="text-sm font-bold text-white">
+            {userProfile.first_name}
+          </p>
+          <p className="text-xs text-white">{userProfile.company?.name}</p>
         </div>
       </div>
       <div className="flex items-center gap-3">
         {/* <IoIosArrowDown className="text-2xl cursor-pointer" /> */}
-        <Button className="flex items-center gap-3 rounded-3xl bg-white px-16  py-3 text-weeny hover:bg-weeny hover:text-white">
+        <Button href={'/'} className="flex items-center gap-3 rounded-3xl bg-white px-16  py-3 text-weeny hover:bg-weeny hover:text-white">
           <IoIosExit className="text-2xl" />
           <p className="text-lg font-bold">{"خروج"}</p>
         </Button>

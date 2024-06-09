@@ -43,6 +43,7 @@ export const useZustandStore = create<ZustandState>()(
         customerConsent: undefined,
         certificates: undefined,
         tags: [],
+        city: ""
       },
       configs: null,
       tags: [],

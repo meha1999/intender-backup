@@ -83,3 +83,15 @@ interface CompanyType {
   documents: Array<any>;
   products: Array<any>;
 }
+
+interface CompanyMember {
+  id: number;
+  first_name: string;
+  last_name: string;
+  email: string;
+  mobile: string;
+  user_type: string;
+  access_level: string;
+  position: string;
+  is_active: boolean;
+}
