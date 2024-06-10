@@ -31,10 +31,12 @@ const Tags: React.FC<TagsProps> = ({ list, onChange, selectedList }) => {
   };
 
   const handleUserTags = (name: string) => {
-    const isActive = selectedList.includes(name);
+    const isActive = selectedList?.includes(name);
     isActive
-      ? onChange(selectedList.filter((item) => item != name))
-      : onChange([...selectedList, name]);
+      ? onChange(selectedList?.filter((item) => item != name))
+      : selectedList
+        ? onChange([...selectedList, name])
+        : onChange([name]);
   };
 
   return (
@@ -60,7 +62,7 @@ const Tags: React.FC<TagsProps> = ({ list, onChange, selectedList }) => {
             {"افزودن"}
           </Button>
         </div>
-        <div className="flex items-center gap-2 overflow-auto">
+        <div className="flex flex-wrap items-center gap-2">
           {userTags.map((item) => (
             <div
               className={`cursor-pointer rounded-xl px-2.5 py-1 text-sm ${selectedList?.includes(item) ? "bg-weeny text-white" : "bg-light-weeny text-weeny"}`}

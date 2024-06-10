@@ -1,7 +1,8 @@
 "use client";
 import Input from "@/components/common/Input";
 import PasswordInput from "@/components/common/PasswordInput";
-import Button from "@/components/common/Button";
+// import Button from "@/components/common/Button";
+import { Button, Checkbox } from "@nextui-org/react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { passwordPattern, phonePattern } from "@/configs/regex";
 import HookFormErrorHandler from "@/utils/HookFormErrorHandler";
@@ -11,6 +12,8 @@ import { useState } from "react";
 import { setCookie } from "cookies-next";
 import { BaseService } from "@/services/base.service";
 import { useZustandStore } from "@/store";
+import { toast } from "react-toastify";
+import Link from "next/link";
 
 type Inputs = {
   username: string;
@@ -21,7 +24,7 @@ type Inputs = {
 
 const Login = () => {
   const router = useRouter();
-  
+
   const {
     register,
     handleSubmit,
@@ -43,9 +46,10 @@ const Login = () => {
       BaseService.setToken(res.data.access);
       const profile = await authServiceHandler.getProfile();
       setUserProfile(profile.data);
+      toast.success("با موفقیت وارد شدید.");
       router.push("/dashboard");
     } catch (error) {
-      console.log(error);
+      toast.error("خطای سرور");
     }
     setLoading(false);
   };
@@ -114,18 +118,21 @@ const Login = () => {
 
         <div className="flex justify-between pt-8">
           <Button
+            size="md"
+            radius="full"
             type="submit"
             className="rounded-2xl border border-brand bg-brand px-20 py-2.5 text-sm font-bold text-white hover:bg-white hover:text-brand"
+            isLoading={loading}
           >
-            {!loading ? "ورود" : "در حال ثبت"}
+            ورود
           </Button>
+          <Link
+            href={"/auth/register"}
+            className="px-4 py-2 text-xl font-bold text-brand"
+          >
+            {"حساب ندارید؟ ثبت نام کنید"}
+          </Link>
         </div>
-        <Button
-          href={"/auth/register"}
-          className="bg-brand px-4 py-2 text-sm text-white"
-        >
-          {"حساب ندارید؟ ثبت نام کنید"}
-        </Button>
       </div>
     </form>
   );

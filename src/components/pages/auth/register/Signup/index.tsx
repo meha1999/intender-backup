@@ -1,12 +1,13 @@
 "use client";
 import Input from "@/components/common/Input";
 import PasswordInput from "@/components/common/PasswordInput";
-import Button from "@/components/common/Button";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { emailPattern, passwordPattern, phonePattern } from "@/configs/regex";
 import HookFormErrorHandler from "@/utils/HookFormErrorHandler";
 import { authServiceHandler } from "@/services/auth.service";
 import { Dispatch, SetStateAction, useState } from "react";
+import { Button } from "@nextui-org/react";
+import { toast } from "react-toastify";
 
 type Inputs = {
   first_name: string;
@@ -30,10 +31,18 @@ const Signup: React.FC<SignupProps> = ({ setVerificationToken }) => {
     getValues,
     formState: { errors },
   } = useForm<Inputs>();
+  const [loading, setLoading] = useState(false);
 
   const handleRegister: SubmitHandler<Inputs> = async (data) => {
-    const res = await authServiceHandler.signup(data);
-    setVerificationToken(res.data.verification_token);
+    setLoading(true);
+    try {
+      const res = await authServiceHandler.signup(data);
+      setVerificationToken(res.data.verification_token);
+      toast.success("کد تایید با موفقیت ارسال شد.");
+    } catch (error) {
+      toast.error("خطای سرور");
+      setLoading(false);
+    }
   };
 
   return (
@@ -100,7 +109,7 @@ const Signup: React.FC<SignupProps> = ({ setVerificationToken }) => {
         </div>
 
         <div className="flex items-center gap-4">
-          <div className="flex flex-col gap-2.5 w-full">
+          <div className="flex w-full flex-col gap-2.5">
             <p className="text-sm font-bold text-black">{"رمز عبور"}</p>
             <PasswordInput
               placeHolder=""
@@ -115,7 +124,7 @@ const Signup: React.FC<SignupProps> = ({ setVerificationToken }) => {
             <HookFormErrorHandler errors={errors} name="password" />
           </div>
 
-          <div className="flex flex-col gap-2.5 w-full">
+          <div className="flex w-full flex-col gap-2.5">
             <p className="text-sm font-bold text-black">{"تکرار رمز عبور"}</p>
             <PasswordInput
               placeHolder=""
@@ -141,17 +150,6 @@ const Signup: React.FC<SignupProps> = ({ setVerificationToken }) => {
           </div>
         </div>
 
-        {/* <div className="flex justify-between">
-          <p className="text-xs text-black">
-            {"آیا عضو شرکت در اینتندر هستید؟"}
-          </p>
-          <input
-            type="checkbox"
-            className="accent-brand"
-            {...register("isMember")}
-          />
-        </div> */}
-
         <div className="flex flex-col gap-2.5">
           <p className="text-sm font-bold text-black">{"شماره ثبت ملی شرکت"}</p>
           <Input
@@ -163,7 +161,7 @@ const Signup: React.FC<SignupProps> = ({ setVerificationToken }) => {
               },
             })}
           />
-          <HookFormErrorHandler errors={errors} name="position" />
+          <HookFormErrorHandler errors={errors} name="company_national_id" />
         </div>
         <div className="flex flex-col gap-2.5">
           <p className="text-sm font-bold text-black">{"سمت"}</p>
@@ -178,12 +176,17 @@ const Signup: React.FC<SignupProps> = ({ setVerificationToken }) => {
           />
           <HookFormErrorHandler errors={errors} name="position" />
         </div>
-        <Button
-          type="submit"
-          className="mt-auto rounded-2xl border border-brand bg-brand px-20 py-2.5 text-sm font-bold text-white hover:bg-white hover:text-brand"
-        >
-          {"ثبت نام"}
-        </Button>
+        <div className="h-10 w-full">
+          <Button
+            size="md"
+            radius="full"
+            type="submit"
+            className="rounded-2xl border border-brand bg-brand !py-2.5 px-20 text-sm font-bold text-white hover:bg-white hover:text-brand w-full"
+            isLoading={loading}
+          >
+            {"ثبت نام"}
+          </Button>
+        </div>
       </div>
     </form>
   );

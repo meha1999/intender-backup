@@ -1,5 +1,4 @@
 "use client";
-import Button from "@/components/common/Button";
 import { SubmitHandler, useForm } from "react-hook-form";
 import HookFormErrorHandler from "@/utils/HookFormErrorHandler";
 import { authServiceHandler } from "@/services/auth.service";
@@ -9,6 +8,8 @@ import { setCookie } from "cookies-next";
 import { BaseService } from "@/services/base.service";
 import { useRouter } from "next/navigation";
 import { useZustandStore } from "@/store";
+import { Button } from "@nextui-org/react";
+import { useState } from "react";
 
 type OtpInputs = {
   verification_code: number;
@@ -20,6 +21,8 @@ interface ConfirmOtpProps {
 
 const ConfirmOtp: React.FC<ConfirmOtpProps> = ({ verificationToken }) => {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
+
   const { setUserProfile } = useZustandStore();
   const {
     control,
@@ -28,35 +31,43 @@ const ConfirmOtp: React.FC<ConfirmOtpProps> = ({ verificationToken }) => {
   } = useForm<OtpInputs>();
 
   const handleVerification: SubmitHandler<OtpInputs> = async (data) => {
-    const res = await authServiceHandler.signupVerification({
-      ...data,
-      verification_token: verificationToken,
-    });
-    toast.success("ثبت شرکت با موفقیت انجام شد.");
-
-    setCookie("token", res.data.access);
-    setCookie("refresh", res.data.refresh);
-    BaseService.setToken(res.data.access);
-    const profile = await authServiceHandler.getProfile();
-    setUserProfile(profile.data);
-    router.push("/auth/register/company");
+    setLoading(true);
+    try {
+      const res = await authServiceHandler.signupVerification({
+        ...data,
+        verification_token: verificationToken,
+      });
+      setCookie("token", res.data.access);
+      setCookie("refresh", res.data.refresh);
+      BaseService.setToken(res.data.access);
+      const profile = await authServiceHandler.getProfile();
+      setUserProfile(profile.data);
+      toast.success("ثبت شرکت با موفقیت انجام شد.");
+      router.push("/auth/register/company");
+    } catch (error) {
+      toast.error("خطای سرور");
+      setLoading(false);
+    }
   };
 
   return (
     <form onSubmit={handleSubmit(handleVerification)} className="h-full">
       <div className="flex h-full flex-col gap-5 py-0 max-3xl:gap-4">
-        <p className="text-3xl font-bold text-black">{"تایید ثبت نام"}</p>
-        <div className="flex flex-col gap-2.5">
-          <OtpInput
-            label="کد تایید"
-            name="verification_code"
-            control={control}
-          />
+        <p className="text-3xl font-bold text-brand">{"تایید ثبت نام"}</p>
+        <p className="text-xl font-bold text-black">
+          {"کد تاییدی که به موبایل شما sms را وارد کنید"}
+        </p>
+
+        <div className="flex flex-col gap-2.5 pt-20">
+          <OtpInput label="" name="verification_code" control={control} />
           <HookFormErrorHandler errors={errors} name="verification_code" />
         </div>
 
         <Button
+          size="md"
+          radius="full"
           type="submit"
+          isLoading={loading}
           className="mt-auto rounded-2xl border border-brand bg-brand px-20 py-2.5 text-sm font-bold text-white hover:bg-white hover:text-brand"
         >
           {"تایید"}

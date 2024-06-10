@@ -6,6 +6,7 @@ import Report from "public/icons/site/report.svg";
 import Inquiry from "public/icons/site/inquiry.svg";
 import Manage from "public/icons/site/manage.svg";
 import CardBg from "public/images/defaults/card-bg.png";
+import { FaUser } from "react-icons/fa";
 
 import Home from "public/icons/site/header/home.svg";
 import TendersList from "public/icons/site/header/tender.svg";
@@ -198,5 +199,10 @@ export const dashboardSideBar = [
     name: "شرکت‌ها",
     icon: <Companies />,
     url: "/dashboard/companies",
+  },
+  {
+    name: "پروفایل",
+    icon: <FaUser className="h-6 w-7" />,
+    url: "/dashboard/profile",
   },
 ];

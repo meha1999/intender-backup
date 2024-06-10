@@ -1,6 +1,5 @@
 "use client";
 import { useEffect } from "react";
-import Button from "@/components/common/Button";
 import Input from "@/components/common/Input";
 import SelectInput from "@/components/common/SelectInput";
 import { emailPattern } from "@/configs/regex";
@@ -8,6 +7,7 @@ import { authServiceHandler } from "@/services/auth.service";
 import { useZustandStore } from "@/store";
 import HookFormErrorHandler from "@/utils/HookFormErrorHandler";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { Button } from "@nextui-org/react";
 
 interface StepperComponentsProps {
   setActiveTab: (value: number) => void;
@@ -36,9 +36,8 @@ const GeneralInfo: React.FC<StepperComponentsProps> = ({ setActiveTab }) => {
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm<InputType>({ values: companyRegister});
+  } = useForm<InputType>({ values: companyRegister });
 
-  
   const handleSubmitBasicInfo: SubmitHandler<InputType> = async (data) => {
     setBasicInfo(data);
     setActiveTab(1);
@@ -228,7 +227,12 @@ const GeneralInfo: React.FC<StepperComponentsProps> = ({ setActiveTab }) => {
           <HookFormErrorHandler errors={errors} name="email" />
         </div>
       </div>
-      <Button className="mt-auto rounded-xl border border-brand bg-brand py-2 text-sm font-bold text-white hover:bg-white hover:text-brand">
+      <Button
+        type="submit"
+        size="md"
+        radius="full"
+        className="mt-auto rounded-xl border border-brand bg-brand py-2 text-sm font-bold text-white hover:bg-white hover:text-brand"
+      >
         {"مرحله بعد"}
       </Button>
     </form>

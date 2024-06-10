@@ -1,38 +1,151 @@
-import React from "react";
-import Image from "next/image";
-import ProfileHeader from "public/images/profileHeader.png";
-import Profile from "public/images/profile.png";
-import Chart from "public/images/chart.png";
+"use client";
+import Input from "@/components/common/Input";
+import { authServiceHandler } from "@/services/auth.service";
+import { useZustandStore } from "@/store";
+import HookFormErrorHandler from "@/utils/HookFormErrorHandler";
+import { Button } from "@nextui-org/react";
+import { useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { LuFileEdit } from "react-icons/lu";
+import { toast } from "react-toastify";
 
-import Back from "public/icons/site/back.svg";
-const Page = () => {
+type Inputs = {
+  first_name: string;
+  last_name: string;
+  email: string;
+  mobile: string;
+  position: string;
+};
+
+const Profile = () => {
+  const { userProfile, setUserProfile } = useZustandStore();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Inputs>({ values: userProfile });
+  const [loading, setLoading] = useState(false);
+
+  const handleEdit: SubmitHandler<Inputs> = async (data) => {
+    setLoading(true);
+    try {
+      authServiceHandler.editUser(data);
+      const res = await authServiceHandler.getProfile();
+      setUserProfile(res.data);
+      toast.success("با موفقیت بروزرسانی شد.");
+    } catch (error) {
+      toast.error("خطای سرور");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <div className="bg-white">
-      <div className="flex w-full">
-        <Image
-          className="h-64 w-full"
-          alt="ProfileHeader"
-          src={ProfileHeader}
-        />
-        <div className="ml-6 flex h-14 justify-center rounded-full bg-white px-3 py-4 shadow-2xl">
-          <Back />
+    <form
+      onSubmit={handleSubmit(handleEdit)}
+      className="flex flex-col gap-10 rounded-3xl bg-white p-11"
+    >
+      <div className="flex items-center gap-5">
+        <div className="flex h-20 w-20 items-center justify-center rounded-full border border-brand p-1">
+          <div className="h-16 w-16 rounded-full bg-brand"></div>
+        </div>
+        <p className="text-lg font-bold text-brand">{`${userProfile.first_name} عزیز به پنل کاربری خود خوش آمدید! `}</p>
+      </div>
+      <div className="flex items-center gap-10">
+        <div className="flex w-1/2 items-center gap-4">
+          <p className="w-16 text-nowrap text-sm font-bold text-black">
+            {"نام"}
+          </p>
+          <div className="flex w-full flex-col gap-2.5">
+            <Input
+              placeHolder="نام "
+              hookFormProps={register("first_name", {
+                required: {
+                  value: true,
+                  message: "نام اجباری میباشد.",
+                },
+              })}
+            />
+            <HookFormErrorHandler errors={errors} name="first_name" />
+          </div>
+        </div>
+        <div className="flex w-1/2 items-center gap-4">
+          <p className="w-16 text-nowrap text-sm font-bold text-black">
+            {"نام خانوادگی"}
+          </p>
+          <div className="flex w-full flex-col gap-2.5">
+            <Input
+              placeHolder="نام خانوادگی"
+              hookFormProps={register("last_name", {
+                required: {
+                  value: true,
+                  message: "نام خانوادگی اجباری میباشد.",
+                },
+              })}
+            />
+            <HookFormErrorHandler errors={errors} name="last_name" />
+          </div>
         </div>
       </div>
-      <div className="relative">
-        <div className="w-65 absolute -bottom-20 flex h-64 rounded-full">
-          <Image className=" w-full" alt="Profile" src={Profile} />
+      <div className="flex items-center gap-10">
+        <div className="flex w-1/2 items-center gap-4">
+          <p className="w-16 text-nowrap text-sm font-bold text-black">
+            {"موبایل"}
+          </p>
+          <div className="flex w-full flex-col gap-2.5 text-black">
+            <div>{userProfile.mobile}</div>
+            <HookFormErrorHandler errors={errors} name="mobile" />
+          </div>
         </div>
-        <div className="absolute -bottom-20 left-11 rounded-full bg-white">
-          <Image className="h-44 w-44" alt="Chart" src={Chart} />
+        <div className="flex w-1/2 items-center gap-4">
+          <p className="w-16 text-nowrap text-sm font-bold text-black">
+            {"ایمیل"}
+          </p>
+          <div className="flex w-full flex-col gap-2.5">
+            <Input
+              placeHolder="ایمیل"
+              hookFormProps={register("email", {
+                required: {
+                  value: true,
+                  message: "ایمیل اجباری میباشد.",
+                },
+              })}
+            />
+            <HookFormErrorHandler errors={errors} name="email" />
+          </div>
         </div>
       </div>
-      <div className="mt-36 flex bg-[#F5F5F5] text-black">
-        <p>اطلاعات شخصی</p>
-        <p>اطلاعات شرکت</p>
-        <p>حساب شرکت</p>
+      <div className="flex items-center gap-10">
+        <div className="flex w-1/2 items-center gap-4">
+          <p className="w-16 text-nowrap text-sm font-bold text-black">
+            {"سمت"}
+          </p>
+          <div className="flex w-full flex-col gap-2.5">
+            <Input
+              placeHolder="سمت"
+              hookFormProps={register("position", {
+                required: {
+                  value: true,
+                  message: "سمت اجباری میباشد.",
+                },
+              })}
+            />
+            <HookFormErrorHandler errors={errors} name="position" />
+          </div>
+        </div>
+        <Button
+          size="md"
+          radius="full"
+          type="submit"
+          className="w-1/2 rounded-2xl border border-weeny bg-weeny !py-2.5 px-20 text-sm font-bold text-white hover:bg-white hover:text-weeny"
+          isLoading={loading}
+        >
+          <LuFileEdit className="h-4 w-4" />
+          {"ویرایش اطلاعات"}
+        </Button>
       </div>
-    </div>
+    </form>
   );
 };
 
-export default Page;
+export default Profile;

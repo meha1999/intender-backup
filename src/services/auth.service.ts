@@ -18,6 +18,18 @@ class AuthService extends BaseService {
     );
   }
 
+  editUser(payload: {
+    first_name: string;
+    last_name: string;
+    email: string;
+    position: string;
+  }): Promise<AxiosResponse<any>> {
+    return this.axiosInstanceWithToken.patch(
+      `/api/v1/users/profile/`,
+      payload,
+    );
+  }
+
   signupVerification(payload: {
     verification_token: string;
     verification_code: number;
