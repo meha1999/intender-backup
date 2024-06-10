@@ -5,7 +5,7 @@ import Draggable from "@/components/common/Draggable";
 import Input from "@/components/common/Input";
 import React, { useState } from "react";
 import Companies from "public/icons/site/companies.svg";
-import Reporting from "public/icons/site/reporting.svg";
+import Reporting from "public/icons/site/editReport.svg";
 import Manager from "public/icons/site/manager.svg";
 import Join from "public/icons/site/join.svg";
 import Invite from "public/icons/site/invite.svg";
