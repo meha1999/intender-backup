@@ -14,7 +14,7 @@ class CompanyService extends BaseService {
   getMembers(): Promise<AxiosResponse<Array<CompanyMember>>> {
     return this.axiosInstanceWithToken.get(`/api/v1/companies/members/`);
   }
-  
+
   addMember(data: {
     first_name: string;
     last_name: string;
@@ -25,6 +25,25 @@ class CompanyService extends BaseService {
     position: string;
   }): Promise<AxiosResponse<any>> {
     return this.axiosInstanceWithToken.post(`/api/v1/companies/members/`, data);
+  }
+  
+  editMember(
+    id: number,
+    data: {
+      first_name?: string;
+      last_name?: string;
+      mobile?: string;
+      email?: String;
+      access_level?: string;
+      user_type?: string;
+      position?: string;
+      is_active?: boolean;
+    },
+  ): Promise<AxiosResponse<any>> {
+    return this.axiosInstanceWithToken.patch(
+      `/api/v1/companies/members/${id}`,
+      data,
+    );
   }
 }
 

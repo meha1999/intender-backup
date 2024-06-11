@@ -1,6 +1,5 @@
 "use client";
 
-import Button from "@/components/common/Button";
 import Input from "@/components/common/Input";
 import SelectInput from "@/components/common/SelectInput";
 import { authServiceHandler } from "@/services/auth.service";
@@ -10,6 +9,11 @@ import HookFormErrorHandler from "@/utils/HookFormErrorHandler";
 import { useEffect, useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { CiUser } from "react-icons/ci";
+import { MdDeleteForever } from "react-icons/md";
+import { toast } from "react-toastify";
+import { Spinner } from "@nextui-org/spinner";
+import { Button } from "@nextui-org/button";
+import { FaRegCheckSquare } from "react-icons/fa";
 
 type Inputs = {
   first_name: string;
@@ -34,14 +38,23 @@ const Members = () => {
     formState: { errors },
   } = useForm<Inputs>();
   const [members, setMembers] = useState<Array<CompanyMember>>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [addUserLoading, setAddUserLoading] = useState(false);
 
   const handleAddMember: SubmitHandler<Inputs> = async (data) => {
-    await companyServiceHandler.addMember({
-      ...data,
-      access_level: data.access_level.value,
-      user_type: data.user_type.value,
-    });
-    handleGetMembers();
+    setAddUserLoading(true);
+    try {
+      await companyServiceHandler.addMember({
+        ...data,
+        access_level: data.access_level.value,
+        user_type: data.user_type.value,
+      });
+      await handleGetMembers();
+      toast.success("کاربر با موفقیت اضافه شد.");
+    } catch (error) {
+      toast.error("خطای سرور");
+    }
+    setAddUserLoading(false);
   };
 
   const handleGetConfigs = async () => {
@@ -52,6 +65,19 @@ const Members = () => {
   const handleGetMembers = async () => {
     const res = await companyServiceHandler.getMembers();
     setMembers(res.data);
+  };
+
+  const handleUserStatus = async (id: number, is_active: boolean) => {
+    setLoading(true);
+    try {
+      await companyServiceHandler.editMember(id, { is_active });
+      await handleGetMembers();
+      toast.success("وضعیت کاربر با موفقیت برزوزرسانی شد.");
+    } catch (error) {
+      toast.error("خطای سرور");
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -164,14 +190,20 @@ const Members = () => {
               <HookFormErrorHandler errors={errors} name="position" />
             </div>
           </div>
-          <Button className="w-full rounded-3xl bg-light-brand py-2.5 text-center text-brand hover:bg-brand hover:text-light-brand">
+          <Button
+            size="md"
+            radius="full"
+            type="submit"
+            isLoading={addUserLoading}
+            className="w-full rounded-3xl bg-light-brand py-2.5 text-center text-brand hover:bg-brand hover:text-light-brand"
+          >
             {"افزودن"}
           </Button>
         </form>
         <div className="flex flex-col gap-2.5">
           {members.map((item) => (
             <div
-              className="flex justify-between rounded-3xl bg-white px-6 py-4"
+              className="flex cursor-pointer items-center justify-between rounded-3xl bg-white px-6 py-4 text-2xl"
               key={item.id}
             >
               <div className="flex h-14 w-14 items-center justify-center rounded-full bg-weeny">
@@ -192,6 +224,19 @@ const Members = () => {
               <div className="flex flex-col justify-center text-sm text-black">
                 <p>{item.access_level}</p>
               </div>
+              {loading ? (
+                <Spinner />
+              ) : item.is_active ? (
+                <MdDeleteForever
+                  onClick={() => handleUserStatus(item.id, !item.is_active)}
+                  className="text-red-600"
+                />
+              ) : (
+                <FaRegCheckSquare
+                  onClick={() => handleUserStatus(item.id, !item.is_active)}
+                  className="text-green-600"
+                />
+              )}
             </div>
           ))}
         </div>
