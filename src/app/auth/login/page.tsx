@@ -116,7 +116,7 @@ const Login = () => {
           </div>
         )}
 
-        <div className="flex justify-between pt-8">
+        <div className="flex justify-end pt-8">
           <Button
             size="md"
             radius="full"
@@ -126,11 +126,19 @@ const Login = () => {
           >
             ورود
           </Button>
+        </div>
+        <div className="flex  justify-between pt-10">
           <Link
             href={"/auth/register"}
-            className="px-4 py-2 text-xl font-bold text-weeny"
+            className="px-4 py-2 text-lg font-bold text-weeny"
           >
             {"حساب ندارید؟ ثبت نام کنید"}
+          </Link>
+          <Link
+            href={"/auth/resetPassword"}
+            className="px-4 py-2 text-lg font-bold text-brand"
+          >
+            {"فراموشی رمز عبور"}
           </Link>
         </div>
       </div>
