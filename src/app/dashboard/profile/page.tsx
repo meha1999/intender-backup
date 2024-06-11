@@ -1,5 +1,8 @@
 "use client";
 import Input from "@/components/common/Input";
+import PasswordInput from "@/components/common/PasswordInput";
+import ChangePassword from "@/components/pages/dashboard/changePassword";
+import { passwordPattern } from "@/configs/regex";
 import { authServiceHandler } from "@/services/auth.service";
 import { useZustandStore } from "@/store";
 import HookFormErrorHandler from "@/utils/HookFormErrorHandler";
@@ -29,7 +32,7 @@ const Profile = () => {
   const handleEdit: SubmitHandler<Inputs> = async (data) => {
     setLoading(true);
     try {
-      authServiceHandler.editUser(data);
+      await authServiceHandler.editUser(data);
       const res = await authServiceHandler.getProfile();
       setUserProfile(res.data);
       toast.success("با موفقیت بروزرسانی شد.");
@@ -41,110 +44,113 @@ const Profile = () => {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(handleEdit)}
-      className="flex flex-col gap-10 rounded-3xl bg-white p-11"
-    >
-      <div className="flex items-center gap-5">
-        <div className="flex h-20 w-20 items-center justify-center rounded-full border border-brand p-1">
-          <div className="h-16 w-16 rounded-full bg-brand"></div>
+    <div className="flex flex-col gap-10">
+      <form
+        onSubmit={handleSubmit(handleEdit)}
+        className="flex flex-col gap-10 rounded-3xl bg-white p-11"
+      >
+        <div className="flex items-center gap-5">
+          <div className="flex h-20 w-20 items-center justify-center rounded-full border border-brand p-1">
+            <div className="h-16 w-16 rounded-full bg-brand"></div>
+          </div>
+          <p className="text-lg font-bold text-brand">{`${userProfile.first_name} عزیز به پنل کاربری خود خوش آمدید! `}</p>
         </div>
-        <p className="text-lg font-bold text-brand">{`${userProfile.first_name} عزیز به پنل کاربری خود خوش آمدید! `}</p>
-      </div>
-      <div className="flex items-center gap-10">
-        <div className="flex w-1/2 items-center gap-4">
-          <p className="w-16 text-nowrap text-sm font-bold text-black">
-            {"نام"}
-          </p>
-          <div className="flex w-full flex-col gap-2.5">
-            <Input
-              placeHolder="نام "
-              hookFormProps={register("first_name", {
-                required: {
-                  value: true,
-                  message: "نام اجباری میباشد.",
-                },
-              })}
-            />
-            <HookFormErrorHandler errors={errors} name="first_name" />
+        <div className="flex items-center gap-10">
+          <div className="flex w-1/2 items-center gap-4">
+            <p className="w-16 text-nowrap text-sm font-bold text-black">
+              {"نام"}
+            </p>
+            <div className="flex w-full flex-col gap-2.5">
+              <Input
+                placeHolder="نام "
+                hookFormProps={register("first_name", {
+                  required: {
+                    value: true,
+                    message: "نام اجباری میباشد.",
+                  },
+                })}
+              />
+              <HookFormErrorHandler errors={errors} name="first_name" />
+            </div>
+          </div>
+          <div className="flex w-1/2 items-center gap-4">
+            <p className="w-16 text-nowrap text-sm font-bold text-black">
+              {"نام خانوادگی"}
+            </p>
+            <div className="flex w-full flex-col gap-2.5">
+              <Input
+                placeHolder="نام خانوادگی"
+                hookFormProps={register("last_name", {
+                  required: {
+                    value: true,
+                    message: "نام خانوادگی اجباری میباشد.",
+                  },
+                })}
+              />
+              <HookFormErrorHandler errors={errors} name="last_name" />
+            </div>
           </div>
         </div>
-        <div className="flex w-1/2 items-center gap-4">
-          <p className="w-16 text-nowrap text-sm font-bold text-black">
-            {"نام خانوادگی"}
-          </p>
-          <div className="flex w-full flex-col gap-2.5">
-            <Input
-              placeHolder="نام خانوادگی"
-              hookFormProps={register("last_name", {
-                required: {
-                  value: true,
-                  message: "نام خانوادگی اجباری میباشد.",
-                },
-              })}
-            />
-            <HookFormErrorHandler errors={errors} name="last_name" />
+        <div className="flex items-center gap-10">
+          <div className="flex w-1/2 items-center gap-4">
+            <p className="w-16 text-nowrap text-sm font-bold text-black">
+              {"موبایل"}
+            </p>
+            <div className="flex w-full flex-col gap-2.5 text-black">
+              <div>{userProfile.mobile}</div>
+              <HookFormErrorHandler errors={errors} name="mobile" />
+            </div>
+          </div>
+          <div className="flex w-1/2 items-center gap-4">
+            <p className="w-16 text-nowrap text-sm font-bold text-black">
+              {"ایمیل"}
+            </p>
+            <div className="flex w-full flex-col gap-2.5">
+              <Input
+                placeHolder="ایمیل"
+                hookFormProps={register("email", {
+                  required: {
+                    value: true,
+                    message: "ایمیل اجباری میباشد.",
+                  },
+                })}
+              />
+              <HookFormErrorHandler errors={errors} name="email" />
+            </div>
           </div>
         </div>
-      </div>
-      <div className="flex items-center gap-10">
-        <div className="flex w-1/2 items-center gap-4">
-          <p className="w-16 text-nowrap text-sm font-bold text-black">
-            {"موبایل"}
-          </p>
-          <div className="flex w-full flex-col gap-2.5 text-black">
-            <div>{userProfile.mobile}</div>
-            <HookFormErrorHandler errors={errors} name="mobile" />
+        <div className="flex items-center gap-10">
+          <div className="flex w-1/2 items-center gap-4">
+            <p className="w-16 text-nowrap text-sm font-bold text-black">
+              {"سمت"}
+            </p>
+            <div className="flex w-full flex-col gap-2.5">
+              <Input
+                placeHolder="سمت"
+                hookFormProps={register("position", {
+                  required: {
+                    value: true,
+                    message: "سمت اجباری میباشد.",
+                  },
+                })}
+              />
+              <HookFormErrorHandler errors={errors} name="position" />
+            </div>
           </div>
+          <Button
+            size="md"
+            radius="full"
+            type="submit"
+            className="w-1/2 rounded-2xl border border-weeny bg-weeny !py-2.5 px-20 text-sm font-bold text-white hover:bg-white hover:text-weeny"
+            isLoading={loading}
+          >
+            <LuFileEdit className="h-4 w-4" />
+            {"ویرایش اطلاعات"}
+          </Button>
         </div>
-        <div className="flex w-1/2 items-center gap-4">
-          <p className="w-16 text-nowrap text-sm font-bold text-black">
-            {"ایمیل"}
-          </p>
-          <div className="flex w-full flex-col gap-2.5">
-            <Input
-              placeHolder="ایمیل"
-              hookFormProps={register("email", {
-                required: {
-                  value: true,
-                  message: "ایمیل اجباری میباشد.",
-                },
-              })}
-            />
-            <HookFormErrorHandler errors={errors} name="email" />
-          </div>
-        </div>
-      </div>
-      <div className="flex items-center gap-10">
-        <div className="flex w-1/2 items-center gap-4">
-          <p className="w-16 text-nowrap text-sm font-bold text-black">
-            {"سمت"}
-          </p>
-          <div className="flex w-full flex-col gap-2.5">
-            <Input
-              placeHolder="سمت"
-              hookFormProps={register("position", {
-                required: {
-                  value: true,
-                  message: "سمت اجباری میباشد.",
-                },
-              })}
-            />
-            <HookFormErrorHandler errors={errors} name="position" />
-          </div>
-        </div>
-        <Button
-          size="md"
-          radius="full"
-          type="submit"
-          className="w-1/2 rounded-2xl border border-weeny bg-weeny !py-2.5 px-20 text-sm font-bold text-white hover:bg-white hover:text-weeny"
-          isLoading={loading}
-        >
-          <LuFileEdit className="h-4 w-4" />
-          {"ویرایش اطلاعات"}
-        </Button>
-      </div>
-    </form>
+      </form>
+      <ChangePassword />
+    </div>
   );
 };
 

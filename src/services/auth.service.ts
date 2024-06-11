@@ -24,10 +24,14 @@ class AuthService extends BaseService {
     email: string;
     position: string;
   }): Promise<AxiosResponse<any>> {
-    return this.axiosInstanceWithToken.patch(
-      `/api/v1/users/profile/`,
-      payload,
-    );
+    return this.axiosInstanceWithToken.patch(`/api/v1/users/profile/`, payload);
+  }
+
+  changePassword(payload: {
+    old_password: string;
+    new_password: string;
+  }): Promise<AxiosResponse<any>> {
+    return this.axiosInstanceWithToken.post(`/api/v1/users/profile/password/`, payload);
   }
 
   signupVerification(payload: {
