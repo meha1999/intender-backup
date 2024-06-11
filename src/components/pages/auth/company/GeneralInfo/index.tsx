@@ -197,26 +197,26 @@ const GeneralInfo: React.FC<StepperComponentsProps> = ({ setActiveTab }) => {
       </div>
       <div className="flex items-center gap-8">
         <div className="flex w-full flex-col gap-2.5">
-          <p className="text-sm font-bold text-black">{"شماره تلفن ثابت"}</p>
+          <p className="text-sm font-bold text-black">{"شماره تلفن ثابت شرکت"}</p>
           <Input
-            placeHolder="شماره تلفن ثابت"
+            placeHolder="شماره تلفن ثابت شرکت"
             hookFormProps={register("phone", {
               required: {
                 value: true,
-                message: "شماره تلفن ثابت اجباری میباشد.",
+                message: "شماره تلفن ثابت شرکت اجباری میباشد.",
               },
             })}
           />
           <HookFormErrorHandler errors={errors} name="phone" />
         </div>
         <div className="flex w-full flex-col gap-2.5">
-          <p className="text-sm font-bold text-black">{"پست الکترونیک"}</p>
+          <p className="text-sm font-bold text-black">{"پست الکترونیک شرکت"}</p>
           <Input
-            placeHolder="پست الکترونیک"
+            placeHolder="پست الکترونیک شرکت"
             hookFormProps={register("email", {
               required: {
                 value: true,
-                message: "پست الکترونیک اجباری میباشد.",
+                message: "پست الکترونیک شرکت اجباری میباشد.",
               },
               pattern: {
                 value: emailPattern,

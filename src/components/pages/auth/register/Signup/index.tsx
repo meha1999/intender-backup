@@ -151,13 +151,13 @@ const Signup: React.FC<SignupProps> = ({ setVerificationToken }) => {
         </div>
 
         <div className="flex flex-col gap-2.5">
-          <p className="text-sm font-bold text-black">{"شماره ثبت ملی شرکت"}</p>
+          <p className="text-sm font-bold text-black">{"شناسه ملی شرکت"}</p>
           <Input
-            placeHolder="شماره ثبت ملی شرکت را وارد کنید"
+            placeHolder="شناسه ملی شرکت را وارد کنید"
             hookFormProps={register("company_national_id", {
               required: {
                 value: true,
-                message: "شماره ثبت ملی شرکت اجباری میباشد.",
+                message: "شناسه ملی شرکت اجباری میباشد.",
               },
             })}
           />

@@ -2,7 +2,7 @@
 import Input from "@/components/common/Input";
 import PasswordInput from "@/components/common/PasswordInput";
 // import Button from "@/components/common/Button";
-import { Button, Checkbox } from "@nextui-org/react";
+import { Button } from "@nextui-org/button";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { passwordPattern, phonePattern } from "@/configs/regex";
 import HookFormErrorHandler from "@/utils/HookFormErrorHandler";
@@ -22,7 +22,7 @@ type Inputs = {
   multipleCompanies?: boolean;
 };
 
-const Login = () => {
+const ResetPassword = () => {
   const router = useRouter();
 
   const {
@@ -36,7 +36,7 @@ const Login = () => {
 
   const { setUserProfile } = useZustandStore();
 
-  const handleLogin: SubmitHandler<Inputs> = async (data) => {
+  const handleResetPassword: SubmitHandler<Inputs> = async (data) => {
     setLoading(true);
     try {
       delete data.multipleCompanies;
@@ -55,7 +55,7 @@ const Login = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(handleLogin)}>
+    <form onSubmit={handleSubmit(handleResetPassword)}>
       <div className="flex flex-col gap-5 py-14">
         <p className="text-3xl font-bold text-black">{"صفحه ورود"}</p>
         <p className="text-sm text-secondary-light">
@@ -128,7 +128,7 @@ const Login = () => {
           </Button>
           <Link
             href={"/auth/register"}
-            className="px-4 py-2 text-xl font-bold text-weeny"
+            className="px-4 py-2 text-xl font-bold text-brand"
           >
             {"حساب ندارید؟ ثبت نام کنید"}
           </Link>
@@ -138,4 +138,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default ResetPassword;

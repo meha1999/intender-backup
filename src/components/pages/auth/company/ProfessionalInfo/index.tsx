@@ -9,13 +9,14 @@ import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import CompleteRegistrationModal from "../CompleteRegistrationModal";
 import Tags from "./Tags";
+import MultipleSelectInput from "@/components/common/MultipleSelectInput";
 
 interface InputType {
   address: string;
   description: string;
   is_foreigner: true;
   tags: Array<string>;
-  services: { name: string; value: number };
+  services: Array<{ text: string; value: number }>;
 }
 
 const ProfessionalInfo: React.FC = ({}) => {
@@ -42,7 +43,7 @@ const ProfessionalInfo: React.FC = ({}) => {
       ...data,
       company_type: companyRegister.company_type.value,
       tags: data.tags,
-      services: [data.services.value],
+      services: data.services.map((item) => item.value),
       province: companyRegister.province.value,
     };
     try {
@@ -114,7 +115,7 @@ const ProfessionalInfo: React.FC = ({}) => {
               control={control}
               name="services"
               render={({ field: { onChange, value, ref } }) => (
-                <SelectInput
+                <MultipleSelectInput
                   data={services.map((item) => {
                     return { text: item.name, value: item.id };
                   })}

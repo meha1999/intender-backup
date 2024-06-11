@@ -6,7 +6,7 @@ import { useOutSideClick } from "@/utils/useOutSideClick";
 import { motion } from "framer-motion";
 import { selectVariants } from "@/utils/variants";
 
-interface SelectInputProps {
+interface MultipleSelectInputProps {
   placeholder?: string;
   value: any;
   setValue: (value: any) => void;
@@ -15,7 +15,7 @@ interface SelectInputProps {
   setOrder?: (value: "desc" | "asc") => void;
   className?: string;
 }
-const SelectInput: React.FC<SelectInputProps> = ({
+const MultipleSelectInput: React.FC<MultipleSelectInputProps> = ({
   placeholder,
   value,
   setValue,
@@ -47,9 +47,15 @@ const SelectInput: React.FC<SelectInputProps> = ({
             className={`${order === "asc" ? "rotate-180 transform" : ""}`}
           />
         )}
-        <p className="text-sm font-bold">
-          {value?.text ?? placeholder ?? "مرتب‌سازی"}
-        </p>
+        <div className="flex gap-1 text-sm font-bold">
+          {value?.map((item: any, index: number) => (
+            <p key={item?.value}>
+              {0 !== index && "-"} {item.text}
+            </p>
+          )) ??
+            placeholder ??
+            "مرتب‌سازی"}
+        </div>
       </div>
       {open ? <Arrow className="rotate-180 transform" /> : <Arrow />}
       <motion.nav
@@ -64,8 +70,12 @@ const SelectInput: React.FC<SelectInputProps> = ({
         {data.map((item, index) => (
           <div
             key={index}
-            onClick={() => setValue(item)}
-            className={`${item?.value === value?.value ? "text-weeny" : ""}`}
+            onClick={() => {
+              value?.find((i: any) => i.value === item.value)
+                ? setValue(value.filter((i: any) => i.value !== item.value))
+                : setValue([...(value || []), item]);
+            }}
+            className={`${value?.find((i: any) => i.value === item.value) ? "text-weeny" : ""}`}
           >
             {item?.text}
           </div>
@@ -75,4 +85,4 @@ const SelectInput: React.FC<SelectInputProps> = ({
   );
 };
 
-export default SelectInput;
+export default MultipleSelectInput;

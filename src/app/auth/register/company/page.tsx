@@ -1,17 +1,9 @@
 "use client";
-import Button from "@/components/common/Button";
-import Input from "@/components/common/Input";
-import SelectInput from "@/components/common/SelectInput";
 import GeneralInfo from "@/components/pages/auth/company/GeneralInfo";
 import ProfessionalInfo from "@/components/pages/auth/company/ProfessionalInfo";
-import { emailPattern } from "@/configs/regex";
-import { authServiceHandler } from "@/services/auth.service";
-import { useZustandStore } from "@/store";
-import HookFormErrorHandler from "@/utils/HookFormErrorHandler";
-import { useEffect, useState } from "react";
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import { LuUploadCloud } from "react-icons/lu";
-import { toast } from "react-toastify";
+
+import {  useState } from "react";
+
 
 interface StepperComponentsProps {
   setActiveTab: (value: number) => void;
