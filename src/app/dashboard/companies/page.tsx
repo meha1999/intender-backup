@@ -1,5 +1,3 @@
-// "use client";
-
 import SearchInput from "@/components/common/SearchInput";
 import SelectInput from "@/components/common/SelectInput";
 import CompanyCard from "@/components/pages/dashboard/companies/CompantCard";
@@ -9,25 +7,25 @@ import { BsSearch } from "react-icons/bs";
 import { motion } from "framer-motion";
 import CompanyList from "@/components/pages/dashboard/companies/CompanyList";
 import { companyServiceHandler } from "@/services/company.service";
+import { Button } from "@nextui-org/react";
+import CompanySearch from "@/components/pages/dashboard/companies/CompanySearch";
+import { useForm } from "react-hook-form";
 
-const Companies = async () => {
+const Companies = async ({
+  searchParams,
+}: {
+  searchParams: Record<string, string>;
+}) => {
   // const [filter, setFilter] = useState();
   // const [order, setOrder] = useState<"desc" | "asc">("asc");
 
-  const res = await companyServiceHandler.getCompanies();
+  const res = await companyServiceHandler.getCompanies({...searchParams});
 
   return (
     <div className="flex flex-col gap-10">
       <div className="flex items-center justify-between">
         <div className="w-1/2">
-          <SearchInput
-            placeHolder="جستجو شرکت"
-            Icon={
-              <div className="cursor-pointer rounded-3xl border border-brand bg-brand px-5 py-2.5 text-center text-xl text-white hover:bg-white hover:text-brand">
-                <BsSearch />
-              </div>
-            }
-          />
+          <CompanySearch />
         </div>
         <div className="w-1/4">
           {/* <SelectInput
@@ -44,7 +42,7 @@ const Companies = async () => {
         </div>
       </div>
       <div className="w-full border border-gray-200" />
-      <CompanyList data={res.data}/>
+      <CompanyList data={res.data} />
     </div>
   );
 };

@@ -50,8 +50,8 @@ const Login = () => {
       router.push("/dashboard");
     } catch (error) {
       toast.error("خطای سرور");
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   return (
