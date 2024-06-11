@@ -31,7 +31,10 @@ class AuthService extends BaseService {
     old_password: string;
     new_password: string;
   }): Promise<AxiosResponse<any>> {
-    return this.axiosInstanceWithToken.post(`/api/v1/users/profile/password/`, payload);
+    return this.axiosInstanceWithToken.post(
+      `/api/v1/users/profile/password/`,
+      payload,
+    );
   }
 
   signupVerification(payload: {
@@ -40,6 +43,27 @@ class AuthService extends BaseService {
   }): Promise<AxiosResponse<loginType>> {
     return this.axiosInstanceWithoutToken.post(
       `/api/v1/users/signup/verification/`,
+      payload,
+    );
+  }
+
+  resetPasswordVerification(payload: {
+    verification_token: string;
+    verification_code: number;
+  }): Promise<AxiosResponse<loginType>> {
+    return this.axiosInstanceWithoutToken.post(
+      `/api/v1/users/reset-pass/verification/`,
+      payload,
+    );
+  }
+
+  resetPassword(payload: {
+    mobile: string;
+    company_national_id: string;
+    new_password: string;
+  }): Promise<AxiosResponse<{ verification_token: string }>> {
+    return this.axiosInstanceWithoutToken.post(
+      `/api/v1/users/reset-pass/`,
       payload,
     );
   }
