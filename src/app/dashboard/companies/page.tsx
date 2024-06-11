@@ -2,7 +2,7 @@ import SearchInput from "@/components/common/SearchInput";
 import SelectInput from "@/components/common/SelectInput";
 import CompanyCard from "@/components/pages/dashboard/companies/CompantCard";
 import { listItemVariants, listVariants } from "@/utils/variants";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { BsSearch } from "react-icons/bs";
 import { motion } from "framer-motion";
 import CompanyList from "@/components/pages/dashboard/companies/CompanyList";
@@ -19,13 +19,18 @@ const Companies = async ({
   // const [filter, setFilter] = useState();
   // const [order, setOrder] = useState<"desc" | "asc">("asc");
 
-  const res = await companyServiceHandler.getCompanies({...searchParams});
+  const res = await companyServiceHandler.getCompanies({ ...searchParams });
 
   return (
     <div className="flex flex-col gap-10">
       <div className="flex items-center justify-between">
         <div className="w-1/2">
-          <CompanySearch />
+          <Suspense
+            key={`search=${JSON.stringify(searchParams)}`}
+            fallback={<></>}
+          >
+            <CompanySearch />
+          </Suspense>
         </div>
         <div className="w-1/4">
           {/* <SelectInput
