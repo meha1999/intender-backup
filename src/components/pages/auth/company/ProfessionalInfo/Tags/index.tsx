@@ -26,8 +26,9 @@ const Tags: React.FC<TagsProps> = ({ list, onChange, selectedList }) => {
   const handleAddUserTags = () => {
     const name = watch("name");
     const tag = userTags.find((item) => item === name);
-    !tag && setUserTags([name, ...userTags]);
-    reset();
+    !tag && onChange([name, ...(selectedList || [])]);
+    setUserTags([name, ...userTags]);
+    reset({ name: "" });
   };
 
   const handleUserTags = (name: string) => {

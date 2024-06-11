@@ -4,6 +4,7 @@ import { dashboardSideBar } from "@/configs/layout";
 import { usePathname } from "next/navigation";
 import { ImExit } from "react-icons/im";
 import Logo from "public/icons/dashboardLogo.svg";
+import { ImOffice } from "react-icons/im";
 
 const SideBar = () => {
   const pathname = usePathname();
@@ -28,11 +29,22 @@ const SideBar = () => {
         </div>
       </div>
 
-      <div className="w-full pl-10 max-xl:pl-5 ">
-        <Button className="flex w-full items-center justify-center gap-3 rounded-3xl border border-white bg-white py-2 text-secondary-dark hover:bg-secondary-dark hover:text-white">
-          <ImExit />
-          <p className="font-bold">{"خروج"}</p>
-        </Button>
+      <div className="flex w-full flex-col gap-4">
+        <div className="w-full pl-10 max-xl:pl-5 ">
+          <Button
+            href={"/profile"}
+            className="flex w-full items-center justify-center gap-3 rounded-3xl border border-white bg-white py-2 text-secondary-dark hover:bg-secondary-dark hover:text-white"
+          >
+            <ImOffice />
+            <p className="font-bold">{"پروفایل شرکت"}</p>
+          </Button>
+        </div>
+        <div className="w-full pl-10 max-xl:pl-5 ">
+          <Button className="flex w-full items-center justify-center gap-3 rounded-3xl border border-white bg-white py-2 text-secondary-dark hover:bg-secondary-dark hover:text-white">
+            <ImExit />
+            <p className="font-bold">{"خروج"}</p>
+          </Button>
+        </div>
       </div>
     </div>
   );

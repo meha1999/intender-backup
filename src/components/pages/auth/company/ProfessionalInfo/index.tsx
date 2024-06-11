@@ -19,33 +19,41 @@ interface InputType {
 }
 
 const ProfessionalInfo: React.FC = ({}) => {
-  const { companyRegister, tags, setTags, services, setServices } =
-    useZustandStore();
+  const {
+    companyRegister,
+    tags,
+    setTags,
+    services,
+    setServices,
+    setUserProfile,
+  } = useZustandStore();
 
   const {
     register,
     handleSubmit,
     control,
-    watch,
     formState: { errors },
   } = useForm<InputType>();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleSubmitBasicInfo: SubmitHandler<InputType> = async (data) => {
     const finalData = {
-      ...data,
       ...companyRegister,
+      ...data,
       company_type: companyRegister.company_type.value,
-      // tags: [data.tags.value],
+      tags: data.tags,
       services: [data.services.value],
       province: companyRegister.province.value,
     };
     try {
       await authServiceHandler.signupCompany(finalData);
-      // await authServiceHandler.reviewCompany();
-    } catch (error) {}
-    setIsModalOpen(true);
-    toast.success("ثبت شرکت با موفقیت تکمیل شد");
+      const res = await authServiceHandler.getProfile();
+      setUserProfile(res.data);
+      toast.success("ثبت شرکت با موفقیت تکمیل شد");
+      setIsModalOpen(true);
+    } catch (error) {
+      toast.error("خطای سرور");
+    }
   };
 
   const handleGetTags = async () => {
@@ -63,8 +71,6 @@ const ProfessionalInfo: React.FC = ({}) => {
     handleGetServices();
   }, []);
 
-  console.log(watch("tags"));
-
   return (
     <>
       <form
@@ -74,7 +80,8 @@ const ProfessionalInfo: React.FC = ({}) => {
         <div className="flex w-full flex-col gap-2.5">
           <p className="text-sm font-bold text-black">{"آدرس"}</p>
           <textarea
-            rows={4}
+            className="text-black"
+            rows={3}
             placeholder="آدرس"
             {...register("address", {
               required: {
@@ -88,7 +95,8 @@ const ProfessionalInfo: React.FC = ({}) => {
         <div className="flex w-full flex-col gap-2.5">
           <p className="text-sm font-bold text-black">{"توضیحات"}</p>
           <textarea
-            rows={4}
+            className="text-black"
+            rows={3}
             placeholder="توضیحات"
             {...register("description", {
               required: {
@@ -99,10 +107,29 @@ const ProfessionalInfo: React.FC = ({}) => {
           />
           <HookFormErrorHandler errors={errors} name="description" />
         </div>
+        <div className="flex w-full flex-col gap-2.5">
+          <p className="text-sm font-bold text-black">{"سرویس ها"}</p>
+          {services && (
+            <Controller
+              control={control}
+              name="services"
+              render={({ field: { onChange, value, ref } }) => (
+                <SelectInput
+                  data={services.map((item) => {
+                    return { text: item.name, value: item.id };
+                  })}
+                  placeholder="سرویس ها"
+                  value={value}
+                  setValue={onChange}
+                />
+              )}
+            />
+          )}
+          <HookFormErrorHandler errors={errors} name="services" />
+        </div>
 
         <div className="flex items-center gap-8">
           <div className="flex w-full flex-col gap-2.5">
-            <p className="text-sm font-bold text-black">{"برچسب ها"}</p>
             {tags && (
               <Controller
                 control={control}
@@ -114,30 +141,10 @@ const ProfessionalInfo: React.FC = ({}) => {
             )}
             <HookFormErrorHandler errors={errors} name="tags" />
           </div>
-          <div className="flex w-full flex-col gap-2.5">
-            <p className="text-sm font-bold text-black">{"سرویس ها"}</p>
-            {services && (
-              <Controller
-                control={control}
-                name="services"
-                render={({ field: { onChange, value, ref } }) => (
-                  <SelectInput
-                    data={services.map((item) => {
-                      return { text: item.name, value: item.id };
-                    })}
-                    placeholder="سرویس ها"
-                    value={value}
-                    setValue={onChange}
-                  />
-                )}
-              />
-            )}
-            <HookFormErrorHandler errors={errors} name="services" />
-          </div>
         </div>
 
         <Button className="rounded-xl border border-brand bg-brand py-2 text-sm font-bold text-white hover:bg-white hover:text-brand">
-          {"مرحله بعد"}
+          {"ثبت"}
         </Button>
       </form>
       <CompleteRegistrationModal
