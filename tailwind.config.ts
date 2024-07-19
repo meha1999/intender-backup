@@ -25,10 +25,11 @@ const config: Config = {
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        banner: `url('/images/homepage/banner.png')`,
+        banner: `url('/images/homepage/banner.svg')`,
+        tail: `url('/images/homepage/tail.svg')`,
+        catalog: `url('/images/homepage/catalog.svg')`,
         auth: `url('/images/auth/background.svg')`,
         "company-background": "url('/images/company/background.png')",
-        events: `url('/images/homepage/events.svg')`,
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
@@ -40,6 +41,7 @@ const config: Config = {
         weeny: "#448CF6",
         milky: "#F5F5F5",
         "light-weeny": "#E1EDFF",
+        "dark-weeny": "#202636",
         "light-gray": "#EFEFEF",
         "dark-gray": "#6C6C6C",
         "light-brand": "#FFE6DD",
@@ -50,6 +52,6 @@ const config: Config = {
     },
   },
   darkMode: "class",
-  plugins: [nextui(), require("@tailwindcss/forms")],
+  plugins: [nextui()],
 };
 export default config;

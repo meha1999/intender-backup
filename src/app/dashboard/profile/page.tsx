@@ -1,7 +1,7 @@
 "use client";
 import Input from "@/components/common/Input";
 import PasswordInput from "@/components/common/PasswordInput";
-import ChangePassword from "@/components/pages/dashboard/changePassword";
+import ChangePassword from "@/components/app/dashboard/changePassword";
 import { passwordPattern } from "@/configs/regex";
 import { authServiceHandler } from "@/services/auth.service";
 import { useZustandStore } from "@/store";

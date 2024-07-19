@@ -96,9 +96,13 @@ export abstract class BaseService {
       },
       function (error) {
         if (error.response?.status === 401 || error.response?.status === 403) {
-          localStorage.clear();
-          sessionStorage.clear();
-          window.location.href = "/auth/login";
+          console.log(typeof window);
+          
+          if (typeof window !== "undefined") {
+            localStorage.clear();
+            sessionStorage.clear();
+            window.location.href = "/auth/login";
+          }
         }
         // Any status codes that falls outside the range of 2xx cause this function to trigger
         // Do something with response error

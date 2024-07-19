@@ -71,7 +71,6 @@ const Comapny = async ({ params: { id } }: { params: { id: string } }) => {
 
   const res = await companyServiceHandler.getCompany(id);
 
-  console.log(res.data);
 
   return (
     <div className="flex h-screen flex-col overflow-y-auto bg-light-gray bg-company-background bg-cover bg-center bg-no-repeat">

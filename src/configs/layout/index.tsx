@@ -191,6 +191,16 @@ export const dashboardSideBar = [
     url: "/dashboard/tenders",
   },
   {
+    name: "مناقصات من",
+    icon: <List />,
+    url: "/dashboard/myTenders",
+  },
+  {
+    name: "مناقصه جدید",
+    icon: <List />,
+    url: "/dashboard/myTenders/create",
+  },
+  {
     name: "آگهی‌ها",
     icon: <Advertisment />,
     url: "/dashboard/advertisements",

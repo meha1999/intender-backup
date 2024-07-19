@@ -95,3 +95,58 @@ interface CompanyMember {
   position: string;
   is_active: boolean;
 }
+
+interface TendersListItem {
+  id: number;
+  name: string;
+  deadline: "2024-07-15";
+  description: string;
+  tender_type: "PUBLIC" | "PRIVATE";
+  project_name: string;
+  tags: [
+    {
+      id: number;
+      name: string;
+    },
+  ];
+  service: {
+    id: number;
+    name: string;
+  };
+  inquiry: string;
+}
+
+interface CreateTender {
+  name: string;
+  deadline: any;
+  description: string;
+  tender_type: "PUBLIC" | "PRIVATE";
+  project_name: string;
+  tags: Array<string>;
+  service: Array<number>;
+  inquiry: FileList;
+  assigns: Array<number>;
+}
+
+interface Tender {
+  name: string;
+  deadline: string;
+  description: string;
+  tender_type: "PUBLIC" | "PRIVATE";
+  project_name: string;
+  tags: Array<{
+    id: number;
+    name: string;
+  }>;
+  service: {
+    id: number;
+    name: string;
+  };
+  inquiry: string;
+}
+
+interface CreateBid {
+  title: string;
+  description: string;
+  resume: FileList;
+}

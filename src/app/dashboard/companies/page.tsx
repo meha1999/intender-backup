@@ -1,14 +1,14 @@
 import SearchInput from "@/components/common/SearchInput";
 import SelectInput from "@/components/common/SelectInput";
-import CompanyCard from "@/components/pages/dashboard/companies/CompantCard";
+import CompanyCard from "@/components/app/dashboard/companies/CompantCard";
 import { listItemVariants, listVariants } from "@/utils/variants";
 import { Suspense, useState } from "react";
 import { BsSearch } from "react-icons/bs";
 import { motion } from "framer-motion";
-import CompanyList from "@/components/pages/dashboard/companies/CompanyList";
+import CompanyList from "@/components/app/dashboard/companies/CompanyList";
 import { companyServiceHandler } from "@/services/company.service";
 import { Button } from "@nextui-org/react";
-import CompanySearch from "@/components/pages/dashboard/companies/CompanySearch";
+import CompanySearch from "@/components/app/dashboard/companies/CompanySearch";
 import { useForm } from "react-hook-form";
 
 const Companies = async ({

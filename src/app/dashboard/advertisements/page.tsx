@@ -5,7 +5,7 @@ import { listItemVariants, listVariants } from "@/utils/variants";
 import { useState } from "react";
 import { BsSearch } from "react-icons/bs";
 import { motion } from "framer-motion";
-import AdvertisementCard from "@/components/pages/dashboard/advertisements/AdvertisementCard";
+import AdvertisementCard from "@/components/app/dashboard/advertisements/AdvertisementCard";
 import Button from "@/components/common/Button";
 import { FaPlus } from "react-icons/fa6";
 

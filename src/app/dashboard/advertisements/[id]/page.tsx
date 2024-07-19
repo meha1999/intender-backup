@@ -5,7 +5,7 @@ import Button from "@/components/common/Button";
 import { CiFilter } from "react-icons/ci";
 import { BsGrid } from "react-icons/bs";
 import { PiList } from "react-icons/pi";
-import CommentCard from "@/components/pages/dashboard/advertisements/CommentCard";
+import CommentCard from "@/components/app/dashboard/advertisements/CommentCard";
 import { CKEditor, CKEditorContext } from "@ckeditor/ckeditor5-react";
 import { ClassicEditor } from "@ckeditor/ckeditor5-editor-classic";
 import { Context } from "@ckeditor/ckeditor5-core";

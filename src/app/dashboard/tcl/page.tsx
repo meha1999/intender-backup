@@ -5,8 +5,7 @@ import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import Button from "@/components/common/Button";
 import Pagination from "@/components/common/Pagination";
-import TclCard from "@/components/pages/dashboard/tcl/TclCard";
-import Tenders from "public/images/tenders.png";
+import TclCard from "@/components/app/dashboard/tcl/TclCard";
 import Image from "next/image";
 import Modal from "@/components/common/Modal";
 import Documents from "@/components/modals/Documents";
@@ -120,7 +119,7 @@ const Tcl = () => {
               <p className="flex items-center justify-center text-sm font-bold text-brand">
                 {"طرفین مناقصه"}
               </p>
-              <Image src={Tenders} alt="tenders" />
+              {/* <Image src={Tenders} alt="tenders" /> */}
             </div>
             <div className="relative bottom-10 h-24 w-24 rounded-full border-4 border-brand">
               <div className="h-full rounded-full border-4 border-light-gray"></div>

@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import Input from "@/components/common/Input";
 import { useForm } from "react-hook-form";
 import Button from "@/components/common/Button";
-import OrderCard from "@/components/pages/dashboard/order/OrderCard";
+import OrderCard from "@/components/app/dashboard/order/OrderCard";
 import Pagination from "@/components/common/Pagination";
 
 const Orders = () => {

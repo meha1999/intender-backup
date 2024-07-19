@@ -23,9 +23,9 @@ const UserInfo = () => {
       </div>
       <div className="flex items-center gap-3">
         {/* <IoIosArrowDown className="text-2xl cursor-pointer" /> */}
-        <Button href={'/'} className="flex items-center gap-3 rounded-3xl bg-white px-16  py-3 text-weeny hover:bg-weeny hover:text-white">
-          <IoIosExit className="text-2xl" />
-          <p className="text-lg font-bold">{"خروج"}</p>
+        <Button href={'/'} className="flex items-center gap-3 rounded-3xl bg-white px-6  py-3 text-weeny hover:bg-weeny hover:text-white">
+          <IoIosExit className="text-xl" />
+          <p className="text-base font-bold">{"خروج"}</p>
         </Button>
       </div>
     </div>

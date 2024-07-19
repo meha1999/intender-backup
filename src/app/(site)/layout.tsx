@@ -7,7 +7,7 @@ const SiteLayout = ({
   children: React.ReactNode;
 }>) => {
   return (
-    <div className="flex flex-col bg-black">
+    <div className="flex flex-col bg-primary">
       <Header />
       {children}
       <Footer />

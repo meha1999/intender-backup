@@ -5,7 +5,7 @@ interface DashboardCardProps {
 
 const DashboardCard: React.FC<DashboardCardProps> = ({ Icon, label }) => {
   return (
-    <div className="flex flex-col items-center justify-center rounded-3xl bg-black px-14 py-14 shadow-sm shadow-brand">
+    <div className="flex h-44 w-44 flex-col items-center justify-center rounded-3xl bg-black shadow-sm shadow-brand">
       {Icon}
       {label}
     </div>

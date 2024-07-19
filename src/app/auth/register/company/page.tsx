@@ -1,6 +1,6 @@
 "use client";
-import GeneralInfo from "@/components/pages/auth/company/GeneralInfo";
-import ProfessionalInfo from "@/components/pages/auth/company/ProfessionalInfo";
+import GeneralInfo from "@/components/app/auth/company/GeneralInfo";
+import ProfessionalInfo from "@/components/app/auth/company/ProfessionalInfo";
 
 import {  useState } from "react";
 

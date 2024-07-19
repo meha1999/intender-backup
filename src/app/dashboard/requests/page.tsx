@@ -5,7 +5,7 @@ import SearchInput from "@/components/common/SearchInput";
 import SelectInput from "@/components/common/SelectInput";
 import { BsSearch } from "react-icons/bs";
 import { MdOutlineSupportAgent } from "react-icons/md";
-import RequestCard from "@/components/pages/dashboard/requests/RequestCrad";
+import RequestCard from "@/components/app/dashboard/requests/RequestCrad";
 import { motion } from "framer-motion";
 import { listItemVariants, listVariants } from "@/utils/variants";
 

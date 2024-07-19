@@ -1,9 +1,11 @@
 "use client";
-import Info from "@/components/pages/profile/Info";
-import Members from "@/components/pages/profile/Members";
-import Resources from "@/components/pages/profile/Resources";
-import Tags from "@/components/pages/profile/Tags";
+import Info from "@/components/app/profile/Info";
+import Members from "@/components/app/profile/Members";
+import Resources from "@/components/app/profile/Resources";
+import Tags from "@/components/app/profile/Tags";
 import { useZustandStore } from "@/store";
+import { Button } from "@nextui-org/react";
+import Link from "next/link";
 import { TiEdit } from "react-icons/ti";
 
 const Profile = () => {
@@ -12,8 +14,13 @@ const Profile = () => {
   } = useZustandStore();
   return (
     <div className="flex flex-col gap-7 px-12 py-16">
-      <p className="text-lg font-bold text-brand">{"اطلاعات شرکت"}</p>
-      <div className="flex flex-col gap-2.5">
+      <div className="flex items-center justify-between">
+        <p className="text-lg font-bold text-brand">{"اطلاعات شرکت"}</p>
+        <Button className="bg-weeny px-12 py-2.5 text-sm font-bold text-white">
+          <Link href={""}>{"ویرایش اطلاعت"}</Link>
+        </Button>
+      </div>
+      {/* <div className="flex flex-col gap-2.5">
         <p className="font-bold text-brand">{"راه های ارتباطی"}</p>
         <div className="flex flex-col gap-4 rounded-xl bg-milky px-6 py-4">
           <div className="flex justify-between">
@@ -36,7 +43,6 @@ const Profile = () => {
             <div className="flex w-1/4 flex-col items-center gap-4">
               <p className="text-sm font-bold text-dark-gray">{"کد پستی"}</p>
               <p className="flex items-center gap-11 text-sm font-bold text-black">
-                {/* {"***1216511"} */}
               </p>
             </div>
             <div className="h-16 border border-secondary-light" />
@@ -50,14 +56,11 @@ const Profile = () => {
             <p className="text-xs text-black">{company?.address}</p>
           </div>
         </div>
-      </div>
+      </div> */}
       <Info />
-      <div className="flex gap-9">
+      <div className="flex flex-col gap-9">
         <Members />
-        <div className="flex w-1/2 flex-col gap-9">
-          <Resources />
-          <Tags />
-        </div>
+        <Tags />
       </div>
     </div>
   );
