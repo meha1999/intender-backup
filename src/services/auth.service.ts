@@ -75,6 +75,13 @@ class AuthService extends BaseService {
     );
   }
 
+
+  preSignUp(payload: preSignUpType): Promise<AxiosResponse<any>> {
+    return this.axiosInstanceWithToken.post(
+      `/api/v1/users/signup/pre/`,
+      payload,
+    );
+  }
   reviewCompany(): Promise<AxiosResponse<any>> {
     return this.axiosInstanceWithToken.post(`/api/v1/users/signup/review/`);
   }

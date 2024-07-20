@@ -6,7 +6,7 @@ import { FaRegCopyright } from "react-icons/fa6";
 const Footer = () => {
   return (
     <div className="bg-primary">
-      <div className="container  mx-auto flex justify-between px-20 py-12 text-white">
+      <div className="container  mx-auto flex justify-between px-20 py-12 text-white max-md:flex-col max-md:gap-8 max-md:px-4">
         <div className="flex flex-col gap-3">
           <p className="text-base font-bold text-weeny">{"تماس با ما"}</p>
           <div className="flex flex-col gap-1">

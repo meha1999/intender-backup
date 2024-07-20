@@ -16,6 +16,13 @@ interface loginType {
   refresh: string;
 }
 
+interface preSignUpType {
+  fullname: string;
+  company_name: string;
+  email: string;
+  mobile: string;
+}
+
 interface getProfileType {
   is_applicant: boolean;
   first_name: string;

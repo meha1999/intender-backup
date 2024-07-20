@@ -8,11 +8,11 @@ import ColoredLogo from "public/icons/site/coloredLogo.svg";
 const Header = () => {
   const pathname = usePathname();
   return (
-    <div className="container relative mx-auto flex justify-between  px-20 py-4">
+    <div className="container relative mx-auto flex justify-between px-20 py-4 max-md:px-4">
       <div className="flex h-10 w-48">
         <ColoredLogo />
       </div>
-      <div className="flex items-center gap-4 text-sm font-semibold text-white">
+      <div className="flex items-center gap-4 text-sm font-semibold text-white max-lg:hidden">
         {siteHeader.map((item) => (
           <Button
             href={item.route}
@@ -26,7 +26,7 @@ const Header = () => {
         ))}
       </div>
       <div className="flex">
-        <Button className="rounded-3xl bg-weeny px-5 py-2.5 text-white">
+        <Button className="rounded-3xl bg-weeny px-5 py-2.5 text-white max-sm:px-2">
           <Link href={"/auth/login"}>
             {"ورود "} | {"ثبت نام"}
           </Link>
