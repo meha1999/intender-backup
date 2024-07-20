@@ -24,10 +24,6 @@ export default function RootLayout({
   return (
     <html lang="fa" dir="rtl">
       <head>
-        <meta
-          http-equiv="Content-Security-Policy"
-          content="upgrade-insecure-requests"
-        />
         <link rel="icon" href="/icons/favIcon.svg" sizes="any" />
       </head>
       <body className={inter.className + " h-screen"}>
