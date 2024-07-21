@@ -193,7 +193,7 @@ const CreateTnder = () => {
                   mainWrapper: "bg-white",
                 }}
               >
-                {Object.keys(configs?.decipline)?.map((decipline) => (
+                {configs?.decipline&&Object?.keys(configs?.decipline)?.map((decipline) => (
                   <SelectItem className="text-black" key={decipline}>
                     {configs?.decipline[decipline]}
                   </SelectItem>

@@ -159,7 +159,7 @@ const DetailTenders = () => {
               whileHover={{ scale: 1.04 }}
               // whileTap={{ scale: 0.95 }}
             >
-              <TendersDetailCard key={item.id}  {...item} />
+              {/* <TendersDetailCard key={item.id}  {...item} /> */}
             </motion.li>
           ))}
         </motion.ul>
