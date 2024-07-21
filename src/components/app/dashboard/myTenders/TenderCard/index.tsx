@@ -52,7 +52,7 @@ const TenderCard: React.FC<TenderCardProps> = ({
       <div className="border border-light-gray" />
       <div className="flex w-1/12 items-center">
         <Button
-          href={`/dashboard/tenders/${id}`}
+          href={`/dashboard/myTenders/${id}`}
           className="w-full rounded-xl border border-brand bg-brand py-2 text-center text-xs font-bold text-white hover:bg-white hover:text-brand"
         >
           {"مشاهده بیشتر"}

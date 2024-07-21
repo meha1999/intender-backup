@@ -126,13 +126,15 @@ interface TendersListItem {
 interface CreateTender {
   name: string;
   deadline: any;
+  start: any;
   description: string;
   tender_type: "PUBLIC" | "PRIVATE";
   project_name: string;
   tags: Array<string>;
   service: Array<number>;
-  inquiry: FileList;
+  document: FileList;
   assigns: Array<number>;
+  manager: number;
 }
 
 interface Tender {
@@ -156,4 +158,38 @@ interface CreateBid {
   title: string;
   description: string;
   resume: FileList;
+}
+
+interface Bid {
+  id: number;
+  company_id: number;
+  title: string;
+  status: string;
+  description: string;
+  document: string;
+  manager: number;
+  offers: [
+    {
+      file: string;
+      created_by: number;
+      created_at: string;
+    },
+  ];
+  comments: [
+    {
+      id: number;
+      title: string;
+      description: string;
+      attachment: string;
+      decipline: number;
+      replies: [
+        {
+          title: string;
+          description: string;
+          attachment: string;
+          decipline: number;
+        },
+      ];
+    },
+  ];
 }

@@ -1,5 +1,5 @@
 import MyTenderFilters from "@/components/app/dashboard/myTenders/TenderFilters";
-import TendersList from "@/components/app/dashboard/tenders/TendersList";
+import TendersList from "@/components/app/dashboard/myTenders/TendersList";
 import { BaseService } from "@/services/base.service";
 import { tenderServiceHandler } from "@/services/tender.service";
 import { cookies } from "next/headers";

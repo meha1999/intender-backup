@@ -215,4 +215,14 @@ export const dashboardSideBar = [
     icon: <FaUser className="h-6 w-7" />,
     url: "/dashboard/profile",
   },
+  {
+    name: "جزئیات مناقصه",
+    icon: <FaUser className="h-6 w-7" />,
+    url: "/dashboard/tenders/detailTenders",
+  },
+  {
+    name: "پیشنهادهای من",
+    icon: <FaUser className="h-6 w-7" />,
+    url: "/dashboard/tenders/muOffers",
+  },
 ];

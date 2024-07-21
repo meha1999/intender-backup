@@ -2,7 +2,6 @@
 // import { useState } from "react";
 // import Accordion from "@/components/common/Accordion";
 import CreateBidModal from "@/components/app/dashboard/tenders/CreateBidModal";
-import Button from "@/components/common/Button";
 import { tenderServiceHandler } from "@/services/tender.service";
 import { setServerSideToken } from "@/utils/setToken";
 import { FaFileDownload } from "react-icons/fa";

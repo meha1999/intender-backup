@@ -20,19 +20,43 @@ class TenderService extends BaseService {
     return this.axiosInstanceWithToken.get(`/api/v1/tenders/me/`, { params });
   }
 
+  getMyOffers(params: {
+    search?: string;
+    tags__id?: number;
+    service?: string;
+    tender_type?: "PUBLIC" | "PRIVATE";
+  }): Promise<AxiosResponse<Array<TendersListItem>>> {
+    return this.axiosInstanceWithToken.get(`/api/v1/tenders/bids/`, { params });
+  }
+
   getTender(id: string): Promise<AxiosResponse<Tender>> {
     return this.axiosInstanceWithToken.get(`/api/v1/tenders/${id}`);
   }
 
+  getTenderBids(id: string): Promise<AxiosResponse<Array<Bid>>> {
+    return this.axiosInstanceWithToken.get(`/api/v1/tenders/${id}/bids/`);
+  }
+
+  updateBidStatus(
+    id: number,
+    status: string,
+  ): Promise<AxiosResponse<Array<Bid>>> {
+    return this.axiosInstanceWithToken.patch(
+      `/api/v1/tenders/bids/${id}/check/`,
+      { status },
+    );
+  }
+
   createTender(data: any): Promise<AxiosResponse<Tender>> {
     const bodyFormData = new FormData();
+
     Object.keys(data).map((item) => {
       if (
         typeof data[item] === "object" &&
         (data[item]?.length || Array.from(data[item]).length)
       ) {
-        if (item !== "inquiry") {
-          if (item === "service") {
+        if (item !== "document") {
+          if (item === "service" || item === "assigns") {
             Array.from(data[item]).map((srv: any) =>
               bodyFormData.append(item, srv),
             );
