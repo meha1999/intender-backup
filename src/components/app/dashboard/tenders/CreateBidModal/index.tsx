@@ -1,5 +1,6 @@
 "use client";
 import { tenderServiceHandler } from "@/services/tender.service";
+import errorHandler from "@/utils/errorHandler";
 import {
   Button,
   Input,
@@ -38,7 +39,7 @@ const CreateBidModal: React.FC<CreateBidModalPropos> = ({ id, tender }) => {
       toast.success("درخواست با موفقیت ثبت شد.");
       router.push("/dashboard/myOffers");
     } catch (error) {
-      toast.error("خطای سرور");
+      errorHandler(error);
     }
   };
 

@@ -4,7 +4,7 @@ import { Controller, useForm } from "react-hook-form";
 import { Checkbox, Select, SelectItem, Tooltip } from "@nextui-org/react";
 import { tenderServiceHandler } from "@/services/tender.service";
 
-const TendersDetailCard: React.FC<Bid> = ({
+const MyOfferCard: React.FC<Bid> = ({
   id,
   status,
   comments,
@@ -35,16 +35,8 @@ const TendersDetailCard: React.FC<Bid> = ({
   };
 
   return (
-    <div className="flex h-full w-full items-center justify-center rounded-xl bg-light-gray py-3 text-xs">
+    <div className="flex h-full w-full items-center justify-center rounded-xl bg-light-gray py-3 text-xs px-10">
       <div className="flex w-[20%] items-center justify-start gap-5 px-2">
-        <div className="flex h-full items-start justify-start">
-          <div className="flex h-full items-start justify-start">
-            <Exclamation />
-          </div>
-          <div className="h-16 w-16 rounded-full border-4 border-weeny">
-            <div className="h-full rounded-full border-4 border-light-gray"></div>
-          </div>
-        </div>
         <p className=" text-black">{title}</p>
       </div>
       <div className="flex h-full w-[20%] items-center justify-start overflow-auto bg-light-gray text-black">
@@ -102,4 +94,4 @@ const TendersDetailCard: React.FC<Bid> = ({
   );
 };
 
-export default TendersDetailCard;
+export default MyOfferCard;

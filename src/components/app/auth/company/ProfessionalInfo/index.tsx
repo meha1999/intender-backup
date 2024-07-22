@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 import CompleteRegistrationModal from "../CompleteRegistrationModal";
 import Tags from "./Tags";
 import MultipleSelectInput from "@/components/common/MultipleSelectInput";
+import errorHandler from "@/utils/errorHandler";
 
 interface InputType {
   address: string;
@@ -53,7 +54,7 @@ const ProfessionalInfo: React.FC = ({}) => {
       toast.success("ثبت شرکت با موفقیت تکمیل شد");
       setIsModalOpen(true);
     } catch (error) {
-      toast.error("خطای سرور");
+      errorHandler(error);
     }
   };
 

@@ -14,7 +14,7 @@ export const useZustandStore = create<ZustandState>()(
         email: "",
         mobile: "",
         registration_status: "",
-        user_type: "",
+        decipline: "",
         access_level: "",
         position: "",
         company_national_id: "",

@@ -27,7 +27,7 @@ class CompanyService extends BaseService {
     mobile: string;
     email: String;
     access_level: string;
-    user_type: string;
+    decipline: string;
     position: string;
   }): Promise<AxiosResponse<any>> {
     return this.axiosInstanceWithToken.post(`/api/v1/companies/members/`, data);
@@ -41,7 +41,7 @@ class CompanyService extends BaseService {
       mobile?: string;
       email?: String;
       access_level?: string;
-      user_type?: string;
+      decipline?: string;
       position?: string;
       is_active?: boolean;
     },

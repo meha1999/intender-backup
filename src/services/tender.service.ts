@@ -25,7 +25,7 @@ class TenderService extends BaseService {
     tags__id?: number;
     service?: string;
     tender_type?: "PUBLIC" | "PRIVATE";
-  }): Promise<AxiosResponse<Array<TendersListItem>>> {
+  }): Promise<AxiosResponse<Array<Bid>>> {
     return this.axiosInstanceWithToken.get(`/api/v1/tenders/bids/`, { params });
   }
 

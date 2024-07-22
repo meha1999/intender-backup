@@ -1,3 +1,4 @@
+import MyOffersList from "@/components/app/dashboard/myOffers/MyOffersList";
 import MyTenderFilters from "@/components/app/dashboard/myTenders/TenderFilters";
 import TendersList from "@/components/app/dashboard/tenders/TendersList";
 import { BaseService } from "@/services/base.service";
@@ -14,11 +15,12 @@ const MyOffers = async ({
   BaseService.setToken(token || "");
   const res = await tenderServiceHandler.getMyOffers(searchParams);
 
-  
+  console.log(res.data);
+
   return (
     <div className="flex flex-col gap-10 pb-10">
       <MyTenderFilters searchParams={searchParams} />
-      <TendersList data={res.data} />
+      <MyOffersList data={res.data}/>
     </div>
   );
 };

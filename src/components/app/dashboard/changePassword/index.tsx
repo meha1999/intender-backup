@@ -2,6 +2,7 @@
 import PasswordInput from "@/components/common/PasswordInput";
 import { passwordPattern } from "@/configs/regex";
 import { authServiceHandler } from "@/services/auth.service";
+import errorHandler from "@/utils/errorHandler";
 import HookFormErrorHandler from "@/utils/HookFormErrorHandler";
 import { Button } from "@nextui-org/react";
 import { useState } from "react";
@@ -32,7 +33,7 @@ const ChangePassword = () => {
       await authServiceHandler.changePassword(data);
       toast.success("رمز عبور با موفقیت بروزرسانی شد.");
     } catch (error) {
-      toast.error("خطای سرور");
+      errorHandler(error);
     } finally {
       setLoading(false);
     }

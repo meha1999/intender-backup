@@ -19,7 +19,8 @@ export abstract class BaseService {
 
   baseUrl: string = "";
 
-  private static token: string | null = null;
+  private static token: string | null =
+    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzI0MTM2MjM2LCJpYXQiOjE3MjE1NDQyMzYsImp0aSI6IjQzN2Y1ODliM2M0OTQzZDM5YjljNjdjOGI5MzlmZmU2IiwidXNlcl9pZCI6MzR9.j5iULG1dWY8gd0anoc5SFBslmd7PpdpTb39BQd5pMPY";
   protected axiosInstance: AxiosInstance;
   protected axiosRequestConfigDefault: AxiosRequestConfig = {
     baseURL: this.baseUrl,
@@ -97,7 +98,7 @@ export abstract class BaseService {
       function (error) {
         if (error.response?.status === 401 || error.response?.status === 403) {
           console.log(typeof window);
-          
+
           if (typeof window !== "undefined") {
             localStorage.clear();
             sessionStorage.clear();
@@ -154,7 +155,7 @@ export abstract class BaseService {
   }
 
   static setToken(token: string) {
-    BaseService.token = token;
+    // BaseService.token = token;
   }
 
   static removeToken() {

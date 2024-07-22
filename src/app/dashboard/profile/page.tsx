@@ -11,6 +11,7 @@ import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { LuFileEdit } from "react-icons/lu";
 import { toast } from "react-toastify";
+import errorHandler from "@/utils/errorHandler";
 
 type Inputs = {
   first_name: string;
@@ -37,7 +38,7 @@ const Profile = () => {
       setUserProfile(res.data);
       toast.success("با موفقیت بروزرسانی شد.");
     } catch (error) {
-      toast.error("خطای سرور");
+      errorHandler(error);
     } finally {
       setLoading(false);
     }

@@ -88,7 +88,7 @@ class AuthService extends BaseService {
 
   login(payload: {
     username: string;
-    company_national_id: string;
+    company_national_id?: string;
     password: string;
   }): Promise<AxiosResponse<loginType>> {
     return this.axiosInstanceWithoutToken.post(`/api/v1/users/token/`, payload);

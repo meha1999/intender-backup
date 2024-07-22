@@ -8,6 +8,7 @@ import { authServiceHandler } from "@/services/auth.service";
 import { Dispatch, SetStateAction, useState } from "react";
 import { Button } from "@nextui-org/react";
 import { toast } from "react-toastify";
+import errorHandler from "@/utils/errorHandler";
 
 type Inputs = {
   first_name: string;
@@ -40,7 +41,7 @@ const Signup: React.FC<SignupProps> = ({ setVerificationToken }) => {
       setVerificationToken(res.data.verification_token);
       toast.success("کد تایید با موفقیت ارسال شد.");
     } catch (error) {
-      toast.error("خطای سرور");
+      errorHandler(error);
       setLoading(false);
     }
   };

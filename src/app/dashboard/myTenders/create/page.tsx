@@ -24,6 +24,7 @@ import {
   SelectItem,
   Textarea,
 } from "@nextui-org/react";
+import errorHandler from "@/utils/errorHandler";
 
 const CreateTnder = () => {
   const [company, setCompany] = useState("");
@@ -46,13 +47,13 @@ const CreateTnder = () => {
     try {
       await tenderServiceHandler.createTender({
         ...data,
-        deadline: new Date(data.deadline).toISOString().split("T")[0],
-        start: new Date(data.start).toISOString().split("T")[0],
+        deadline: new Date(data.deadline).getTime(),
+        start: new Date(data.start).getTime(),
       });
       router.push("/dashboard/myTenders");
       toast.success("مناقصه با موفقیت ساخته شد.");
     } catch (error) {
-      toast.error("خطای سرور");
+      errorHandler(error);
       console.log(error);
       
     }

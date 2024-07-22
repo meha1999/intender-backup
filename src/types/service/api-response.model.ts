@@ -30,7 +30,7 @@ interface getProfileType {
   email: string;
   mobile: string;
   registration_status: string;
-  user_type: string;
+  decipline: string;
   access_level: string;
   position: string;
   company_national_id: string;
@@ -97,7 +97,7 @@ interface CompanyMember {
   last_name: string;
   email: string;
   mobile: string;
-  user_type: string;
+  decipline: string;
   access_level: string;
   position: string;
   is_active: boolean;
@@ -162,12 +162,56 @@ interface CreateBid {
 
 interface Bid {
   id: number;
-  company_id: number;
+  company: {
+    id: number;
+    name: string;
+    name_en: string;
+    national_id: string;
+    description: string;
+    services: [
+      {
+        id: number;
+        name: string;
+      },
+    ];
+    tags: [
+      {
+        id: number;
+        name: string;
+      },
+    ];
+  };
+  tender: {
+    id: number;
+    name: string;
+    start: string;
+    deadline: string;
+    description: string;
+    tender_type: "PUBLIC" | "PRIVATE";
+    project_name: string;
+    tags: [
+      {
+        id: number;
+        name: string;
+      },
+    ];
+    services: [
+      {
+        id: number;
+        name: string;
+      },
+    ];
+    document: string;
+  };
   title: string;
   status: string;
   description: string;
   document: string;
-  manager: number;
+  manager: {
+    first_name: string;
+    last_name: string;
+    email: string;
+  };
   offers: [
     {
       file: string;
@@ -192,4 +236,6 @@ interface Bid {
       ];
     },
   ];
+  created_at: string;
+  updated_at: string;
 }

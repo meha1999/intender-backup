@@ -14,6 +14,7 @@ import { toast } from "react-toastify";
 import { Spinner } from "@nextui-org/spinner";
 import { Button } from "@nextui-org/button";
 import { FaRegCheckSquare } from "react-icons/fa";
+import errorHandler from "@/utils/errorHandler";
 
 type Inputs = {
   first_name: string;
@@ -21,7 +22,7 @@ type Inputs = {
   mobile: string;
   email: String;
   access_level: { text: string; value: string };
-  user_type: { text: string; value: string };
+  decipline: { text: string; value: string };
   position: string;
 };
 
@@ -47,12 +48,12 @@ const Members = () => {
       await companyServiceHandler.addMember({
         ...data,
         access_level: data.access_level.value,
-        user_type: data.user_type.value,
+        decipline: data.decipline.value,
       });
       await handleGetMembers();
       toast.success("کاربر با موفقیت اضافه شد.");
     } catch (error) {
-      toast.error("خطای سرور");
+      errorHandler(error);
     }
     setAddUserLoading(false);
   };
@@ -74,7 +75,7 @@ const Members = () => {
       await handleGetMembers();
       toast.success("وضعیت کاربر با موفقیت برزوزرسانی شد.");
     } catch (error) {
-      toast.error("خطای سرور");
+      errorHandler(error);
     } finally {
       setLoading(false);
     }
@@ -158,14 +159,14 @@ const Members = () => {
               <HookFormErrorHandler errors={errors} name="access_level" />
             </div>
             <div className="flex w-full flex-col gap-2.5">
-              {configs?.user_type && (
+              {configs?.decipline && (
                 <Controller
                   control={control}
-                  name="user_type"
+                  name="decipline"
                   render={({ field: { onChange, value, ref } }) => (
                     <SelectInput
-                      data={Object?.keys(configs?.user_type).map((item) => {
-                        return { text: configs.user_type[item], value: item };
+                      data={Object?.keys(configs?.decipline).map((item) => {
+                        return { text: configs.decipline[item], value: item };
                       })}
                       placeholder="نوع کاربر"
                       value={value}
@@ -174,7 +175,7 @@ const Members = () => {
                   )}
                 />
               )}
-              <HookFormErrorHandler errors={errors} name="user_type" />
+              <HookFormErrorHandler errors={errors} name="decipline" />
             </div>
             <div className="flex w-full flex-col gap-2.5">
               <Input
@@ -219,7 +220,7 @@ const Members = () => {
               </div>
               <div className="flex flex-col items-center justify-between text-sm text-black">
                 <p>{item.mobile}</p>
-                <p>{item.user_type}</p>
+                <p>{item.decipline}</p>
               </div>
               <div className="flex flex-col justify-center text-sm text-black">
                 <p>{item.access_level}</p>

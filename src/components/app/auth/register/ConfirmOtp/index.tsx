@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import { useZustandStore } from "@/store";
 import { Button } from "@nextui-org/react";
 import { useState } from "react";
+import errorHandler from "@/utils/errorHandler";
 
 type OtpInputs = {
   verification_code: number;
@@ -45,7 +46,7 @@ const ConfirmOtp: React.FC<ConfirmOtpProps> = ({ verificationToken }) => {
       toast.success("ثبت شرکت با موفقیت انجام شد.");
       router.push("/auth/register/company");
     } catch (error) {
-      toast.error("خطای سرور");
+      errorHandler(error);
       setLoading(false);
     }
   };

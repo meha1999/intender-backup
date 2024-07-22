@@ -14,6 +14,7 @@ import { BaseService } from "@/services/base.service";
 import { useZustandStore } from "@/store";
 import { toast } from "react-toastify";
 import Link from "next/link";
+import errorHandler from "@/utils/errorHandler";
 
 type Inputs = {
   username: string;
@@ -40,7 +41,12 @@ const Login = () => {
     setLoading(true);
     try {
       delete data.multipleCompanies;
-      const res = await authServiceHandler.login(data);
+      const res = await authServiceHandler.login({
+        ...data,
+        company_national_id: data.multipleCompanies
+          ? data.company_national_id
+          : undefined,
+      });
       setCookie("token", res.data.access);
       setCookie("refresh", res.data.refresh);
       BaseService.setToken(res.data.access);
@@ -49,7 +55,7 @@ const Login = () => {
       toast.success("با موفقیت وارد شدید.");
       router.push("/dashboard");
     } catch (error) {
-      toast.error("خطای سرور");
+      errorHandler(error);
       setLoading(false);
     }
   };

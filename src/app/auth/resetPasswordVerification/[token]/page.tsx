@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import { useZustandStore } from "@/store";
 import { Button } from "@nextui-org/react";
 import { useState } from "react";
+import errorHandler from "@/utils/errorHandler";
 
 type OtpInputs = {
   verification_code: number;
@@ -45,7 +46,7 @@ const ResetPasswordVerification = ({
       toast.success("پسورد با موفقیت تغییر یافت");
       router.push("/auth/login");
     } catch (error) {
-      toast.error("خطای سرور");
+      errorHandler(error);
       setLoading(false);
     }
   };

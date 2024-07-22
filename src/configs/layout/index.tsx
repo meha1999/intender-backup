@@ -223,6 +223,6 @@ export const dashboardSideBar = [
   {
     name: "پیشنهادهای من",
     icon: <FaUser className="h-6 w-7" />,
-    url: "/dashboard/tenders/muOffers",
+    url: "/dashboard/myOffers",
   },
 ];

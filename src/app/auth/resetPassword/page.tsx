@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import { authServiceHandler } from "@/services/auth.service";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import errorHandler from "@/utils/errorHandler";
 
 type Inputs = {
   mobile: string;
@@ -36,7 +37,7 @@ const ResetPassword = () => {
         `/auth/resetPasswordVerification/${res.data.verification_token}`,
       );
     } catch (error) {
-      toast.error("خطای سرور");
+      errorHandler(error);
     }
     setLoading(false);
   };

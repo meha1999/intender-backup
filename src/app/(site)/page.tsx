@@ -24,6 +24,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { authServiceHandler } from "@/services/auth.service";
 import { toast } from "react-toastify";
 import { useState } from "react";
+import errorHandler from "@/utils/errorHandler";
 
 const Home = () => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -37,7 +38,7 @@ const Home = () => {
       toast.success("با موفقیت ثبت شد.");
       onOpenChange();
     } catch (error) {
-      toast.error("خطاری سرور");
+      errorHandler(error);
     }
     setLoading(false);
   };
