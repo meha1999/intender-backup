@@ -47,15 +47,14 @@ const CreateTnder = () => {
     try {
       await tenderServiceHandler.createTender({
         ...data,
-        deadline: new Date(data.deadline).getTime(),
-        start: new Date(data.start).getTime(),
+        deadline: new Date(data.deadline).getTime() * 1000,
+        start: new Date(data.start).getTime() * 1000,
       });
       router.push("/dashboard/myTenders");
       toast.success("مناقصه با موفقیت ساخته شد.");
     } catch (error) {
       errorHandler(error);
       console.log(error);
-      
     }
   };
 
@@ -96,8 +95,6 @@ const CreateTnder = () => {
   useEffect(() => {
     getCompanyByName();
   }, [search]);
-
-  console.log(watch("tender_type"));
 
   return (
     <form
@@ -175,14 +172,14 @@ const CreateTnder = () => {
               </Select>
             )}
           />
-          <HookFormErrorHandler errors={errors} name="service" />
+          <HookFormErrorHandler errors={errors} name="manager" />
         </div>
 
         <div className="flex w-1/3 flex-col gap-2">
           <p className="text-sm font-bold text-black">واحد های درگیر</p>
           <Controller
             control={control}
-            name="assigns"
+            name="deciplines"
             render={({ field: { onChange, value } }) => (
               <Select
                 selectionMode="multiple"
@@ -194,11 +191,12 @@ const CreateTnder = () => {
                   mainWrapper: "bg-white",
                 }}
               >
-                {configs?.decipline&&Object?.keys(configs?.decipline)?.map((decipline) => (
-                  <SelectItem className="text-black" key={decipline}>
-                    {configs?.decipline[decipline]}
-                  </SelectItem>
-                ))}
+                {configs?.decipline &&
+                  Object?.keys(configs?.decipline)?.map((decipline) => (
+                    <SelectItem className="text-black" key={decipline}>
+                      {configs?.decipline[decipline]}
+                    </SelectItem>
+                  ))}
               </Select>
             )}
           />

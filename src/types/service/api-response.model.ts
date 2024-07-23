@@ -124,7 +124,26 @@ interface TendersListItem {
     id: number;
     name: string;
   }>;
-  manager: number;
+  manager: {
+    first_name: string;
+    last_name: string;
+    email: string;
+  };
+  company: {
+    id: number;
+    name: string;
+    name_en: string;
+    national_id: string;
+    description: string;
+    services: Array<{
+      id: number;
+      name: string;
+    }>;
+    tags: Array<{
+      id: number;
+      name: string;
+    }>;
+  };
   document: string;
 }
 
@@ -140,8 +159,8 @@ interface CreateTender {
   document: FileList;
   assigns: Array<number>;
   manager: number;
+  deciplines: Array<number>;
 }
-
 
 interface CreateBid {
   title: string;

@@ -56,7 +56,11 @@ class TenderService extends BaseService {
         (data[item]?.length || Array.from(data[item]).length)
       ) {
         if (item !== "document") {
-          if (item === "service" || item === "assigns") {
+          if (
+            item === "service" ||
+            item === "deciplines" ||
+            item === "assigns"
+          ) {
             Array.from(data[item]).map((srv: any) =>
               bodyFormData.append(item, srv),
             );

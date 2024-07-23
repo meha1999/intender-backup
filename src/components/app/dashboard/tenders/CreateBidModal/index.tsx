@@ -1,4 +1,5 @@
 "use client";
+import { companyServiceHandler } from "@/services/company.service";
 import { tenderServiceHandler } from "@/services/tender.service";
 import errorHandler from "@/utils/errorHandler";
 import {
@@ -8,12 +9,15 @@ import {
   ModalBody,
   ModalContent,
   ModalHeader,
+  Select,
+  SelectItem,
   Textarea,
   useDisclosure,
 } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
 import Upload from "public/icons/dashboard/upload.svg";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useEffect, useState } from "react";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
 interface CreateBidModalPropos {
@@ -27,8 +31,15 @@ const CreateBidModal: React.FC<CreateBidModalPropos> = ({ id, tender }) => {
     register,
     handleSubmit,
     watch,
+    control,
     formState: { errors },
   } = useForm<CreateBid>();
+  const [members, setMembers] = useState<Array<CompanyMember>>([]);
+
+  const handleGetMembers = async () => {
+    const res = await companyServiceHandler.getMembers();
+    setMembers(res.data);
+  };
 
   const handleCreateBid: SubmitHandler<CreateBid> = async (data) => {
     try {
@@ -42,6 +53,10 @@ const CreateBidModal: React.FC<CreateBidModalPropos> = ({ id, tender }) => {
       errorHandler(error);
     }
   };
+
+  useEffect(() => {
+    handleGetMembers();
+  }, []);
 
   return (
     <>
@@ -68,16 +83,36 @@ const CreateBidModal: React.FC<CreateBidModalPropos> = ({ id, tender }) => {
                 </div>
                 <div className="flex w-full flex-col gap-1">
                   <p className="text-sm font-bold">نام مدیر پروژه</p>
-                  <Input
-                    {...register("title")}
-                    variant="bordered"
-                    placeholder="...!نام مورد نظر را وارد کنید"
+                  <Controller
+                    control={control}
+                    name="title"
+                    render={({ field: { onChange, value } }) => (
+                      <Select
+                        variant="bordered"
+                        className="text-black"
+                        selectedKeys={[value]}
+                        onChange={onChange}
+                        classNames={{
+                          mainWrapper: "bg-white",
+                        }}
+                      >
+                        {members?.map((member) => (
+                          <SelectItem className="text-black" key={member.id}>
+                            {` ${member.first_name} ${member.last_name}`}
+                          </SelectItem>
+                        ))}
+                      </Select>
+                    )}
                   />
                 </div>
               </div>
               <div className="flex flex-col gap-1">
                 <p className="text-sm font-bold">شرکت ایجاد کننده</p>
-                <Input variant="bordered" disabled value={"فعلا نداریم"} />
+                <Input
+                  variant="bordered"
+                  disabled
+                  value={tender.company.name}
+                />
               </div>
               <div className="flex flex-col gap-1">
                 <p className="text-sm font-bold">متن درخواست مناقصه</p>

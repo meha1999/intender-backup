@@ -1,16 +1,13 @@
-// "use client";
-// import { useState } from "react";
-// import Accordion from "@/components/common/Accordion";
 import CreateBidModal from "@/components/app/dashboard/tenders/CreateBidModal";
 import { tenderServiceHandler } from "@/services/tender.service";
 import { setServerSideToken } from "@/utils/setToken";
+import { toLocalDate } from "@/utils/tolocaleDate";
 import { FaFileDownload } from "react-icons/fa";
 
 const Tender = async ({ params }: { params: { id: string } }) => {
   setServerSideToken();
   const res = await tenderServiceHandler.getTender(params.id);
 
-  
   return (
     <div className="flex flex-col gap-10 pb-6">
       <div className="flex items-center justify-between rounded-3xl bg-white p-8">
@@ -24,34 +21,40 @@ const Tender = async ({ params }: { params: { id: string } }) => {
               <p className="text-lg font-semibold text-dark-gray">
                 {"شرکت ایجاد کننده:"}
               </p>
-              <p className="text-black">
-                {"لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم"}
-              </p>
+              <p className="text-black">{res.data.company.name}</p>
             </div>
             <div className="flex items-center gap-1">
               <p className="text-lg font-semibold text-dark-gray">
                 {"شخص مسئول:"}
               </p>
-              <p className="text-black">{res.data.manager}</p>
+              <p className="text-black">
+                {res?.data?.manager?.first_name} {res?.data?.manager?.last_name}
+              </p>
             </div>
             <div className="flex items-center gap-10">
               <div className="flex items-center gap-1">
                 <p className="text-lg font-semibold text-dark-gray">
                   {"خدمات:"}
                 </p>
-                <p className="text-black">{res.data?.service?.name}</p>
+                <div className="text-black">
+                  {res.data?.services.map((item, index) => (
+                    <p key={item.id}>
+                      {!!index && " - "} {item.name}{" "}
+                    </p>
+                  ))}
+                </div>
               </div>
               <div className="flex items-center gap-1">
                 <p className="text-lg font-semibold text-dark-gray">
                   {"زمان شروع:"}
                 </p>
-                <p className="text-black">{"1403/08/20"}</p>
+                <p className="text-black">{toLocalDate(res.data.start)}</p>
               </div>
               <div className="flex items-center gap-1">
                 <p className="text-lg font-semibold text-dark-gray">
                   {"زمان پایان:"}
                 </p>
-                <p className="text-black">{res?.data?.deadline}</p>
+                <p className="text-black">{toLocalDate(res?.data?.deadline)}</p>
               </div>
             </div>
           </div>
@@ -89,9 +92,9 @@ const Tender = async ({ params }: { params: { id: string } }) => {
           <a
             className="flex flex-col items-center gap-8"
             target="_"
-            href={res?.data?.inquiry}
+            href={res?.data?.document}
           >
-            {res?.data?.inquiry}
+            {res?.data?.document}
 
             <FaFileDownload className="cursor-pointer text-7xl text-weeny" />
           </a>
