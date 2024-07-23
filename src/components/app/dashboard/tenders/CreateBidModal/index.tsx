@@ -18,7 +18,7 @@ import { toast } from "react-toastify";
 
 interface CreateBidModalPropos {
   id: string;
-  tender: Tender;
+  tender: TendersListItem;
 }
 const CreateBidModal: React.FC<CreateBidModalPropos> = ({ id, tender }) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();

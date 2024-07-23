@@ -29,8 +29,8 @@ class TenderService extends BaseService {
     return this.axiosInstanceWithToken.get(`/api/v1/tenders/bids/`, { params });
   }
 
-  getTender(id: string): Promise<AxiosResponse<Tender>> {
-    return this.axiosInstanceWithToken.get(`/api/v1/tenders/${id}`);
+  getTender(id: string): Promise<AxiosResponse<TendersListItem>> {
+    return this.axiosInstanceWithToken.get(`/api/v1/tenders/${id}/`);
   }
 
   getTenderBids(id: string): Promise<AxiosResponse<Array<Bid>>> {
@@ -47,7 +47,7 @@ class TenderService extends BaseService {
     );
   }
 
-  createTender(data: any): Promise<AxiosResponse<Tender>> {
+  createTender(data: any): Promise<AxiosResponse<TendersListItem>> {
     const bodyFormData = new FormData();
 
     Object.keys(data).map((item) => {

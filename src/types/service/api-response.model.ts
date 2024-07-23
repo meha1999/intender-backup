@@ -106,21 +106,26 @@ interface CompanyMember {
 interface TendersListItem {
   id: number;
   name: string;
-  deadline: "2024-07-15";
+  start: string;
+  deadline: string;
   description: string;
   tender_type: "PUBLIC" | "PRIVATE";
   project_name: string;
-  tags: [
-    {
-      id: number;
-      name: string;
-    },
-  ];
-  service: {
+  tags: Array<{
     id: number;
     name: string;
-  };
-  inquiry: string;
+  }>;
+  inquiries: Array<{
+    file: string;
+    created_by: number;
+    created_at: string;
+  }>;
+  services: Array<{
+    id: number;
+    name: string;
+  }>;
+  manager: number;
+  document: string;
 }
 
 interface CreateTender {
@@ -137,22 +142,6 @@ interface CreateTender {
   manager: number;
 }
 
-interface Tender {
-  name: string;
-  deadline: string;
-  description: string;
-  tender_type: "PUBLIC" | "PRIVATE";
-  project_name: string;
-  tags: Array<{
-    id: number;
-    name: string;
-  }>;
-  service: {
-    id: number;
-    name: string;
-  };
-  inquiry: string;
-}
 
 interface CreateBid {
   title: string;

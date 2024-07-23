@@ -10,8 +10,9 @@ const TenderCard: React.FC<TenderCardProps> = ({
   description,
   deadline,
   tender_type,
-  service,
+  services,
   project_name,
+  start,
 }) => {
   return (
     <div className="flex w-full gap-5 rounded-3xl bg-white px-6 py-5">
@@ -23,7 +24,11 @@ const TenderCard: React.FC<TenderCardProps> = ({
           </div>
           <div className="flex flex-col gap-1">
             <p className="font-bold text-black">{name}</p>
-            <p className="text-xs font-bold text-dark-gray">{service?.name}</p>
+            <div className="flex gap-1 text-xs font-bold text-dark-gray">
+              {services.map((item) => (
+                <p key={item.id}>{item.name}</p>
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -43,10 +48,16 @@ const TenderCard: React.FC<TenderCardProps> = ({
       <div className="border border-light-gray" />
       <div className="flex w-2/12 flex-col items-center justify-center gap-1.5 text-xs">
         <div className={`flex items-center gap-1 font-bold text-green-500`}>
-          <div className={`h-2 w-2 rounded-full bg-green-500`} />
-          <p>{project_name}</p>
+          <p>
+            {"نام پروژه: "}
+            {project_name}
+          </p>
         </div>
-        <p className="font-bold text-black">{deadline}</p>
+        <p className="font-bold text-black"></p>
+        <p className="font-bold text-black">
+          {new Date(1000 * +start).toLocaleDateString("fa-IR")} -{" "}
+          {new Date(1000 * +deadline).toLocaleDateString("fa-IR")}
+        </p>
         <p className="font-bold text-dark-gray">#{id}</p>
       </div>
       <div className="border border-light-gray" />

@@ -15,6 +15,8 @@ const Tenders = async ({
   const res = await tenderServiceHandler.getTenders(searchParams);
   
 
+  console.log(res.data);
+  
   return (
     <div className="flex flex-col gap-10 pb-10">
       <TenderFilters searchParams={searchParams} />

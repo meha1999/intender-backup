@@ -10,6 +10,7 @@ const Tender = async ({ params }: { params: { id: string } }) => {
   setServerSideToken();
   const res = await tenderServiceHandler.getTender(params.id);
 
+  
   return (
     <div className="flex flex-col gap-10 pb-6">
       <div className="flex items-center justify-between rounded-3xl bg-white p-8">
@@ -31,14 +32,14 @@ const Tender = async ({ params }: { params: { id: string } }) => {
               <p className="text-lg font-semibold text-dark-gray">
                 {"شخص مسئول:"}
               </p>
-              <p className="text-black">{"لورم ایپسوم"}</p>
+              <p className="text-black">{res.data.manager}</p>
             </div>
             <div className="flex items-center gap-10">
               <div className="flex items-center gap-1">
                 <p className="text-lg font-semibold text-dark-gray">
                   {"خدمات:"}
                 </p>
-                <p className="text-black">{res.data.service.name}</p>
+                <p className="text-black">{res.data?.service?.name}</p>
               </div>
               <div className="flex items-center gap-1">
                 <p className="text-lg font-semibold text-dark-gray">
@@ -50,12 +51,12 @@ const Tender = async ({ params }: { params: { id: string } }) => {
                 <p className="text-lg font-semibold text-dark-gray">
                   {"زمان پایان:"}
                 </p>
-                <p className="text-black">{res.data.deadline}</p>
+                <p className="text-black">{res?.data?.deadline}</p>
               </div>
             </div>
           </div>
         </div>
-        <CreateBidModal tender={res.data} id={params.id} />
+        <CreateBidModal tender={res?.data} id={params?.id} />
       </div>
       <div className="flex gap-10">
         <div className="flex w-full flex-col gap-12 rounded-3xl bg-white p-8">
@@ -64,18 +65,18 @@ const Tender = async ({ params }: { params: { id: string } }) => {
               {"جزئـیـات مـنـاقصه"}
             </p>
             <div className="rounded-xl bg-milky px-4 py-7 text-justify text-sm text-black">
-              {res.data.description}
+              {res?.data?.description}
             </div>
           </div>
           <div className="flex flex-col gap-7">
             <p className="text-xl font-bold text-black">{"سربرگ ها"}</p>
             <div className="flex flex-wrap gap-4">
-              {res.data.tags.map((item) => (
+              {res?.data?.tags?.map((item) => (
                 <div
-                  key={item.id}
+                  key={item?.id}
                   className="rounded-xl bg-light-weeny px-6 py-2 text-sm text-weeny"
                 >
-                  {item.name}
+                  {item?.name}
                 </div>
               ))}
             </div>
@@ -88,9 +89,9 @@ const Tender = async ({ params }: { params: { id: string } }) => {
           <a
             className="flex flex-col items-center gap-8"
             target="_"
-            href={res.data.inquiry}
+            href={res?.data?.inquiry}
           >
-            {res.data.inquiry}
+            {res?.data?.inquiry}
 
             <FaFileDownload className="cursor-pointer text-7xl text-weeny" />
           </a>
