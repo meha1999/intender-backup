@@ -10,7 +10,7 @@ const TenderCard: React.FC<TenderCardProps> = ({
   description,
   deadline,
   tender_type,
-  service,
+  services,
   project_name,
 }) => {
   return (
@@ -23,7 +23,13 @@ const TenderCard: React.FC<TenderCardProps> = ({
           </div>
           <div className="flex flex-col gap-1">
             <p className="font-bold text-black">{name}</p>
-            <p className="text-xs font-bold text-dark-gray">{service?.name}</p>
+            <div className="text-xs font-bold text-dark-gray">
+              {services.map((item, index) => (
+                <p key={item.id}>
+                  {!!index && " - "} {item.name}
+                </p>
+              ))}
+            </div>
           </div>
         </div>
       </div>

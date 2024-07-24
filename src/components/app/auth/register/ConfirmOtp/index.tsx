@@ -43,7 +43,7 @@ const ConfirmOtp: React.FC<ConfirmOtpProps> = ({ verificationToken }) => {
       BaseService.setToken(res.data.access);
       const profile = await authServiceHandler.getProfile();
       setUserProfile(profile.data);
-      toast.success("ثبت شرکت با موفقیت انجام شد.");
+      toast.success("اعتبارسنجی  با موفقیت انجام شد.");
       router.push("/auth/register/company");
     } catch (error) {
       errorHandler(error);
