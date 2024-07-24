@@ -55,7 +55,7 @@ const CreateBidModal: React.FC<CreateBidModalPropos> = ({ id, tender }) => {
   };
 
   useEffect(() => {
-    handleGetMembers();
+    // handleGetMembers();
   }, []);
 
   return (
@@ -83,7 +83,7 @@ const CreateBidModal: React.FC<CreateBidModalPropos> = ({ id, tender }) => {
                 </div>
                 <div className="flex w-full flex-col gap-1">
                   <p className="text-sm font-bold">نام مدیر پروژه</p>
-                  <Controller
+                  {/* <Controller
                     control={control}
                     name="title"
                     render={({ field: { onChange, value } }) => (
@@ -103,7 +103,8 @@ const CreateBidModal: React.FC<CreateBidModalPropos> = ({ id, tender }) => {
                         ))}
                       </Select>
                     )}
-                  />
+                  /> */}
+                  <Input variant="bordered" {...register("title")} />
                 </div>
               </div>
               <div className="flex flex-col gap-1">

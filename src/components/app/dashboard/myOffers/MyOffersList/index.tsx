@@ -9,13 +9,14 @@ const MyOffersList: React.FC<{ data: Array<Bid> }> = ({ data }) => {
   return (
     <>
       <div className=" flex flex-col gap-2 rounded-3xl bg-white px-7 py-9">
-        <div className="flex w-full items-center justify-center border-b-[0.5px] border-black py-2 text-base font-bold text-black px-10">
-          <p className="flex w-[20%] justify-start">نام</p>
-          <p className="flex w-[20%] justify-start">توضیحات</p>
+        <div className="flex w-full items-center justify-center border-b-[0.5px] border-black px-10 py-2 text-base font-bold text-black">
+          <p className="flex w-[15%] justify-start">نام درخواست</p>
+          <p className="flex w-[15%] justify-center">مناقصه</p>
+          <p className="flex w-[20%] justify-center">توضیحات</p>
           <p className="flex w-[15%] justify-center">شرکت</p>
           <p className="flex w-[15%] justify-center">شخص درگیر</p>
           <p className="flex w-[15%] justify-center">وضعیت</p>
-          <p className="flex w-[15%] justify-center">تایید</p>
+          <p className="flex w-[5%] justify-end">تایید</p>
         </div>
         <motion.ul variants={listVariants} className="flex flex-col gap-1">
           {data.map((item) => (

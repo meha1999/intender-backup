@@ -47,8 +47,8 @@ const CreateTnder = () => {
     try {
       await tenderServiceHandler.createTender({
         ...data,
-        deadline: new Date(data.deadline).getTime() * 1000,
-        start: new Date(data.start).getTime() * 1000,
+        deadline: (new Date(data.deadline).getTime() / 1000).toFixed(),
+        start: (new Date(data.start).getTime() / 1000).toFixed(),
       });
       router.push("/dashboard/myTenders");
       toast.success("مناقصه با موفقیت ساخته شد.");

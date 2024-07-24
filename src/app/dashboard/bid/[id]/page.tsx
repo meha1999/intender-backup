@@ -1,4 +1,3 @@
-"use client";
 import { listItemVariants, listVariants } from "@/utils/variants";
 import { useState } from "react";
 import { motion } from "framer-motion";
@@ -12,63 +11,12 @@ import Documents from "@/components/modals/Documents";
 import Copy from "public/icons/dashboard/copy.svg";
 import { Accordion, AccordionItem } from "@nextui-org/react";
 import { CiShoppingCart } from "react-icons/ci";
+import { tenderServiceHandler } from "@/services/tender.service";
+import { toLocalDate } from "@/utils/tolocaleDate";
 
-const Offers = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<CompanySignUpType>();
-  const [isModalOpen, setIsModalOpen] = useState(true);
-  const data: Array<{
-    id: string;
-    commentA: string;
-    responseA: string;
-    commentB: string;
-    responseB: string;
-    status: string;
-  }> = [
-    {
-      id: "1",
-      commentA: "لورم ایپسوم",
-      responseA: "لورم ایپسوم متن ساختگی با تولید سادگی ....",
-      commentB: "لورم ایپسوم",
-      responseB: "لورم ایپسوم",
-      status: "لورم ایپسوم",
-    },
-    {
-      id: "2",
-      commentA: "لورم ایپسوم",
-      responseA: "لورم ایپسوم متن ساختگی با تولید سادگی ....",
-      commentB: "لورم ایپسوم",
-      responseB: "لورم ایپسوم",
-      status: "لورم ایپسوم",
-    },
-    {
-      id: "3",
-      commentA: "لورم ایپسوم",
-      responseA: "لورم ایپسوم متن ساختگی با تولید سادگی ....",
-      commentB: "لورم ایپسوم",
-      responseB: "لورم ایپسوم",
-      status: "لورم ایپسوم",
-    },
-    {
-      id: "4",
-      commentA: "لورم ایپسوم",
-      responseA: "لورم ایپسوم متن ساختگی با تولید سادگی ....",
-      commentB: "لورم ایپسوم",
-      responseB: "لورم ایپسوم",
-      status: "لورم ایپسوم",
-    },
-    {
-      id: "5",
-      commentA: "لورم ایپسوم",
-      responseA: "لورم ایپسوم متن ساختگی با تولید سادگی ....",
-      commentB: "لورم ایپسوم",
-      responseB: "لورم ایپسوم",
-      status: "لورم ایپسوم",
-    },
-  ];
+const Offers = async ({ params }: { params: { id: string } }) => {
+  const res = await tenderServiceHandler.getBid(params.id);
+  console.log(res.data);
   return (
     <div className="flex flex-col gap-3">
       <div className="flex w-full flex-col items-center justify-center gap-4 rounded-3xl bg-white px-5 py-5">
@@ -77,12 +25,14 @@ const Offers = () => {
             <div className="flex items-center justify-start gap-1">
               <p className="flex text-sm font-bold text-brand">تاریخ شروع :</p>
               <p className="flex text-sm font-bold text-primary ">
-                لورم ایپسوم
+                {toLocalDate(res.data.tender.start)}
               </p>
             </div>
             <div className="flex items-center gap-1">
               <p className="flex text-sm font-bold text-brand">تاریخ پایان :</p>
-              <p className="flex text-sm font-bold text-primary">لورم ایپسوم</p>
+              <p className="flex text-sm font-bold text-primary">
+                {toLocalDate(res.data.tender.deadline)}
+              </p>
             </div>
           </div>
         </div>
@@ -92,15 +42,15 @@ const Offers = () => {
               <p className="flex text-sm font-bold text-weeny">
                 شرکت مناقصه گذار:
               </p>
-              <p className="flex text-sm font-bold text-primary ">
-                لورم ایپسوم
-              </p>
+              <p className="flex text-sm font-bold text-primary ">{"نداریم"}</p>
             </div>
             <div className="flex w-full items-center justify-between gap-1">
               <p className="flex text-sm font-bold text-weeny">
                 شرکت پیشنهاد گذار:
               </p>
-              <p className="flex text-sm font-bold text-primary">لورم ایپسوم</p>
+              <p className="flex text-sm font-bold text-primary">
+                {res.data.company.name}
+              </p>
             </div>
           </div>
           <div className="flex w-1/3 justify-between">
@@ -109,12 +59,14 @@ const Offers = () => {
                 <div className="h-full rounded-full border-4 border-light-gray"></div>
               </div>
               <p className="relative bottom-8 flex w-full justify-center text-sm font-bold text-primary">
-                نام مناقصه گذار
+                {"مناقصه گذار : "}
+                {"نداریم"}
               </p>
             </div>
             <div className="items-between flex flex-col">
               <p className="flex items-center justify-center text-sm font-bold text-brand">
-                {"نام مناقصه"}
+                {"نام مناقصه : "}
+                {res.data.tender.name}
               </p>
               {/* <Image src={Tenders} alt="tenders" /> */}
             </div>
@@ -123,29 +75,20 @@ const Offers = () => {
                 <div className="h-full rounded-full border-4 border-light-gray"></div>
               </div>
               <p className="relative bottom-8 flex w-full justify-center text-sm font-bold text-primary">
-                مدیر پیشنهاد گذار
+                {"مدیر پیشنهاد گذار : "} {'نداریم'}
               </p>
             </div>
           </div>
-          <div className="flex w-1/3 flex-col gap-2 items-center justify-between rounded-xl bg-white px-9 py-6">
+          <div className="flex w-1/3 flex-col items-center justify-between gap-2 rounded-xl bg-white px-9 py-6">
             <p className="text-sm font-bold text-primary">عملیات</p>
             <div className="flex w-full items-center justify-between ">
-              <Button
-                onClick={() => setIsModalOpen(true)}
-                className="flex gap-6 rounded-xl border border-weeny bg-weeny px-3 py-3 text-center text-xs font-bold text-white hover:bg-white hover:text-weeny"
-              >
+              <Button className="flex gap-6 rounded-xl border border-weeny bg-weeny px-3 py-3 text-center text-xs font-bold text-white hover:bg-white hover:text-weeny">
                 {"ارسال تیکت"}
               </Button>
-              <Button
-                onClick={() => setIsModalOpen(true)}
-                className="flex gap-6 rounded-xl border border-weeny bg-weeny  px-3 py-3 text-center text-xs font-bold text-white hover:bg-white hover:text-weeny"
-              >
+              <Button className="flex gap-6 rounded-xl border border-weeny bg-weeny  px-3 py-3 text-center text-xs font-bold text-white hover:bg-white hover:text-weeny">
                 {"صغحه TCL"}
               </Button>
-              <Button
-                // href={`/dashboard/tenders/${id}`}
-                className="flex gap-6 rounded-xl border border-weeny bg-weeny  px-3 py-3 text-center text-xs font-bold text-white hover:bg-white hover:text-weeny"
-              >
+              <Button className="flex gap-6 rounded-xl border border-weeny bg-weeny  px-3 py-3 text-center text-xs font-bold text-white hover:bg-white hover:text-weeny">
                 {"گزارشگیری"}
               </Button>
             </div>
@@ -155,7 +98,7 @@ const Offers = () => {
       <div className="flex items-center  justify-center gap-3">
         <div className="flex h-96 w-1/3 flex-col gap-1 overflow-y-auto rounded-3xl bg-white px-9 py-6">
           <p className="text-sm font-bold text-primary">مدارک</p>
-          <div className="flex w-full flex-col gap-1">
+          {/* <div className="flex w-full flex-col gap-1">
             <Accordion
               showDivider={false}
               className="flex w-full flex-col gap-1 rounded-xl bg-[#F9F9F9]"
@@ -216,7 +159,7 @@ const Offers = () => {
                 title="لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ؟"
               ></AccordionItem>
             </Accordion>
-          </div>
+          </div> */}
         </div>
         <div className="flex h-96 w-2/3 flex-col gap-1 overflow-y-auto rounded-3xl bg-white px-9 py-6">
           <p className="text-sm font-bold text-primary">پنل عملیات</p>

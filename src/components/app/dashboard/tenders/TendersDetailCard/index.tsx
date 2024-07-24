@@ -81,7 +81,9 @@ const TendersDetailCard: React.FC<Bid> = ({
       <div className="flex w-[15%] items-center justify-center ">
         <p className=" text-black">
           <Tooltip content={manager?.email}>
-            {manager?.first_name} {manager?.last_name}
+            <p>
+              {manager?.first_name} {manager?.last_name}
+            </p>
           </Tooltip>
         </p>
       </div>

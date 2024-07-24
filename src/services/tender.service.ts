@@ -98,6 +98,10 @@ class TenderService extends BaseService {
       },
     );
   }
+
+  getBid(id: string): Promise<AxiosResponse<Bid>> {
+    return this.axiosInstanceWithToken.get(`/api/v1/tenders/bids/${id}/`);
+  }
 }
 
 export const tenderServiceHandler = new TenderService();

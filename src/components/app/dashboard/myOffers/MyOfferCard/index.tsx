@@ -3,6 +3,7 @@ import Exclamation from "public/icons/dashboard/exclamation.svg";
 import { Controller, useForm } from "react-hook-form";
 import { Checkbox, Select, SelectItem, Tooltip } from "@nextui-org/react";
 import { tenderServiceHandler } from "@/services/tender.service";
+import Link from "next/link";
 
 const MyOfferCard: React.FC<Bid> = ({
   id,
@@ -15,6 +16,7 @@ const MyOfferCard: React.FC<Bid> = ({
   manager,
   offers,
   title,
+  tender,
 }) => {
   type Inputs = {
     isConfirm: boolean;
@@ -35,34 +37,18 @@ const MyOfferCard: React.FC<Bid> = ({
   };
 
   return (
-    <div className="flex h-full w-full items-center justify-center rounded-xl bg-light-gray py-3 text-xs px-10">
-      <div className="flex w-[20%] items-center justify-start gap-5 px-2">
-        <p className=" text-black">{title}</p>
+    <Link
+      href={`/dashboard/bid/${id}`}
+      className="flex h-full w-full items-center justify-center rounded-xl bg-light-gray px-10 py-3 text-xs"
+    >
+      <div className="flex w-[15%] items-center justify-start gap-5 px-2">
+        <p className=" font-bold text-black">{title}</p>
       </div>
-      <div className="flex h-full w-[20%] items-center justify-start overflow-auto bg-light-gray text-black">
+      <div className="flex w-[15%] items-center justify-center gap-5 px-2">
+        <p className=" font-bold text-black">{tender.name}</p>
+      </div>
+      <div className="flex h-full w-[20%] items-center justify-center overflow-auto bg-light-gray text-black">
         {description}
-        {/* <Controller
-          control={control}
-          name="service"
-          render={({ field: { onChange, onBlur, value, ref } }) => (
-            <Select
-              selectionMode="multiple"
-              variant="bordered"
-              className="text-black"
-              // selectedKeys={value}
-              onSelectionChange={onChange}
-              classNames={{
-                mainWrapper: "bg-white",
-              }}
-            >
-              {offers.map((offer) => (
-                <SelectItem className="text-black" key={offer?.file}>
-                  {offer?.created_at}
-                </SelectItem>
-              ))}
-            </Select>
-          )}
-        /> */}
       </div>
 
       <div className="flex w-[15%] items-center justify-center ">
@@ -73,7 +59,9 @@ const MyOfferCard: React.FC<Bid> = ({
       <div className="flex w-[15%] items-center justify-center ">
         <p className=" text-black">
           <Tooltip content={manager?.email}>
-            {manager?.first_name} {manager?.last_name}
+            <p>
+              {manager?.first_name} {manager?.last_name}
+            </p>
           </Tooltip>
         </p>
       </div>
@@ -82,7 +70,7 @@ const MyOfferCard: React.FC<Bid> = ({
         <p className=" text-black">{status}</p>
       </div>
 
-      <div className="flex w-[15%] items-center justify-center">
+      <div className="flex w-[5%] items-center justify-end">
         <Checkbox
           isSelected={status === "ACCEPTED"}
           color="primary"
@@ -90,7 +78,7 @@ const MyOfferCard: React.FC<Bid> = ({
           onClick={handleChangeStatus}
         />
       </div>
-    </div>
+    </Link>
   );
 };
 
